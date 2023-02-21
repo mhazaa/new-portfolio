@@ -1,0 +1,74 @@
+@import url("https://use.typekit.net/kdg5doa.css");
+
+$thin: 100;
+$light: 300;
+$regular: 400;
+$medium: 500;
+$bold: 700;
+$black: 900;
+
+$beige: #ffeed9;
+$yellow: #ffc758;
+$teal: #8dcb97;
+$brownPrimary: #6e523b;
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+	overflow-x: hidden;
+}
+
+body {
+	background: $beige;
+}
+
+ul {
+	list-style: none
+}
+
+a {
+	cursor: pointer;
+	transition: opacity 0.2s ease;
+}
+
+a:hover {
+	opacity: 0.5;
+}
+
+h1, h2, h3, h4, h5 {
+	font-family: "brandon-grotesque", sans-serif;
+	line-height: 1;
+}
+
+h2 {
+	text-transform: uppercase;
+	font-size: 7em;
+	letter-spacing: -0.03em;
+	font-weight: $black;
+	color: $yellow;
+}
+
+h3 {
+	font-size: 1.8em;
+	font-weight: $regular;
+	color: $brownPrimary;
+}
+
+h4 {
+	text-transform: uppercase;
+	font-size: 1.4em;
+	font-weight: $black;
+	color: $teal;
+}
+
+h5 {
+	text-transform: uppercase;
+	font-size: 0.9em;
+	font-weight: $black;
+	color: $yellow;
+}

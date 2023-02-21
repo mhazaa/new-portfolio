@@ -1,0 +1,6 @@
+.DS_STORE
+node_modules
+build
+*.env
+*.js
+!webpack.config.js

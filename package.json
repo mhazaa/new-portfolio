@@ -1,0 +1,28 @@
+{
+  "name": "magdi-hazaa-blog",
+  "version": "1.0.0",
+  "description": "",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+	"start": "npm run build -w ./frontend && npm run start -w ./backend",
+	"stop": "npm run stop -w ./backend",
+    "dev": "concurrently \"npm run dev -w ./frontend\" \"npm run dev -w ./backend\""
+  },
+  "keywords": [],
+  "author": "Magdi Hazaa",
+  "license": "ISC",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.51.0",
+    "@typescript-eslint/parser": "^5.51.0",
+    "concurrently": "^7.6.0",
+    "eslint": "^8.34.0",
+    "eslint-plugin-react": "^7.32.2",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "@mhazaa/analytics-engine": "^1.0.16"
+  }
+}
