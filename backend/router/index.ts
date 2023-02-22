@@ -2,12 +2,13 @@ import { resolve } from 'path';
 import { Application } from 'express';
 import { Collection } from '@mhazaa/mongo-controller';
 import { sendLike, sendComment } from './dbFunctions';
-import { LikeData, CommentData } from '../../types';
+import { AllData, LikePostData, CommentPostData } from '../../types';
 
 export default (app: Application, collections: {postsCollection: Collection}): void => {
 	app.get('/fetch-data', async (_req, res) => {
 		try {
 			const allDocuments = await collections.postsCollection.getAllDocuments();
+			//as AllData
 			console.log(allDocuments);
 			res.status(200).send(allDocuments);
 		} catch (error) {
@@ -22,7 +23,7 @@ export default (app: Application, collections: {postsCollection: Collection}): v
 
 	app.post('/like', async (req, res) => {
 		try {
-			const reqData: LikeData = req.body;
+			const reqData: LikePostData = req.body;
 			const { postId } = reqData;
 			const post = await sendLike(collections.postsCollection, postId);
 			//const resData = await collections.postsCollection.insertOne(reqData);
@@ -36,7 +37,7 @@ export default (app: Application, collections: {postsCollection: Collection}): v
 
 	app.post('/comment', async (req, res) => {
 		try {
-			const reqData: CommentData = req.body;
+			const reqData: CommentPostData = req.body;
 			const { postId, comment } = reqData;
 			const post = await sendComment(collections.postsCollection, postId, comment);
 			//const resData = await collections.postsCollection.insertOne(reqData);
