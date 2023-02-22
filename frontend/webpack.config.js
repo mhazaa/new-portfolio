@@ -40,7 +40,7 @@ module.exports = {
 				use: [MiniCSSExtractPlugin.loader, 'css-loader', 'sass-loader'],
 			},
 			{
-				test: /\.(png|jpe?g|gif|svg)$/,
+				test: /\.(png|jpe?g|gif|svg|pdf)$/,
 				use: {
 					loader: 'file-loader',
 					options: {

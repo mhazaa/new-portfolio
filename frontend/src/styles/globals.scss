@@ -1,16 +1,19 @@
 @import url("https://use.typekit.net/kdg5doa.css");
 
+/* fontWeights */
 $thin: 100;
 $light: 300;
 $regular: 400;
 $medium: 500;
 $bold: 700;
 $black: 900;
-
+/* colors */
 $beige: #ffeed9;
 $yellow: #ffc758;
 $teal: #8dcb97;
 $brownPrimary: #6e523b;
+/* transitions */
+$transitionPrimary: 0.2s ease;
 
 * {
 	margin: 0;
@@ -33,14 +36,21 @@ ul {
 
 a {
 	cursor: pointer;
-	transition: opacity 0.2s ease;
+	text-decoration: none;
+	transition: opacity $transitionPrimary;
 }
 
 a:hover {
 	opacity: 0.5;
 }
 
-h1, h2, h3, h4, h5 {
+p, textarea {
+	font-family: "Times New Roman", Times, serif;
+	font-size: 1.2em;
+	color: $brownPrimary;
+}
+
+h1, h2, h3, h4, h5, button, input {
 	font-family: "brandon-grotesque", sans-serif;
 	line-height: 1;
 }
@@ -70,5 +80,40 @@ h5 {
 	text-transform: uppercase;
 	font-size: 0.9em;
 	font-weight: $black;
-	color: $yellow;
+	color: $teal;
+}
+
+button {
+	background: $yellow;
+	cursor: pointer;
+	border: none;
+	padding: 1.2em 2em;
+
+	text-transform: uppercase;
+	font-size: 1em;
+	font-weight: $black;
+	color: $beige;
+}
+
+input {	
+	padding: 0.8em;
+
+	outline-color: $teal;
+	text-transform: uppercase;
+	font-size: 1em;
+	font-weight: $black;
+	color: $brownPrimary;
+}
+
+textarea {
+	padding: 0.8em;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+}
+
+*::placeholder {
+    color: $brownPrimary;
 }

@@ -1,19 +1,21 @@
-import React, { CSSProperties } from 'react';
+import React, { useState, useEffect, useRef, CSSProperties } from 'react';
 import arrow from '../assets/arrow.svg';
 import { globalStyles } from '../theme';
-
-interface PortfolioItem {
-	title: string;
-	medium: string;
-}
+import { Pages, Post } from '../../../types';
 
 interface PortfolioNavProps {
-	portfolioItems: PortfolioItem[];
+	posts: Post[];
+	changePage: (page: Pages) => void;
 }
 
 const PortfolioNav: React.FC<PortfolioNavProps> = ({
-	portfolioItems,
+	posts,
+	changePage,
 }) => {
+	const [topArrowVisible, setTopArrowVisible] = useState<boolean>(false);
+	const [bottomArrowVisible, setBottomArrowVisible] = useState<boolean>(true);
+	const itemsWrapperEl = useRef<HTMLDivElement>(null);
+
 	const styles: {
 		[key: string]: CSSProperties;
 	} = {
@@ -30,6 +32,7 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 			height: '300px',
 			overflowY: 'scroll',
 			paddingRight: '30px',
+			scrollBehavior: 'smooth',
 		},
 		item: {
 			display: 'block',
@@ -64,37 +67,72 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 			left: '0',
 			zIndex: '1',
 		},
-		arrowWrapper: {
-			marginTop: '10px',
+		arrowWrapperTop: {
+			marginBottom: '10px',
+			opacity: topArrowVisible ? '1' : '0',
+			transition: `opacity ${globalStyles.transitions.primary}`,
 		},
-		arrow: {
-			width: '40px',	
+		arrowTop: {
+			width: '40px',
+			transform: 'rotate(180deg)',
+		},
+		arrowWrapperBottom: {
+			marginTop: '10px',
+			opacity: bottomArrowVisible ? '1' : '0',
+			transition: `opacity ${globalStyles.transitions.primary}`,
+		},
+		arrowBottom: {
+			width: '40px',
 		},
 	};
 
-	const itemOnClick = () => {
-		console.log('item clicked');
-	};
+	useEffect(() => {
+		const el = itemsWrapperEl.current;
+		if (!el) return;
+		el.addEventListener('scroll', () => {
+			const scrollTop = el.scrollTop;
+			const height = el.offsetHeight;
+			const scrollHeight = el.scrollHeight;
+			const maxScroll = scrollHeight - height;
+			(scrollTop <= 0) ? setTopArrowVisible(false) : setTopArrowVisible(true);
+			(scrollTop >= maxScroll) ? setBottomArrowVisible(false) : setBottomArrowVisible(true);
+		});
+	}, []);
 
 	const arrowOnClick = () => {
-		console.log('arrow clicked');
+		const el = itemsWrapperEl.current;
+		if (!el) return;
+		const height = el.offsetHeight;
+		const scrollHeight = el.scrollHeight;
+		const maxScroll = scrollHeight - height;
+		el.scrollTo(0, maxScroll);
+		setBottomArrowVisible(false);
+	};
+
+	const itemOnClick = (e: React.MouseEvent) => {
+		const url = e.currentTarget.getAttribute('data-url') as Pages;
+		if (url) changePage(url);
 	};
 
 	return (
 		<div style={styles.container}>
+			<a style={styles.arrowWrapperTop} onClick={arrowOnClick}>
+				<img style={styles.arrowTop} src={arrow} alt='up arrow' />
+			</a>
 			<div style={styles.contentWrapper}>
-				<div style={styles.itemsWrapper}>
-					{portfolioItems.map((item: PortfolioItem, i) => (
+				<div style={styles.itemsWrapper} ref={itemsWrapperEl}>
+					{posts.map((post: Post, i) => (
 						<a
 							style={{
 								...styles.item,
 								...(i === 0 && {...styles.firstItem})
 							}}
 							key={i}
+							data-url={post.url}
 							onClick={itemOnClick}
 						>
-							<h3>{item.title}</h3>
-							<h4>{item.medium}</h4>
+							<h3>{post.title}</h3>
+							<h4>{post.medium}</h4>
 						</a>
 					))}
 				</div>
@@ -103,8 +141,8 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 					<div style={styles.scrollfront}></div>
 				</div>
 			</div>
-			<a style={styles.arrowWrapper} onClick={arrowOnClick}>
-				<img style={styles.arrow} src={arrow} alt='arrow down' />
+			<a style={styles.arrowWrapperBottom} onClick={arrowOnClick}>
+				<img style={styles.arrowBottom} src={arrow} alt='down arrow' />
 			</a>
 		</div>
 	);

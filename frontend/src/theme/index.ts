@@ -17,4 +17,7 @@ export const globalStyles = {
 		orangeSecondary: '#cc6933', // Outline color
 		pink: '#f75658',
 	},
+	transitions: {
+		primary: '0.2s ease',
+	},
 };
