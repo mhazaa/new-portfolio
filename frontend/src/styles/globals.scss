@@ -14,6 +14,8 @@ $teal: #8dcb97;
 $brownPrimary: #6e523b;
 /* transitions */
 $transitionPrimary: 0.2s ease;
+/* breakpoints */
+$mobileBreakpoint: 768px;
 
 * {
 	margin: 0;
@@ -37,6 +39,11 @@ html, body {
 
 body {
 	background: $beige;
+	font-size: 16px;
+
+	@media (max-width: $mobileBreakpoint) {
+		font-size: 12px;
+	}
 }
 
 ul {

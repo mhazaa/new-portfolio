@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import https from 'https';
-import { AllData } from '../../types';
+import { Post, AllData } from '../../types';
 
 dotenv.config();
 
@@ -21,7 +21,30 @@ const fetchAllData = (): Promise<AllData> => {
 
 			response.on('end', () => {
 				const body = JSON.parse(data);
-				resolve(body.result);
+				
+				const posts: Post[] = body.result.map((item: any) => {
+					return {
+						id: item.id,
+						title: item.title,
+						medium: item.medium,
+						url: item.url,
+						year: item.year,
+						markup: item.markup,
+					};
+				});
+
+				const allData: AllData = {
+					socialMediaLinks: {
+						instagram: 'https://www.instagram.com/magdi_hazaa/',
+					},
+					bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus sem, consectetur in odio sit amet, pharetra sodales libero. Pellentesque molestie mollis massa, sit amet ultricies eros vestibulum id. Phasellus sit amet semper velit, ut vulputate ipsum. Etiam dignissim eros ac lacinia tempor. Morbi eu libero commodo elit blandit pulvinar. Praesent nisl lacus, scelerisque in consequat a, lobortis laoreet lectus. Vivamus ultricies risus at sagittis ultrices. Nam et mi quis leo fringilla finibus.',
+					portfolio: {
+						artist: posts,
+						writer: posts,
+					},
+				};
+
+				resolve(allData);
 			});
 		});
 

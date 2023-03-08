@@ -9,7 +9,7 @@ export default (app: Application, collections: {postsCollection: Collection}): v
 	app.get('/fetch-all-data', async (_req, res) => {
 		try {
 			const allDocuments = await collections.postsCollection.getAllDocuments();
-			console.log(allDocuments); //as AllData
+			//console.log(allDocuments); //as AllData
 
 			const allData: AllData = await fetchAllData();
 			console.log(allData);

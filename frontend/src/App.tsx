@@ -6,12 +6,13 @@ import CateogryNav from './components/CateogryNav';
 import PortfolioNav from './components/PortfolioNav';
 import Bio from './components/Bio';
 import Contact from './components/Contact';
+import PostPage from './components/PostPage';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
-import { Pages, Categories } from '../../types';
+import { Pages, Categories, AllData } from '../../types';
 import { fetchAllData } from './requests';
-import data from '../../data';
 
 const App: React.FC = () => {
+	const [data, setData] = useState<AllData>();
 	const [page, setPage] = useState<Pages>('');
 	const [category, setCategory] = useState<Categories>('artist');
 
@@ -25,7 +26,6 @@ const App: React.FC = () => {
 			width: '70%',
 			maxWidth: '800px',
 			margin: 'auto',
-			minHeight: '100vh',
 		},
 	};
 
@@ -36,7 +36,9 @@ const App: React.FC = () => {
 
 		(async () => {
 			const data = await fetchAllData();
+			setData(data);
 			console.log(data);
+			console.log(data.portfolio.writer[0]);
 		})();
 	}, []);
 
@@ -51,18 +53,24 @@ const App: React.FC = () => {
 		console.log(category);
 	};
 
+	const inHomepage = page === '' || page === 'home';
+
 	return (
 		<div>
-			<Header socialMediaLinks={data.socialMediaLinks} changePage={changePage} />
+			{data && <Header socialMediaLinks={data.socialMediaLinks} changePage={changePage} />}
 			
-			{(page === '' || page === 'home') &&
+			{data &&
 				<div style={styles.page}>
-					<CateogryNav category={category} changeCategory={changeCategory} />
-					<PortfolioNav posts={data.portfolio[category]} changePage={changePage} />
+					<CateogryNav
+						category={category}
+						changeCategory={changeCategory}
+						variant={inHomepage ? 'primary' : 'secondary'}
+					/>
+					{inHomepage && <PortfolioNav posts={data.portfolio[category]} changePage={changePage} />}
 				</div>
 			}
 
-			{page === 'bio' &&
+			{data && page === 'bio' &&
 				<div style={styles.page}>
 					<Bio bio={data.bio} />
 				</div>
@@ -71,6 +79,12 @@ const App: React.FC = () => {
 			{page === 'contact' &&
 				<div style={styles.page}>
 					<Contact />
+				</div>
+			}
+
+			{data && category === 'artist' || category === 'writer' &&
+				<div style={styles.page}>
+					<PostPage {...data!.portfolio.artist[0]} changePage={changePage} />
 				</div>
 			}
 

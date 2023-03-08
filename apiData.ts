@@ -1,4 +1,4 @@
-export interface APIData {
+/*export interface APIData {
 	url: string;
 	method: 'GET' | 'POST',
 	data?: any,
@@ -19,4 +19,4 @@ const apiData: APIData = [
 	},
 ]
 
-export default apiData
+export default apiData;*/

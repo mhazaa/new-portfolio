@@ -19,5 +19,9 @@ export const globalStyles = {
 	},
 	transitions: {
 		primary: '0.2s ease',
+		secondary: '0.6s cubic-bezier(.07,.76,.35,1.06)',
+	},
+	breakpoints: {
+		mobile: 768,
 	},
 };
