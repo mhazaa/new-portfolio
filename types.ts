@@ -7,6 +7,7 @@ export interface Post {
 	title: string;
 	medium: string;
 	url: string;
+	year: string;
 	tags?: [string];
 	markup?: string;
 	likes?: number;

@@ -2,15 +2,19 @@ import { resolve } from 'path';
 import { Application } from 'express';
 import { Collection } from '@mhazaa/mongo-controller';
 import { sendLike, sendComment } from './dbFunctions';
+import fetchAllData from './fetchAllData';
 import { AllData, LikePostData, CommentPostData } from '../../types';
 
 export default (app: Application, collections: {postsCollection: Collection}): void => {
-	app.get('/fetch-data', async (_req, res) => {
+	app.get('/fetch-all-data', async (_req, res) => {
 		try {
 			const allDocuments = await collections.postsCollection.getAllDocuments();
-			//as AllData
-			console.log(allDocuments);
-			res.status(200).send(allDocuments);
+			console.log(allDocuments); //as AllData
+
+			const allData: AllData = await fetchAllData();
+			console.log(allData);
+
+			res.status(200).send(allData);
 		} catch (error) {
 			console.log(error);
 			return res.status(400).send(error);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, CSSProperties } from 'react';
 import arrow from '../assets/arrow.svg';
+import map from '../modules/map';
 import { globalStyles } from '../theme';
 import { Pages, Post } from '../../../types';
 
@@ -14,6 +15,8 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 }) => {
 	const [topArrowVisible, setTopArrowVisible] = useState<boolean>(false);
 	const [bottomArrowVisible, setBottomArrowVisible] = useState<boolean>(true);
+	const [scrollHeight, setScrollHeight] = useState<number>(0);
+	const [scrollPercentage, setScrollPercentage] = useState<number>(0);
 	const itemsWrapperEl = useRef<HTMLDivElement>(null);
 
 	const styles: {
@@ -47,6 +50,7 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 			width: '3px',
 			top: '5%',
 			right: '0',
+			overflow: 'hidden',
 		},
 		scrollback: {
 			background: globalStyles.colors.orangeSecondary,
@@ -61,9 +65,9 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 		scrollfront: {
 			background: globalStyles.colors.brownPrimary,
 			position: 'absolute',
-			height: '50%',
+			height: scrollHeight + '%',
 			width: '100%',
-			top: '0',
+			top: scrollPercentage + '%',
 			left: '0',
 			zIndex: '1',
 		},
@@ -86,20 +90,43 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 		},
 	};
 
-	useEffect(() => {
+	const refreshScroll = () => {
 		const el = itemsWrapperEl.current;
 		if (!el) return;
-		el.addEventListener('scroll', () => {
-			const scrollTop = el.scrollTop;
-			const height = el.offsetHeight;
-			const scrollHeight = el.scrollHeight;
-			const maxScroll = scrollHeight - height;
-			(scrollTop <= 0) ? setTopArrowVisible(false) : setTopArrowVisible(true);
-			(scrollTop >= maxScroll) ? setBottomArrowVisible(false) : setBottomArrowVisible(true);
-		});
+		const scrollTop = el.scrollTop;
+		const height = el.offsetHeight;
+		const scrollHeight = el.scrollHeight;
+		const maxScroll = scrollHeight - height;
+
+		let sh = (scrollHeight - height) / 2;
+		if (sh > 100) sh = 100;
+		setScrollHeight(sh);
+
+		let sp = map(scrollTop, 0, scrollHeight - height, 0, 100 - sh);
+		sp = Math.floor(sp);
+		setScrollPercentage(sp);
+		
+		(scrollTop <= 0) ? setTopArrowVisible(false) : setTopArrowVisible(true);
+		(scrollTop >= maxScroll) ? setBottomArrowVisible(false) : setBottomArrowVisible(true);
+	};
+
+	useEffect(() => {
+		refreshScroll();
+		itemsWrapperEl.current?.addEventListener('scroll', refreshScroll);
 	}, []);
 
-	const arrowOnClick = () => {
+	useEffect(() => {
+		refreshScroll();
+	}, [posts]);
+
+	const topArrowOnClick = () => {
+		const el = itemsWrapperEl.current;
+		if (!el) return;
+		el.scrollTo(0, 0);
+		setBottomArrowVisible(false);
+	};
+
+	const bottomArrowOnClick = () => {
 		const el = itemsWrapperEl.current;
 		if (!el) return;
 		const height = el.offsetHeight;
@@ -116,7 +143,7 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 
 	return (
 		<div style={styles.container}>
-			<a style={styles.arrowWrapperTop} onClick={arrowOnClick}>
+			<a style={styles.arrowWrapperTop} onClick={topArrowOnClick}>
 				<img style={styles.arrowTop} src={arrow} alt='up arrow' />
 			</a>
 			<div style={styles.contentWrapper}>
@@ -131,7 +158,7 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 							data-url={post.url}
 							onClick={itemOnClick}
 						>
-							<h3>{post.title}</h3>
+							<h3>{post.title} ({post.year})</h3>
 							<h4>{post.medium}</h4>
 						</a>
 					))}
@@ -141,7 +168,7 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 					<div style={styles.scrollfront}></div>
 				</div>
 			</div>
-			<a style={styles.arrowWrapperBottom} onClick={arrowOnClick}>
+			<a style={styles.arrowWrapperBottom} onClick={bottomArrowOnClick}>
 				<img style={styles.arrowBottom} src={arrow} alt='down arrow' />
 			</a>
 		</div>

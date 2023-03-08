@@ -8,6 +8,7 @@ import Bio from './components/Bio';
 import Contact from './components/Contact';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import { Pages, Categories } from '../../types';
+import { fetchAllData } from './requests';
 import data from '../../data';
 
 const App: React.FC = () => {
@@ -32,6 +33,11 @@ const App: React.FC = () => {
 		AnalyticsEngineClient.connect();
 		//On connection might not be neccsary
 		AnalyticsEngineClient.onConnection(() => AnalyticsEngineClient.sendMetric('Viewed homepage'));
+
+		(async () => {
+			const data = await fetchAllData();
+			console.log(data);
+		})();
 	}, []);
 
 	const changePage = (page: Pages) => {
