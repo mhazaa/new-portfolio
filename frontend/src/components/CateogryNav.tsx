@@ -1,17 +1,17 @@
 import React, { CSSProperties } from 'react';
 import useIsMobile from '../hooks/useIsMobile';
 import { globalStyles } from '../theme';
-import { Categories } from '../../../types';
+import { Pages } from '../../../types';
 
 interface CateogryNavProps {
-	category: Categories;
-	changeCategory: (category: Categories) => void;
+	page: Pages;
+	changePage: (page: Pages) => void;
 	variant?: 'primary' | 'secondary';
 }
 
 const CateogryNav: React.FC<CateogryNavProps> = ({
-	category,
-	changeCategory,
+	page,
+	changePage,
 	variant = 'primary',
 }) => {
 	const isMobile = useIsMobile();
@@ -48,18 +48,18 @@ const CateogryNav: React.FC<CateogryNavProps> = ({
 		};
 	};
 
-	const artistOnClick = () => changeCategory('artist');
+	const artistOnClick = () => changePage('/artist');
 
-	const writerOnClick = () => changeCategory('writer');
+	const writerOnClick = () => changePage('/writer');
 
 	return (
 		<div style={styles.container}>
 			<a onClick={artistOnClick}>
-				<h2 style={textStyle(category === 'artist')}>Artist</h2>
+				<h2 style={textStyle(page === '/artist')}>Artist</h2>
 			</a>
 			<h2 style={styles.text}>&nbsp;+&nbsp;</h2>
 			<a onClick={writerOnClick}>
-				<h2 style={textStyle(category === 'writer')}>Writer</h2>
+				<h2 style={textStyle(page === '/writer')}>Writer</h2>
 			</a>
 		</div>
 	);

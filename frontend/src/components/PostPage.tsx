@@ -6,7 +6,7 @@ import like from '../assets/like.svg';
 import comment from '../assets/comment.svg';
 
 interface PostPageProps extends Post {
-	changePage: (page?: Pages) => void;
+	changePage: (page: Pages) => void;
 }
 
 const PostPage: React.FC<PostPageProps> = ({
@@ -15,7 +15,6 @@ const PostPage: React.FC<PostPageProps> = ({
 	medium,
 	url,
 	year,
-	tags,
 	markdown,
 	likes,
 	comments,
@@ -61,7 +60,7 @@ const PostPage: React.FC<PostPageProps> = ({
 		},
 	};
 
-	const backArrowOnClick = () => changePage();
+	const backArrowOnClick = () => changePage('/');
 	
 	const likeOnClick = () => {
 		console.log('like clicked');

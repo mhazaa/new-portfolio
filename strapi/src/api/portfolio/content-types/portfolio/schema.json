@@ -11,12 +11,12 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Artist": {
+    "artist": {
       "type": "component",
       "repeatable": true,
       "component": "post.post"
     },
-    "Writer": {
+    "writer": {
       "type": "component",
       "repeatable": true,
       "component": "post.post"

@@ -1,8 +1,7 @@
 {
   "collectionName": "components_post_posts",
   "info": {
-    "displayName": "Post",
-    "description": ""
+    "displayName": "Post"
   },
   "options": {},
   "attributes": {
@@ -21,9 +20,6 @@
     "year": {
       "type": "string",
       "required": true
-    },
-    "tags": {
-      "type": "json"
     },
     "markdown": {
       "type": "richtext"

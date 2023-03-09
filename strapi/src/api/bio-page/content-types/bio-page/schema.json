@@ -1,10 +1,10 @@
 {
   "kind": "singleType",
-  "collectionName": "bios",
+  "collectionName": "bio_pages",
   "info": {
-    "singularName": "bio",
-    "pluralName": "bios",
-    "displayName": "Bio",
+    "singularName": "bio-page",
+    "pluralName": "bio-pages",
+    "displayName": "Bio Page",
     "description": ""
   },
   "options": {

@@ -1,4 +1,5 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
+import ReactMarkdown from 'react-markdown';
 
 interface BioProps {
     bio: string;
@@ -6,20 +7,13 @@ interface BioProps {
 
 const Bio: React.FC<BioProps> = ({
 	bio
-}) => {
-	const styles: {
-		[key: string]: CSSProperties;
-	} = {
-		text: {
-		},
-	};
-
-	return (
-		<div>
-			<h2>Bio</h2>
-			<p style={styles.text}>{bio}</p>
-		</div>
-	);
-};
+}) => (
+	<div>
+		<h2>Bio</h2>
+		<ReactMarkdown>
+			{bio}
+		</ReactMarkdown>
+	</div>
+);
 
 export default Bio;

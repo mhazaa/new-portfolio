@@ -6,12 +6,12 @@ import { Pages, Post } from '../../../types';
 
 interface PortfolioNavProps {
 	posts: Post[];
-	changePage: (page: Pages) => void;
+	changePost: (post: string | null) => void;
 }
 
 const PortfolioNav: React.FC<PortfolioNavProps> = ({
 	posts,
-	changePage,
+	changePost,
 }) => {
 	const [topArrowVisible, setTopArrowVisible] = useState<boolean>(false);
 	const [bottomArrowVisible, setBottomArrowVisible] = useState<boolean>(true);
@@ -138,7 +138,7 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 
 	const itemOnClick = (e: React.MouseEvent) => {
 		const url = e.currentTarget.getAttribute('data-url') as Pages;
-		if (url) changePage(url);
+		if (url) changePost(url);
 	};
 
 	return (

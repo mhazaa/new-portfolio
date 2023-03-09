@@ -8,14 +8,14 @@ import Bio from './components/Bio';
 import Contact from './components/Contact';
 import PostPage from './components/PostPage';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
-import { Pages, Categories, AllData } from '../../types';
+import { Pages, AllData } from '../../types';
 import { fetchAllData } from './requests';
 
 const App: React.FC = () => {
 	const [data, setData] = useState<AllData>();
-	const [category, setCategory] = useState<Categories>('artist');
-	const [page, setPage] = useState<Pages>(category);
-	const inHomepage = true;
+	const [page, setPage] = useState<Pages>('/');
+	const [post, setPost] = useState<string | null>(null);
+	const isInPortfolio = (page === '/artist' || page === '/writer');
 
 	const styles: {
 		[key: string]: CSSProperties;
@@ -36,55 +36,55 @@ const App: React.FC = () => {
 		AnalyticsEngineClient.onConnection(() => AnalyticsEngineClient.sendMetric('Viewed homepage'));
 
 		(async () => {
-			const data = await fetchAllData();
+			const data: AllData = await fetchAllData();
 			setData(data);
 			console.log(data);
 		})();
 	}, []);
 
-	const changePage = (page?: Pages) => {
-		if (!page) page = category;
-		if (page[0] === '/') page = page.substring(1) as Pages;
+	const changePage = (page: Pages) => {
 		setPage(page);
+		setPost(null);
 		console.log(page);
-		history.pushState(null, '', `/${page}`);
+		history.pushState(null, '', `${page}`);
 	};
 
-	const changeCategory = (category: Categories) => {
-		changePage(category);
-		setCategory(category);
+	const changePost = (post: string | null) => {
+		setPost(post);
+		console.log(post);
+		history.pushState(null, '', `${post}`);
 	};
 
 	return (
 		<div>
-			{data && <Header socialMediaLinks={data.socialMediaLinks} changePage={changePage} />}
+			{data?.socialMediaLinks && <Header socialMediaLinks={data.socialMediaLinks} changePage={changePage} />}
 			
-			{data &&
-				<div style={styles.page}>
-					<CateogryNav
-						category={category}
-						changeCategory={changeCategory}
-						variant={inHomepage ? 'primary' : 'secondary'}
-					/>
-					{inHomepage && <PortfolioNav posts={data.portfolio[category]} changePage={changePage} />}
-				</div>
-			}
+			<div style={styles.page}>
+				<CateogryNav
+					page={page}
+					changePage={changePage}
+					variant={(isInPortfolio || page === '/') && !post ? 'primary' : 'secondary'}
+				/>
 
-			{data && page === 'bio' &&
+				{data?.portfolio && isInPortfolio &&
+					<>
+						{post
+							? <PostPage {...data.portfolio.writer[0]} changePage={changePage} />
+							: <PortfolioNav posts={data.portfolio['writer']} changePost={changePost} />
+						}
+					</>
+				}
+			</div>
+
+			{data?.bio && page === '/bio' &&
 				<div style={styles.page}>
 					<Bio bio={data.bio} />
 				</div>
 			}
 
-			{page === 'contact' &&
+			{page === '/contact' &&
 				<div style={styles.page}>
 					<Contact />
-				</div>
-			}
-
-			{data && category === 'artist' || category === 'writer' &&
-				<div style={styles.page}>
-					<PostPage {...data!.portfolio.writer[0]} changePage={changePage} />
 				</div>
 			}
 

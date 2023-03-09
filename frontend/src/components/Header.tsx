@@ -6,7 +6,7 @@ import resume from '../assets/resume.pdf';
 
 interface HeaderProps {
 	socialMediaLinks: SocialMediaLinks;
-	changePage: (page?: Pages) => void;
+	changePage: (page: Pages) => void;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -39,13 +39,13 @@ const Header: React.FC<HeaderProps> = ({
 
 	const instagramOnClick = () => window.open(socialMediaLinks.instagram, '_blank');
 
-	const bioOnClick = () => changePage('bio');
+	const bioOnClick = () => changePage('/bio');
 
 	const resumeOnClick = () => window.open(resume, '_blank');
 
-	const contactOnClick = () => changePage('contact');
+	const contactOnClick = () => changePage('/contact');
 
-	const logoOnClick = () => changePage();
+	const logoOnClick = () => changePage('/');
 
 	return (
 		<div style={styles.container}>

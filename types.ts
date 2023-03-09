@@ -1,8 +1,4 @@
-export type Pages = 'artist' | 'writer' | 'bio' | 'resume' | 'contact';
-
-export type Categories = 'artist' | 'writer';
-
-export type Tags = 'fiction' | 'poetry' | 'digitalpainting' | 'photography';
+export type Pages = '/' | '/artist' | '/writer' | '/bio' | '/resume' | '/contact';
 
 export interface Post {
 	id: string;
@@ -10,7 +6,6 @@ export interface Post {
 	medium: string;
 	url: string;
 	year: string;
-	tags?: [Tags];
 	markdown?: string;
 	likes?: number;
 	comments?: Comment[];

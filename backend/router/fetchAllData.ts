@@ -27,42 +27,40 @@ const httpRequest = async (options: http.RequestOptions): Promise<any> => {
 	});
 };
 
+const STRAPI_TOKEN = process.env.STRAPI_TOKEN;
+
+const getData = async (endpoint: string) => {
+	const data = await httpRequest({
+		method: 'GET',
+		hostname: 'localhost',
+		port: 1337,
+		path: '/api/' + endpoint,
+		headers: {
+			Authorization: 'Bearer ' + STRAPI_TOKEN,
+		},
+	});
+	return data;
+};
+
 const fetchAllData = async (): Promise<AllData> => {
-	const STRAPI_TOKEN = process.env.STRAPI_TOKEN;
+	const portfolio = await getData('portfolio');
+	const artistPosts: Post[] = portfolio.data.attributes.Artist;
+	const writerPosts: Post[] = portfolio.data.attributes.Writer;
+	const bioPage = await getData('bio-page');
+	const socialMedia = await getData('social-media');
 
-	const posts = await httpRequest({
-		method: 'GET',
-		hostname: 'localhost',
-		port: 1337,
-		path: '/api/portfolio?populate=*',
-		headers: {
-			Authorization: 'bearer ' + STRAPI_TOKEN,
-		},
-	});
-
-	const artistPosts: Post[] = posts.data.attributes.Artist;
-	const writerPosts: Post[] = posts.data.attributes.Writer;
-
-	const bio = await httpRequest({
-		method: 'GET',
-		hostname: 'localhost',
-		port: 1337,
-		path: '/api/bio?populate=*',
-		headers: {
-			Authorization: 'bearer ' + STRAPI_TOKEN,
-		},
-	});
-
-	console.log(bio);
+	console.log(portfolio);
+	console.log(bioPage.data.attributes.bio);
+	console.log(socialMedia.data.attributes.instagram);
 
 	const allData: AllData = {
 		socialMediaLinks: {
-			instagram: 'https://www.instagram.com/magdi_hazaa/',
+			instagram: socialMedia.data.attributes.instagram,
 		},
-		bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus sem, consectetur in odio sit amet, pharetra sodales libero. Pellentesque molestie mollis massa, sit amet ultricies eros vestibulum id. Phasellus sit amet semper velit, ut vulputate ipsum. Etiam dignissim eros ac lacinia tempor. Morbi eu libero commodo elit blandit pulvinar. Praesent nisl lacus, scelerisque in consequat a, lobortis laoreet lectus. Vivamus ultricies risus at sagittis ultrices. Nam et mi quis leo fringilla finibus.',
+		bio: bioPage.data.attributes.bio,
 		portfolio: {
-			artist: artistPosts,
-			writer: writerPosts,
+			artist: [],
+			writer: [],
 		},
 	};
 
