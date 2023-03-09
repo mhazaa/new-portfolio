@@ -4,10 +4,15 @@ TO DO:
 - add google tag/analytics
 - og:image
 
+
+
 posts id match strapi
 
 routes change page (/)
 - markdown
+
+page loading with url
+contact
 
 mongoblog change nane to new-portfolio
 
