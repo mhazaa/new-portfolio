@@ -1,0 +1,25 @@
+{
+  "kind": "singleType",
+  "collectionName": "portfolios",
+  "info": {
+    "singularName": "portfolio",
+    "pluralName": "portfolios",
+    "displayName": "Portfolio"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Artist": {
+      "type": "component",
+      "repeatable": true,
+      "component": "post.post"
+    },
+    "Writer": {
+      "type": "component",
+      "repeatable": true,
+      "component": "post.post"
+    }
+  }
+}

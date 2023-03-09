@@ -1,13 +1,12 @@
 import React, { CSSProperties } from 'react';
 import { Pages, SocialMediaLinks } from '../../../types';
-import { globalStyles } from '../theme';
 import instagram from '../assets/instagram.svg';
 import logo from '../assets/logo.svg';
 import resume from '../assets/resume.pdf';
 
 interface HeaderProps {
 	socialMediaLinks: SocialMediaLinks;
-	changePage: (page: Pages) => void;
+	changePage: (page?: Pages) => void;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -24,7 +23,6 @@ const Header: React.FC<HeaderProps> = ({
 		},
 		instagram: {
 			width: '25px',
-			fill: globalStyles.colors.brownPrimary,
 		},
 		menuItems: {
 			margin: '5px 0',
@@ -37,9 +35,6 @@ const Header: React.FC<HeaderProps> = ({
 			position: 'absolute',
 			textIndent: '-999999999px',
 		},
-		logoObject: {
-			fill: globalStyles.colors.brownPrimary,
-		}
 	};
 
 	const instagramOnClick = () => window.open(socialMediaLinks.instagram, '_blank');
@@ -50,7 +45,7 @@ const Header: React.FC<HeaderProps> = ({
 
 	const contactOnClick = () => changePage('contact');
 
-	const logoOnClick = () => changePage('');
+	const logoOnClick = () => changePage();
 
 	return (
 		<div style={styles.container}>
@@ -70,7 +65,7 @@ const Header: React.FC<HeaderProps> = ({
 				<h1 style={styles.logoHiddenText}>
 					Magdi Hazaa
 				</h1>
-				<img style={styles.logoObject} src={logo} alt='magdi hazaa' />
+				<img src={logo} alt='magdi hazaa' />
 			</a>
 		</div>
 	);

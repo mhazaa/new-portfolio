@@ -1,5 +1,5 @@
 {
-  "name": "magdi-hazaa-blog-frontend",
+  "name": "magdi-hazaa-new-portfolio-frontend",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -11,7 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-markdown": "^8.0.5"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

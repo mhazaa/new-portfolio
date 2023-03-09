@@ -10,6 +10,9 @@
 		"strict": true,
 		"skipLibCheck": true,
 	},
+	"exclude": [
+		"strapi",
+	],
 	"ts-node": {
 		"compilerOptions": {
 			"module": "commonjs",

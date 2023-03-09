@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
 interface BioProps {
     bio: string;
@@ -6,11 +6,20 @@ interface BioProps {
 
 const Bio: React.FC<BioProps> = ({
 	bio
-}) => (
-	<div>
-		<h2>Bio</h2>
-		<p>{bio}</p>
-	</div>
-);
+}) => {
+	const styles: {
+		[key: string]: CSSProperties;
+	} = {
+		text: {
+		},
+	};
+
+	return (
+		<div>
+			<h2>Bio</h2>
+			<p style={styles.text}>{bio}</p>
+		</div>
+	);
+};
 
 export default Bio;

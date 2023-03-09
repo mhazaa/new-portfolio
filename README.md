@@ -4,6 +4,15 @@ TO DO:
 - add google tag/analytics
 - og:image
 
+posts id match strapi
+
+routes change page (/)
+- markdown
+
+mongoblog change nane to new-portfolio
+
+tags
+
 - backend package.json start & stop scripts, ts-node
 
 - sendlike, sendcomment: postId instead of title

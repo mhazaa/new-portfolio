@@ -1,18 +1,12 @@
 import dotenv from 'dotenv';
-import https from 'https';
+import http from 'http';
 import { Post, AllData } from '../../types';
 
 dotenv.config();
 
-const SANITY_PROJECT_ID = process.env.SANITY_PROJECT_ID;
-const SANITY_DATASET = process.env.SANITY_DATASET;
-
-const fetchAllData = (): Promise<AllData> => {
-	const QUERY = encodeURIComponent('*[_type == "post"]');
-	const URL = `https://${SANITY_PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${SANITY_DATASET}?query=${QUERY}`;
-
-	return new Promise<AllData>((resolve, reject) => {
-		const request = https.request(URL, (response) => {
+const httpRequest = async (options: http.RequestOptions): Promise<any> => {
+	return new Promise<any>((resolve, reject) => {
+		const request = http.request(options, (response) => {
 			let data = '';
 
 			response.on('data', (chunk) => {
@@ -21,30 +15,7 @@ const fetchAllData = (): Promise<AllData> => {
 
 			response.on('end', () => {
 				const body = JSON.parse(data);
-				
-				const posts: Post[] = body.result.map((item: any) => {
-					return {
-						id: item.id,
-						title: item.title,
-						medium: item.medium,
-						url: item.url,
-						year: item.year,
-						markup: item.markup,
-					};
-				});
-
-				const allData: AllData = {
-					socialMediaLinks: {
-						instagram: 'https://www.instagram.com/magdi_hazaa/',
-					},
-					bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus sem, consectetur in odio sit amet, pharetra sodales libero. Pellentesque molestie mollis massa, sit amet ultricies eros vestibulum id. Phasellus sit amet semper velit, ut vulputate ipsum. Etiam dignissim eros ac lacinia tempor. Morbi eu libero commodo elit blandit pulvinar. Praesent nisl lacus, scelerisque in consequat a, lobortis laoreet lectus. Vivamus ultricies risus at sagittis ultrices. Nam et mi quis leo fringilla finibus.',
-					portfolio: {
-						artist: posts,
-						writer: posts,
-					},
-				};
-
-				resolve(allData);
+				resolve(body);
 			});
 		});
 
@@ -56,4 +27,46 @@ const fetchAllData = (): Promise<AllData> => {
 	});
 };
 
-export default fetchAllData;
+const fetchAllData = async (): Promise<AllData> => {
+	const STRAPI_TOKEN = process.env.STRAPI_TOKEN;
+
+	const posts = await httpRequest({
+		method: 'GET',
+		hostname: 'localhost',
+		port: 1337,
+		path: '/api/portfolio?populate=*',
+		headers: {
+			Authorization: 'bearer ' + STRAPI_TOKEN,
+		},
+	});
+
+	const artistPosts: Post[] = posts.data.attributes.Artist;
+	const writerPosts: Post[] = posts.data.attributes.Writer;
+
+	const bio = await httpRequest({
+		method: 'GET',
+		hostname: 'localhost',
+		port: 1337,
+		path: '/api/bio?populate=*',
+		headers: {
+			Authorization: 'bearer ' + STRAPI_TOKEN,
+		},
+	});
+
+	console.log(bio);
+
+	const allData: AllData = {
+		socialMediaLinks: {
+			instagram: 'https://www.instagram.com/magdi_hazaa/',
+		},
+		bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus sem, consectetur in odio sit amet, pharetra sodales libero. Pellentesque molestie mollis massa, sit amet ultricies eros vestibulum id. Phasellus sit amet semper velit, ut vulputate ipsum. Etiam dignissim eros ac lacinia tempor. Morbi eu libero commodo elit blandit pulvinar. Praesent nisl lacus, scelerisque in consequat a, lobortis laoreet lectus. Vivamus ultricies risus at sagittis ultrices. Nam et mi quis leo fringilla finibus.',
+		portfolio: {
+			artist: artistPosts,
+			writer: writerPosts,
+		},
+	};
+
+	return allData;
+};
+
+export default fetchAllData; 

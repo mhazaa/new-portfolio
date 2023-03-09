@@ -10,9 +10,9 @@ export default (app: Application, collections: {postsCollection: Collection}): v
 		try {
 			const allDocuments = await collections.postsCollection.getAllDocuments();
 			//console.log(allDocuments); //as AllData
-
+			
 			const allData: AllData = await fetchAllData();
-			console.log(allData);
+			//console.log(allData);
 
 			res.status(200).send(allData);
 		} catch (error) {

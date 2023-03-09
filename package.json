@@ -1,15 +1,16 @@
 {
-  "name": "magdi-hazaa-blog",
+  "name": "magdi-hazaa-new-portfolio",
   "version": "1.0.0",
   "description": "",
   "workspaces": [
     "backend",
-    "frontend"
+    "frontend",
+    "strapi"
   ],
   "scripts": {
-	  "start": "npm run build -w ./frontend && npm run start -w ./backend",
+	  "start": "npm run build -w ./frontend && npm run build -w ./strapi && concurrently \"npm run start -w ./backend\" \"npm run start -w ./strapi\"",
 	  "stop": "npm run stop -w ./backend",
-    "dev": "concurrently \"npm run dev -w ./frontend\" \"npm run dev -w ./backend\""
+    "dev": "concurrently \"npm run dev -w ./frontend\" \"npm run dev -w ./backend\" \"npm run dev -w ./strapi\""
   },
   "keywords": [],
   "author": "Magdi Hazaa",

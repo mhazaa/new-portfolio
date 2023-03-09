@@ -1,9 +1,12 @@
 import React, { CSSProperties } from 'react';
+import ReactMarkdown from 'react-markdown';
 import { Post, Pages } from '../../../types';
-import arrow from '../assets/arrow.svg';
+import backArrow from '../assets/back_arrow.svg';
+import like from '../assets/like.svg';
+import comment from '../assets/comment.svg';
 
 interface PostPageProps extends Post {
-	changePage: (page: Pages) => void;
+	changePage: (page?: Pages) => void;
 }
 
 const PostPage: React.FC<PostPageProps> = ({
@@ -13,7 +16,7 @@ const PostPage: React.FC<PostPageProps> = ({
 	url,
 	year,
 	tags,
-	markup,
+	markdown,
 	likes,
 	comments,
 	changePage,
@@ -29,29 +32,67 @@ const PostPage: React.FC<PostPageProps> = ({
 		},
 		backArrow: {
 			width: '40px',
-			transform: 'rotate(90deg)',
 		},
 		title: {
 		},
-		textWrapper: {
+		contentWrapper: {
+			display: 'flex',
+			flexDirection: 'column',
+			alignItems: 'end',
 			position: 'relative',
 			width: '70%',
 			left: '30%',
+			margin: '60px 0',
+		},
+		iconsWrapper: {
+			display: 'flex',
 			marginTop: '60px',
+		},
+		likeWrapper: {
+			width: '40px',
+		},
+		like: {
+		},
+		commentWrapper: {
+			marginLeft: '20px',
+		},
+		comment: {
+			width: '40px',
 		},
 	};
 
-	const backArrowOnClick = () => changePage('');
+	const backArrowOnClick = () => changePage();
+	
+	const likeOnClick = () => {
+		console.log('like clicked');
+	};
+
+	const commentOnClick = () => {
+		console.log('comment clicked');
+	};
 
 	return (
 		<div style={styles.container}>
 			<a style={styles.backArrowWrapper} onClick={backArrowOnClick}>
-				<img style={styles.backArrow} src={arrow} alt='back arrow' />
+				<img style={styles.backArrow} src={backArrow} alt='back arrow' />
 			</a>
 			<h2 style={styles.title}>{title}</h2>
-			<h4>{medium}</h4>
-			<div style={styles.textWrapper}>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ut elit sem. Integer vitae fermentum libero. Proin in venenatis lectus, eget hendrerit elit. Donec quis congue neque. Duis sodales euismod mauris, in sollicitudin quam posuere a. Phasellus sed congue nisl. Maecenas pellentesque lobortis cursus. Sed in tincidunt nisl. Aliquam elementum ornare volutpat.</p>
+			<h4>{medium}, {year}</h4>
+			<div style={styles.contentWrapper}>
+				{markdown &&
+					<div>
+						<ReactMarkdown>{markdown}</ReactMarkdown>
+					</div>
+				}
+
+				<div style={styles.iconsWrapper}>
+					<a style={styles.likeWrapper} onClick={likeOnClick}>
+						<img style={styles.like} src={like} alt='like' />
+					</a>
+					<a style={styles.commentWrapper} onClick={commentOnClick}>
+						<img style={styles.comment} src={comment} alt='comment' />
+					</a>
+				</div>
 			</div>
 		</div>
 	);

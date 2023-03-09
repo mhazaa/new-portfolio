@@ -13,8 +13,9 @@ import { fetchAllData } from './requests';
 
 const App: React.FC = () => {
 	const [data, setData] = useState<AllData>();
-	const [page, setPage] = useState<Pages>('');
 	const [category, setCategory] = useState<Categories>('artist');
+	const [page, setPage] = useState<Pages>(category);
+	const inHomepage = true;
 
 	const styles: {
 		[key: string]: CSSProperties;
@@ -38,22 +39,21 @@ const App: React.FC = () => {
 			const data = await fetchAllData();
 			setData(data);
 			console.log(data);
-			console.log(data.portfolio.writer[0]);
 		})();
 	}, []);
 
-	const changePage = (page: Pages) => {
+	const changePage = (page?: Pages) => {
+		if (!page) page = category;
+		if (page[0] === '/') page = page.substring(1) as Pages;
 		setPage(page);
 		console.log(page);
+		history.pushState(null, '', `/${page}`);
 	};
 
 	const changeCategory = (category: Categories) => {
-		changePage('');
+		changePage(category);
 		setCategory(category);
-		console.log(category);
 	};
-
-	const inHomepage = page === '' || page === 'home';
 
 	return (
 		<div>
@@ -84,7 +84,7 @@ const App: React.FC = () => {
 
 			{data && category === 'artist' || category === 'writer' &&
 				<div style={styles.page}>
-					<PostPage {...data!.portfolio.artist[0]} changePage={changePage} />
+					<PostPage {...data!.portfolio.writer[0]} changePage={changePage} />
 				</div>
 			}
 

@@ -158,8 +158,8 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 							data-url={post.url}
 							onClick={itemOnClick}
 						>
-							<h3>{post.title} ({post.year})</h3>
-							<h4>{post.medium}</h4>
+							<h3>{post.title}</h3>
+							<h4>{post.medium}, {post.year}</h4>
 						</a>
 					))}
 				</div>
