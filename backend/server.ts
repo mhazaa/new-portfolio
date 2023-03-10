@@ -29,11 +29,12 @@ const start = async () => {
 
 	const analyticsCollection = db.collection(process.env.ANALYTICS_COLLECTION || 'analytics');
 	const postsCollection = db.collection(process.env.POSTS_COLLECTION || 'posts');
+	const contactFormsCollection = db.collection(process.env.CONTACT_FORMS_COLLECTION || 'contact-forms');
 	
 	AnalyticsEngine.connectUsingCollection(analyticsCollection);
 	AnalyticsEngine.routes(app);
 	
-	router(app, { postsCollection });
+	router(app, { analyticsCollection, postsCollection, contactFormsCollection });
 };
 
 start();

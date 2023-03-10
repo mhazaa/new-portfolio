@@ -5,10 +5,18 @@ import { sendLike, sendComment } from './dbFunctions';
 import fetchAllData from './fetchAllData';
 import { AllData, LikePostData, CommentPostData } from '../../types';
 
-export default (app: Application, collections: {postsCollection: Collection}): void => {
+interface Collections {
+	analyticsCollection: Collection;
+	postsCollection: Collection;
+	contactFormsCollection: Collection;
+}
+
+export default (app: Application, collections: Collections): void => {
+	const { analyticsCollection, postsCollection, contactFormsCollection } = collections;
+	
 	app.get('/fetch-all-data', async (_req, res) => {
 		try {
-			const allDocuments = await collections.postsCollection.getAllDocuments();
+			const allDocuments = await postsCollection.getAllDocuments();
 			//console.log(allDocuments); //as AllData
 			
 			const allData: AllData = await fetchAllData();
@@ -29,8 +37,8 @@ export default (app: Application, collections: {postsCollection: Collection}): v
 		try {
 			const reqData: LikePostData = req.body;
 			const { postId } = reqData;
-			const post = await sendLike(collections.postsCollection, postId);
-			//const resData = await collections.postsCollection.insertOne(reqData);
+			const post = await sendLike(postsCollection, postId);
+			//const resData = await postsCollection.insertOne(reqData);
 			console.log(reqData);
 			res.status(200).send(post);
 		} catch (error) {
@@ -43,8 +51,8 @@ export default (app: Application, collections: {postsCollection: Collection}): v
 		try {
 			const reqData: CommentPostData = req.body;
 			const { postId, comment } = reqData;
-			const post = await sendComment(collections.postsCollection, postId, comment);
-			//const resData = await collections.postsCollection.insertOne(reqData);
+			const post = await sendComment(postsCollection, postId, comment);
+			//const resData = await postsCollection.insertOne(reqData);
 			console.log(reqData);
 			res.status(200).send(post);
 		} catch (error) {

@@ -4,7 +4,7 @@ TO DO:
 - add google tag/analytics
 - og:image
 
-
+pm2
 
 posts id match strapi
 

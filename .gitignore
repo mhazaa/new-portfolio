@@ -4,3 +4,4 @@ build
 *.env
 *.js
 !webpack.config.js
+upload_secrets.sh
