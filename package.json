@@ -8,8 +8,8 @@
     "strapi"
   ],
   "scripts": {
-	  "start": "npm run build -w ./frontend && npm run build -w ./strapi && concurrently \"npm run start -w ./backend\" \"npm run start -w ./strapi\"",
-	  "stop": "npm run stop -w ./backend",
+    "start": "npm run build -w ./frontend && npm run build -w ./strapi && concurrently \"npm run start -w ./backend\" \"npm run start -w ./strapi\"",
+    "stop": "npm run stop -w ./backend",
     "dev": "concurrently \"npm run dev -w ./frontend\" \"npm run dev -w ./backend\" \"npm run dev -w ./strapi\""
   },
   "keywords": [],
@@ -24,6 +24,6 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
-    "@mhazaa/analytics-engine": "^1.0.16"
+    "@mhazaa/analytics-engine": "^1.0.26"
   }
 }
