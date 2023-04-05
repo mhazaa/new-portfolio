@@ -3,6 +3,8 @@ import http from 'http';
 import { Post, AllData } from '../../types';
 
 dotenv.config();
+const DROPLET_IP = process.env.DROPLET_IP;
+const STRAPI_TOKEN = process.env.STRAPI_TOKEN;
 
 const httpRequest = async (options: http.RequestOptions): Promise<any> => {
 	return new Promise<any>((resolve, reject) => {
@@ -27,12 +29,10 @@ const httpRequest = async (options: http.RequestOptions): Promise<any> => {
 	});
 };
 
-const STRAPI_TOKEN = process.env.STRAPI_TOKEN;
-
 const getData = async (endpoint: string) => {
 	const data = await httpRequest({
 		method: 'GET',
-		hostname: 'localhost',
+		hostname: DROPLET_IP,
 		port: 1337,
 		path: '/api/' + endpoint,
 		headers: {
