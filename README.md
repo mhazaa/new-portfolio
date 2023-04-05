@@ -6,6 +6,11 @@ TO DO:
 
 pm2
 
+{data?.socialMediaLinks && <Header
+
+google tag manager console error
+strappi production fails
+
 posts id match strapi
 
 routes change page (/)

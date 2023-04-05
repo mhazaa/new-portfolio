@@ -49,9 +49,8 @@ const fetchAllData = async (): Promise<AllData> => {
 	const bioPage = await getData('bio-page');
 	const socialMedia = await getData('social-media');
 
-	console.log(portfolio);
-	console.log(bioPage.data.attributes.bio);
-	console.log(socialMedia.data.attributes.instagram);
+	console.log(portfolio.data);
+	console.log(bioPage.data);
 
 	const allData: AllData = {
 		socialMediaLinks: {
