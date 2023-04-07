@@ -1,36 +1,35 @@
-/*
 TO DO:
-- metatags to do
-- add google tag/analytics
+
+- contact + css
+- helmet
+- postId and userId in sanity must match mongodb
+- posts collection, if it's still empty does it generate records?
+
+- routes change page (/)
+- page loading with url
+
+- sanity markdown, serializer?
+
+- test google analytics, reset before launch
+- metatags copy
 - og:image
 
-pm2
+- pm2
 
-{data?.socialMediaLinks && <Header
+===
 
-google tag manager console error
-strappi production fails
+- mongoblog change nane to new-portfolio
 
-posts id match strapi
-
-routes change page (/)
-- markdown
-
-page loading with url
-contact
-
-mongoblog change nane to new-portfolio
-
-tags
+- tags
 
 - backend package.json start & stop scripts, ts-node
-
-- sendlike, sendcomment: postId instead of title
-- analytics engine add to frontend and make sure it works
-- database, make sure it works
 
 - eslint errors (and warnings) don't fail the webpack build
 
 - (scrollTop <= 0) ? setTopArrowVisible(false) : setTopArrowVisible(true);
 (scrollTop >= maxScroll) ? setBottomArrowVisible(false) : setBottomArrowVisible(true);
 */
+
+- add email to contact, "feel free to email me directly or send it here*"
+
+- {data?.socialMediaLinks && <Header

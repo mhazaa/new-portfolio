@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, CSSProperties } from 'react';
 import arrow from '../assets/arrow.svg';
-import map from '../modules/map';
+import map from '../helperFunctions/map';
 import { globalStyles } from '../theme';
 import { Pages, Post } from '../../../types';
 

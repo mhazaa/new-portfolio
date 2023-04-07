@@ -6,7 +6,7 @@ interface ComponentProps {
 }
 
 const Component: React.FC<ComponentProps> = ({
-	a
+	a,
 }) => {
 	const styles: {
 		[key: string]: CSSProperties;

@@ -6,14 +6,33 @@ import CateogryNav from './components/CateogryNav';
 import PortfolioNav from './components/PortfolioNav';
 import Bio from './components/Bio';
 import Contact from './components/Contact';
+import Error from './components/Error';
 import PostPage from './components/PostPage';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import { Pages, AllData } from '../../types';
-import { fetchAllData } from './requests';
+import { getAllData } from './requests';
+
+const setUrl = (url: string) => history.pushState(null, '', `${url}`);
+const url = window.location.href;
+const pathname = new URL(url).pathname;
+
+const initialPage: Pages = 
+	(
+		pathname === '/' ||
+		pathname === '/artist' ||
+		pathname === '/writer' ||
+		pathname === '/bio' ||
+		pathname === '/resume' ||
+		pathname === '/contact'
+	)
+		? pathname
+		: '/error';
+
+setUrl(initialPage);
 
 const App: React.FC = () => {
-	const [data, setData] = useState<AllData>();
-	const [page, setPage] = useState<Pages>('/');
+	const [allData, seAlltData] = useState<AllData>();
+	const [page, setPage] = useState<Pages>(initialPage);
 	const [post, setPost] = useState<string | null>(null);
 	const isInPortfolio = (page === '/artist' || page === '/writer');
 
@@ -32,32 +51,30 @@ const App: React.FC = () => {
 
 	useEffect(() => {
 		AnalyticsEngineClient.connect();
-		//On connection might not be neccsary
-		AnalyticsEngineClient.onConnection(() => AnalyticsEngineClient.sendMetric('Viewed homepage'));
-
+		AnalyticsEngineClient.sendMetric('Viewed homepage');
+		
 		(async () => {
-			const data: AllData = await fetchAllData();
-			setData(data);
-			console.log(data);
+			const allData: AllData = await getAllData();
+			seAlltData(allData);
 		})();
 	}, []);
 
 	const changePage = (page: Pages) => {
 		setPage(page);
 		setPost(null);
+		setUrl(page);
 		console.log(page);
-		history.pushState(null, '', `${page}`);
 	};
 
 	const changePost = (post: string | null) => {
 		setPost(post);
+		if (post) setUrl(post);
 		console.log(post);
-		history.pushState(null, '', `${post}`);
 	};
 
 	return (
 		<div>
-			{data?.socialMediaLinks && <Header socialMediaLinks={data.socialMediaLinks} changePage={changePage} />}
+			{allData?.socialMediaLinks && <Header socialMediaLinks={allData.socialMediaLinks} changePage={changePage} />}
 			
 			<div style={styles.page}>
 				<CateogryNav
@@ -66,25 +83,31 @@ const App: React.FC = () => {
 					variant={(isInPortfolio || page === '/') && !post ? 'primary' : 'secondary'}
 				/>
 
-				{data?.portfolio && isInPortfolio &&
+				{allData?.portfolio && isInPortfolio &&
 					<>
 						{post
-							? <PostPage {...data.portfolio.writer[0]} changePage={changePage} />
-							: <PortfolioNav posts={data.portfolio['writer']} changePost={changePost} />
+							? <PostPage {...allData.portfolio.artist[0]} changePage={changePage} />
+							: <PortfolioNav posts={allData.portfolio['artist']} changePost={changePost} />
 						}
 					</>
 				}
 			</div>
 
-			{data?.bio && page === '/bio' &&
+			{allData?.bioPage && page === '/bio' &&
 				<div style={styles.page}>
-					<Bio bio={data.bio} />
+					<Bio bio={allData.bioPage.bio} />
 				</div>
 			}
 
 			{page === '/contact' &&
 				<div style={styles.page}>
 					<Contact />
+				</div>
+			}
+
+			{page === '/error' &&
+				<div style={styles.page}>
+					<Error />
 				</div>
 			}
 

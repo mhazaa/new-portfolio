@@ -1,29 +1,27 @@
 import { resolve } from 'path';
 import { Application } from 'express';
 import { Collection } from '@mhazaa/mongo-controller';
-import { sendLike, sendComment } from './dbFunctions';
-import fetchAllData from './fetchAllData';
-import { AllData, LikePostData, CommentPostData } from '../../types';
+import getAllData from '../sanityControls/getAllData';
+import { AllData, PostContactFormData, PostLikeData, PostCommentData } from '../../types';
 
 interface Collections {
-	analyticsCollection: Collection;
 	postsCollection: Collection;
 	contactFormsCollection: Collection;
 }
 
 export default (app: Application, collections: Collections): void => {
-	const { analyticsCollection, postsCollection, contactFormsCollection } = collections;
-	
-	app.get('/fetch-all-data', async (_req, res) => {
-		try {
-			const allDocuments = await postsCollection.getAllDocuments();
-			//console.log(allDocuments); //as AllData
-			
-			const allData: AllData = await fetchAllData();
-			//console.log(allData);
+	const { postsCollection, contactFormsCollection } = collections;
 
+	app.get('/get-all-data', async (_req, res) => {
+		try {
+			//const allDocuments = await postsCollection.getAllDocuments();
+			//console.log(allDocuments); //as AllData?
+			
+			const allData: AllData = await getAllData();
+			console.log(allData);
 			res.status(200).send(allData);
 		} catch (error) {
+			console.log('error');
 			console.log(error);
 			return res.status(400).send(error);
 		}
@@ -33,28 +31,50 @@ export default (app: Application, collections: Collections): void => {
 		res.sendFile(resolve('../frontend/build/index.html'));
 	});
 
-	app.post('/like', async (req, res) => {
+	app.post('/post-contact-form', async (req, res) => {
 		try {
-			const reqData: LikePostData = req.body;
-			const { postId } = reqData;
-			const post = await sendLike(postsCollection, postId);
-			//const resData = await postsCollection.insertOne(reqData);
+			const reqData: PostContactFormData = req.body;
 			console.log(reqData);
-			res.status(200).send(post);
+
+			const resData = await contactFormsCollection.insertOne(reqData);
+			console.log(resData);
+			res.status(200).send(resData);
 		} catch (error) {
 			console.log(error);
 			return res.status(400).send(error);
 		}
 	});
 
-	app.post('/comment', async (req, res) => {
+	app.post('/post-like', async (req, res) => {
 		try {
-			const reqData: CommentPostData = req.body;
-			const { postId, comment } = reqData;
-			const post = await sendComment(postsCollection, postId, comment);
-			//const resData = await postsCollection.insertOne(reqData);
+			const reqData: PostLikeData = req.body;
 			console.log(reqData);
-			res.status(200).send(post);
+
+			const { userId, postId } = reqData;
+			const resData = await postsCollection.createOrUpdateDocument(
+				{ postId },
+				{ $inc: { likes: 1 } }
+			);
+			console.log(resData);
+			res.status(200).send(resData);
+		} catch (error) {
+			console.log(error);
+			return res.status(400).send(error);
+		}
+	});
+
+	app.post('/post-comment', async (req, res) => {
+		try {
+			const reqData: PostCommentData = req.body;
+			console.log(reqData);
+
+			const { userId, postId, comment } = reqData;
+			const resData = await postsCollection.createOrUpdateDocument(
+				{ postId },
+				{ $push: { comments: comment } }
+			);
+			console.log(resData);
+			res.status(200).send(resData);
 		} catch (error) {
 			console.log(error);
 			return res.status(400).send(error);

@@ -10,7 +10,7 @@ interface PostPageProps extends Post {
 }
 
 const PostPage: React.FC<PostPageProps> = ({
-	id,
+	postId,
 	title,
 	medium,
 	url,

@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@mhazaa/mongo-controller": "^1.0.17",
+    "@sanity/client": "^5.4.2",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "helmet": "^6.0.1"

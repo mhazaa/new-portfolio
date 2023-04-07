@@ -4,12 +4,14 @@
   "description": "",
   "workspaces": [
     "backend",
-    "frontend"
+    "frontend",
+    "sanity"
   ],
   "scripts": {
     "start": "npm run build -w ./frontend && npm run start -w ./backend",
     "stop": "npm run stop -w ./backend",
-    "dev": "concurrently \"npm run dev -w ./frontend\" \"npm run dev -w ./backend\""
+    "dev": "concurrently \"npm run dev -w ./frontend\" \"npm run dev -w ./backend\"",
+    "sanity": "npm run dev -w ./sanity"
   },
   "keywords": [],
   "author": "Magdi Hazaa",
@@ -23,6 +25,6 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
-    "@mhazaa/analytics-engine": "^1.0.26"
+    "@mhazaa/analytics-engine": "^1.0.27"
   }
 }

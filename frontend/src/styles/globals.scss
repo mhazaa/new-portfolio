@@ -66,7 +66,7 @@ p, textarea {
 	color: $brownPrimary;
 }
 
-h1, h2, h3, h4, h5, button, input {
+h1, h2, h3, h4, h5, button, input, textarea {
 	font-family: "brandon-grotesque", sans-serif;
 	line-height: 1;
 }
@@ -99,7 +99,7 @@ h5 {
 	color: $teal;
 }
 
-button {
+button, input[type=submit] {
 	background: $yellow;
 	cursor: pointer;
 	border: none;
@@ -111,18 +111,17 @@ button {
 	color: $beige;
 }
 
-input {	
+input, textarea {	
 	padding: 0.8em;
 
 	outline-color: $teal;
-	text-transform: uppercase;
 	font-size: 1em;
-	font-weight: $black;
 	color: $brownPrimary;
 }
 
-textarea {
-	padding: 0.8em;
+input {
+	text-transform: uppercase;
+	font-weight: $black;
 }
 
 form {

@@ -1,7 +1,15 @@
-export type Pages = '/' | '/artist' | '/writer' | '/bio' | '/resume' | '/contact';
+export type Pages = '/' | '/artist' | '/writer' | '/bio' | '/resume' | '/contact' | '/error';
+
+export interface BioPage {
+	bio: string;
+};
+
+export interface SocialMediaLinks {
+	instagram: string;
+};
 
 export interface Post {
-	id: string;
+	postId: string;
 	title: string;
 	medium: string;
 	url: string;
@@ -11,19 +19,22 @@ export interface Post {
 	comments?: Comment[];
 }[];
 
-export interface SocialMediaLinks {
-	instagram: string;
-};
-
 export interface Portfolio {
 	artist: Post[];
 	writer: Post[];
 };
 
 export interface AllData {
+	bioPage: BioPage;
 	socialMediaLinks: SocialMediaLinks;
-	bio: string;
 	portfolio: Portfolio;
+};
+
+export interface PostContactFormData {
+	userId: string;
+	name: string;
+	email: string;
+	message: string;
 };
 
 export interface Comment {
@@ -31,12 +42,12 @@ export interface Comment {
 	comment: string;
 };
 
-export interface LikePostData {
+export interface PostLikeData {
 	userId: string;
 	postId: string;
 };
 
-export interface CommentPostData {
+export interface PostCommentData {
 	userId: string;
 	postId: string;
 	comment: Comment;
