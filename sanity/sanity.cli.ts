@@ -1,4 +1,4 @@
-import {defineCliConfig} from 'sanity/cli'
+import { defineCliConfig } from 'sanity/cli'
 import { SANITY_PROJECT_ID, SANITY_DATASET } from '../backend/sanityControls';
 
 export default defineCliConfig({

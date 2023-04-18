@@ -74,7 +74,7 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 		arrowWrapperTop: {
 			marginBottom: '10px',
 			opacity: topArrowVisible ? '1' : '0',
-			transition: `opacity ${globalStyles.transitions.primary}`,
+			transition: `opacity ${globalStyles.transitions.fast}`,
 		},
 		arrowTop: {
 			width: '40px',
@@ -83,7 +83,7 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 		arrowWrapperBottom: {
 			marginTop: '10px',
 			opacity: bottomArrowVisible ? '1' : '0',
-			transition: `opacity ${globalStyles.transitions.primary}`,
+			transition: `opacity ${globalStyles.transitions.fast}`,
 		},
 		arrowBottom: {
 			width: '40px',
@@ -93,21 +93,21 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 	const refreshScroll = () => {
 		const el = itemsWrapperEl.current;
 		if (!el) return;
-		const scrollTop = el.scrollTop;
-		const height = el.offsetHeight;
-		const scrollHeight = el.scrollHeight;
-		const maxScroll = scrollHeight - height;
-
-		let sh = (scrollHeight - height) / 2;
-		if (sh > 100) sh = 100;
+		const elScrollTop = el.scrollTop;
+		const elHeight = el.offsetHeight;
+		const elScrollHeight = el.scrollHeight;
+		const maxScroll = elScrollHeight - elHeight;
+		
+		let sh = map(elScrollHeight / elHeight, 4, 1, 0, 100);
+		if (sh >= 100) sh = 0;
 		setScrollHeight(sh);
 
-		let sp = map(scrollTop, 0, scrollHeight - height, 0, 100 - sh);
+		let sp = map(elScrollTop, 0, elScrollHeight - elHeight, 0, 100 - sh);
 		sp = Math.floor(sp);
 		setScrollPercentage(sp);
-		
-		(scrollTop <= 0) ? setTopArrowVisible(false) : setTopArrowVisible(true);
-		(scrollTop >= maxScroll) ? setBottomArrowVisible(false) : setBottomArrowVisible(true);
+
+		(elScrollTop <= 0) ? setTopArrowVisible(false) : setTopArrowVisible(true);
+		(elScrollTop >= maxScroll) ? setBottomArrowVisible(false) : setBottomArrowVisible(true);
 	};
 
 	useEffect(() => {
@@ -129,9 +129,9 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 	const bottomArrowOnClick = () => {
 		const el = itemsWrapperEl.current;
 		if (!el) return;
-		const height = el.offsetHeight;
-		const scrollHeight = el.scrollHeight;
-		const maxScroll = scrollHeight - height;
+		const elHeight = el.offsetHeight;
+		const elScrollHeight = el.scrollHeight;
+		const maxScroll = elScrollHeight - elHeight;
 		el.scrollTo(0, maxScroll);
 		setBottomArrowVisible(false);
 	};

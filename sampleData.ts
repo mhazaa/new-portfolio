@@ -6,6 +6,8 @@ const data: AllData = {
 	},
 	socialMediaLinks: {
 		instagram: 'https://www.instagram.com/magdi_hazaa/',
+		github: 'https://www.instagram.com/magdi_hazaa/',
+		spotify: 'https://www.instagram.com/magdi_hazaa/',
 	},
 	portfolio: {
 		artist: [

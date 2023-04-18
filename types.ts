@@ -6,6 +6,8 @@ export interface BioPage {
 
 export interface SocialMediaLinks {
 	instagram: string;
+	github: string;
+	spotify: string;
 };
 
 export interface Post {

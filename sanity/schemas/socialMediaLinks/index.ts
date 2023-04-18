@@ -14,6 +14,18 @@ export default {
           type: 'url',
           validation: (Rule: any) => Rule.required(),
         },
+        {
+          title: 'GitHub',
+          name: 'github',
+          type: 'url',
+          validation: (Rule: any) => Rule.required(),
+        },
+        {
+          title: 'Spotify',
+          name: 'spotify',
+          type: 'url',
+          validation: (Rule: any) => Rule.required(),
+        },
       ],
     },
   ],

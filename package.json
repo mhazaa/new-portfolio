@@ -10,7 +10,7 @@
   "scripts": {
     "start": "npm run build -w ./frontend && npm run start -w ./backend",
     "stop": "npm run stop -w ./backend",
-    "dev": "concurrently \"npm run dev -w ./frontend\" \"npm run dev -w ./backend\"",
+    "dev": "concurrently \"npm run dev -w ./frontend\" \"npm run dev -w ./backend\" \"npm run sanity\"",
     "sanity": "npm run dev -w ./sanity"
   },
   "keywords": [],

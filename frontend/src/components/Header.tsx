@@ -1,7 +1,9 @@
 import React, { CSSProperties } from 'react';
 import { Pages, SocialMediaLinks } from '../../../types';
+import Logo from './Logo';
 import instagram from '../assets/instagram.svg';
-import logo from '../assets/logo.svg';
+import github from '../assets/github.svg';
+import spotify from '../assets/spotify.svg';
 import resume from '../assets/resume.pdf';
 
 interface HeaderProps {
@@ -20,36 +22,39 @@ const Header: React.FC<HeaderProps> = ({
 			position: 'fixed',
 			bottom: '10px',
 			left: '10px',
-		},
-		instagram: {
-			width: '25px',
+			zIndex: '999',
 		},
 		menuItems: {
+			
+		},
+		socialMediaWrapper: {
 			margin: '5px 0',
 		},
-		logoWrapper: {
-			display: 'flex',
-			width: '200px',
+		socialMediaIcon: {
+			width: '25px',
+			marginRight: '5px',
 		},
-		logoHiddenText: {
-			position: 'absolute',
-			textIndent: '-999999999px',
+		logoWrapper: {
+			width: '200px',
 		},
 	};
 
 	const instagramOnClick = () => window.open(socialMediaLinks.instagram, '_blank');
+	
+	const githubOnClick = () => window.open(socialMediaLinks.instagram, '_blank');
+	
+	const spotifyOnClick = () => window.open(socialMediaLinks.instagram, '_blank');
 
 	const bioOnClick = () => changePage('/bio');
-
+	
 	const resumeOnClick = () => window.open(resume, '_blank');
-
+	
 	const contactOnClick = () => changePage('/contact');
-
+	
 	const logoOnClick = () => changePage('/');
 
 	return (
 		<div style={styles.container}>
-			<a onClick={instagramOnClick}><img style={styles.instagram} src={instagram} alt='instagram' /></a>
 			<ul style={styles.menuItems}>
 				<li>
 					<a onClick={bioOnClick}><h5>Bio</h5></a>
@@ -61,12 +66,20 @@ const Header: React.FC<HeaderProps> = ({
 					<a onClick={contactOnClick}><h5>Contact</h5></a>
 				</li>
 			</ul>
-			<a style={styles.logoWrapper} onClick={logoOnClick}>
-				<h1 style={styles.logoHiddenText}>
-					Magdi Hazaa
-				</h1>
-				<img src={logo} alt='magdi hazaa' />
-			</a>
+			<div style={styles.socialMediaWrapper}>
+				<a onClick={instagramOnClick}>
+					<img style={styles.socialMediaIcon} src={instagram} alt='instagram' />
+				</a>
+				<a onClick={githubOnClick}>
+					<img style={styles.socialMediaIcon} src={instagram} alt='github' />
+				</a>
+				<a onClick={spotifyOnClick}>
+					<img style={styles.socialMediaIcon} src={instagram} alt='spotify' />
+				</a>
+			</div>
+			<div style={styles.logoWrapper}>
+				<Logo onClick={logoOnClick} />
+			</div>
 		</div>
 	);
 };

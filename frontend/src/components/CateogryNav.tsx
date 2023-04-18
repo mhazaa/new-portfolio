@@ -1,34 +1,31 @@
 import React, { CSSProperties } from 'react';
-import useIsMobile from '../hooks/useIsMobile';
+import useResponsive from '../hooks/useResponsive';
 import { globalStyles } from '../theme';
 import { Pages } from '../../../types';
 
 interface CateogryNavProps {
 	page: Pages;
 	changePage: (page: Pages) => void;
-	variant?: 'primary' | 'secondary';
+	variant?: 'big' | 'small';
 }
 
 const CateogryNav: React.FC<CateogryNavProps> = ({
 	page,
 	changePage,
-	variant = 'primary',
+	variant = 'big',
 }) => {
-	const isMobile = useIsMobile();
+	const { isMobile } = useResponsive();
 
 	const styles: {
 		[key: string]: CSSProperties;
 	} = {
 		container: {
-			//position: 'absolute',
-			//top: variant === 'primary' ? '150px' : '50px',
 			display: 'flex',
 			justifyContent: 'center',
 			alignItems: 'center',
 			flexDirection: isMobile ? 'column' : 'row',
-			margin: '60px 0',
-			transform: variant === 'primary' ? 'scale(1)' : 'scale(0.5)',
-			transition: `transform ${globalStyles.transitions.secondary}, top ${globalStyles.transitions.secondary}`,
+			transform: variant === 'big' ? 'scale(1)' : 'scale(0.5)',
+			transition: `transform ${globalStyles.transitions.slow}, top ${globalStyles.transitions.slow}`,
 		},
 		text: {
 			userSelect: 'none',

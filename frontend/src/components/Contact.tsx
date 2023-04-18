@@ -1,20 +1,20 @@
 import React, { CSSProperties } from 'react';
+import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import { postContactForm } from '../requests';
 import { PostContactFormData } from '../../../types';
-import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 
 const Contact: React.FC = () => {
 	const styles: {
 		[key: string]: CSSProperties;
 	} = {
+		textWrapper: {
+			maxWidth: '400px',
+			marginTop: '10px',
+		},
 		formWrapper: {
 			alignItems: 'end',
 		},
-		name: {
-			width: '100%',
-			marginTop: '20px',
-		},
-		email: {
+		input: {
 			width: '100%',
 			marginTop: '20px',
 		},
@@ -29,22 +29,30 @@ const Contact: React.FC = () => {
 
 	const onSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+		
+		const form = e.target as HTMLFormElement;
+		const name = form.querySelector('input[name="name"]') as HTMLInputElement;
+		const email = form.querySelector('input[name="email"]') as HTMLInputElement;
+		const message = form.querySelector('.message') as HTMLTextAreaElement;
+
 		const data: PostContactFormData = {
 			userId: AnalyticsEngineClient.getUserId(),
-			name: 'magdi hazaa',
-			email: 'magdihazaa@gmail.com',
-			message: 'yoyoyo',
+			name: name.value.toUpperCase(),
+			email: email.value.toUpperCase(),
+			message: message.value,
 		};
+
 		await postContactForm(data);
 	};
 
 	return (
 		<div>
 			<h2>Contact</h2>
+			<h4 style={styles.textWrapper}>Feel free to email me directly at magdihazaa@gmail.com or fill the form below:</h4>
 			<form style={styles.formWrapper} onSubmit={onSubmit}>
-				<input style={styles.name} name='name' type='name' placeholder='YOUR NAME' required></input>
-				<input style={styles.email} name='email' type="email" placeholder='YOUR EMAIL' required></input>
-				<textarea style={styles.textarea} rows={10} placeholder='YOUR MESSAGE' required />
+				<input style={styles.input} name='name' type='name' placeholder='NAME' required></input>
+				<input style={styles.input} name='email' type="email" placeholder='EMAIL' required></input>
+				<textarea style={styles.textarea} className='message' rows={10} placeholder='MESSAGE' required />
 				<a><input style={styles.submit} type='submit' value="send" /></a>
 			</form>
 		</div>

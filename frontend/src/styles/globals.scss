@@ -13,7 +13,7 @@ $yellow: #ffc758;
 $teal: #8dcb97;
 $brownPrimary: #6e523b;
 /* transitions */
-$transitionPrimary: 0.2s ease;
+$transitionFast: 0.2s ease;
 /* breakpoints */
 $mobileBreakpoint: 768px;
 
@@ -33,7 +33,6 @@ $mobileBreakpoint: 768px;
 
 html, body {
 	width: 100%;
-	height: 100%;
 	overflow-x: hidden;
 }
 
@@ -53,14 +52,14 @@ ul {
 a {
 	cursor: pointer;
 	text-decoration: none;
-	transition: opacity $transitionPrimary;
+	transition: opacity $transitionFast;
 }
 
 a:hover {
 	opacity: 0.5;
 }
 
-p, textarea {
+p {
 	font-family: "Times New Roman", Times, serif;
 	font-size: 1.2em;
 	color: $brownPrimary;
@@ -99,6 +98,20 @@ h5 {
 	color: $teal;
 }
 
+input, textarea {
+	padding: 0.8em;
+	box-sizing: border-box;
+
+	outline-color: $teal;
+	font-size: 1em;
+	color: $brownPrimary;
+	font-weight: $black;
+}
+
+input {
+	text-transform: uppercase;
+}
+
 button, input[type=submit] {
 	background: $yellow;
 	cursor: pointer;
@@ -109,19 +122,6 @@ button, input[type=submit] {
 	font-size: 1em;
 	font-weight: $black;
 	color: $beige;
-}
-
-input, textarea {	
-	padding: 0.8em;
-
-	outline-color: $teal;
-	font-size: 1em;
-	color: $brownPrimary;
-}
-
-input {
-	text-transform: uppercase;
-	font-weight: $black;
 }
 
 form {

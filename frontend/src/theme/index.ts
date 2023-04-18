@@ -18,10 +18,12 @@ export const globalStyles = {
 		pink: '#f75658',
 	},
 	transitions: {
-		primary: '0.2s ease',
-		secondary: '0.6s cubic-bezier(.07,.76,.35,1.06)',
+		fast: '0.2s ease',
+		slow: '0.6s cubic-bezier(.07,.76,.35,1.06)',
+		verySlow: '1.2s cubic-bezier(.07,.76,.35,1.06)',
 	},
 	breakpoints: {
 		mobile: 768,
+		tablet: 1024,
 	},
 };

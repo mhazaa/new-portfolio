@@ -1,16 +1,20 @@
-import React, { useState, useEffect, CSSProperties } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles/stylesheet.scss';
-import Header from './components/Header';
 import Background from './components/Background';
+import Header from './components/Header';
 import CateogryNav from './components/CateogryNav';
 import PortfolioNav from './components/PortfolioNav';
 import Bio from './components/Bio';
 import Contact from './components/Contact';
 import Error from './components/Error';
+import Loading from './components/Loading';
 import PostPage from './components/PostPage';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import { Pages, AllData } from '../../types';
 import { getAllData } from './requests';
+import logo from '../assets/logo.svg';
+import Page from './components/Page';
+import Logo from './components/Logo';
 
 const setUrl = (url: string) => history.pushState(null, '', `${url}`);
 const url = window.location.href;
@@ -34,20 +38,6 @@ const App: React.FC = () => {
 	const [allData, seAlltData] = useState<AllData>();
 	const [page, setPage] = useState<Pages>(initialPage);
 	const [post, setPost] = useState<string | null>(null);
-	const isInPortfolio = (page === '/artist' || page === '/writer');
-
-	const styles: {
-		[key: string]: CSSProperties;
-	} = {
-		page: {
-			display: 'flex',
-			flexDirection: 'column',
-			justifyContent: 'center',
-			width: '70%',
-			maxWidth: '800px',
-			margin: 'auto',
-		},
-	};
 
 	useEffect(() => {
 		AnalyticsEngineClient.connect();
@@ -72,46 +62,71 @@ const App: React.FC = () => {
 		console.log(post);
 	};
 
+	const portfolioPage = (): 'artist' | 'writer' => {
+		if (page === '/artist') return 'artist';
+		if (page === '/writer') return 'writer';
+		return 'artist';
+	};
+
+	if (!allData) return (
+		<div>
+			<Background />
+
+			<Page>
+				<Loading />
+			</Page>
+		</div>
+	);
+
 	return (
 		<div>
-			{allData?.socialMediaLinks && <Header socialMediaLinks={allData.socialMediaLinks} changePage={changePage} />}
+			<Background />
 			
-			<div style={styles.page}>
+			<Page zIndex={'1'} variant={page === '/' ? 'fullscreen' : 'header'}>
+				{page === '/' && <Logo />}
 				<CateogryNav
 					page={page}
 					changePage={changePage}
-					variant={(isInPortfolio || page === '/') && !post ? 'primary' : 'secondary'}
+					variant={
+						(page === '/' || page === '/artist' || page === '/writer') && !post ? 'big' : 'small'
+					}
 				/>
+			</Page>
 
-				{allData?.portfolio && isInPortfolio &&
-					<>
-						{post
-							? <PostPage {...allData.portfolio.artist[0]} changePage={changePage} />
-							: <PortfolioNav posts={allData.portfolio['artist']} changePost={changePost} />
-						}
-					</>
-				}
-			</div>
+			{(page === '/artist' || page === '/writer') &&
+				<>
+					{post
+						?
+						<Page variant={'sprawling'}>
+							<PostPage {...allData.portfolio.artist[0]} changePage={changePage} />
+						</Page>
+						:
+						<Page>
+							<PortfolioNav posts={allData.portfolio[portfolioPage()]} changePost={changePost} />
+						</Page>
+					}
+				</>
+			}
 
-			{allData?.bioPage && page === '/bio' &&
-				<div style={styles.page}>
+			{page === '/bio' &&
+				<Page>
 					<Bio bio={allData.bioPage.bio} />
-				</div>
+				</Page>
 			}
 
 			{page === '/contact' &&
-				<div style={styles.page}>
+				<Page>
 					<Contact />
-				</div>
+				</Page>
 			}
 
 			{page === '/error' &&
-				<div style={styles.page}>
+				<Page>
 					<Error />
-				</div>
+				</Page>
 			}
 
-			<Background />
+			<Header socialMediaLinks={allData.socialMediaLinks} changePage={changePage} />
 		</div>
 	);
 };
