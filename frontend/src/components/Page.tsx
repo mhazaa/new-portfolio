@@ -33,8 +33,7 @@ const Page: React.FC<PageProps> = ({
 		},
 		contentWrapper: {
 			width: isMobile ? '90%' : '70%',
-			maxWidth: '1200px',
-			
+			maxWidth: '1200px',	
 		},
 	};
 

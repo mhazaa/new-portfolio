@@ -12,7 +12,6 @@ import PostPage from './components/PostPage';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import { Pages, AllData } from '../../types';
 import { getAllData } from './requests';
-import logo from '../assets/logo.svg';
 import Page from './components/Page';
 import Logo from './components/Logo';
 
