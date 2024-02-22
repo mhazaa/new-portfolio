@@ -1,18 +1,22 @@
 import { defineConfig } from 'sanity';
-import { deskTool } from 'sanity/desk';
+import { structureTool } from 'sanity/structure';
 import { visionTool } from '@sanity/vision';
-import { schemaTypes } from './schemas';
-import { SANITY_PROJECT_ID, SANITY_DATASET } from '../backend/sanityControls';
+import { schemaTypes } from './schemaTypes';
+import {
+  SANITY_STUDIO_PROJECT_TITLE,
+  SANITY_STUDIO_PROJECT_ID,
+  SANITY_STUDIO_DATASET,
+} from '../backend/sanityControls';
 
 export default defineConfig({
   name: 'default',
-  title: 'Sanity Project',
+  title: SANITY_STUDIO_PROJECT_TITLE,
 
-  projectId: 'vy0rcbg9'!,
-  dataset: 'production'!,
+  projectId: SANITY_STUDIO_PROJECT_ID,
+  dataset: SANITY_STUDIO_DATASET,
 
   plugins: [
-    deskTool(),
+    structureTool(),
     visionTool(),
   ],
 

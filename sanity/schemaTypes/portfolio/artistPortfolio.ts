@@ -4,5 +4,5 @@ export default {
   title: 'Artist Portfolio',
   name: 'artistPortfolio',
   type: 'document',
-  fields: [post],
+  fields: [ post ],
 };

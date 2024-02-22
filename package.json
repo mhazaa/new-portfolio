@@ -9,18 +9,19 @@
   ],
   "scripts": {
     "build": "concurrently \"npm run build -w ./frontend\" \"npm run build -w ./backend\"",
-    "start": "npm run build && npm run start -w ./backend",
+    "start": "npm run stop && npm run build && npm run start -w ./backend && npm run deploy-sanity",
     "stop": "npm run stop -w ./backend",
-    "dev": "concurrently \"npm run dev -w ./frontend\" \"npm run dev -w ./backend\" \"npm run sanity\"",
-    "sanity": "npm run dev -w ./sanity"
+    "dev": "concurrently \"npm run dev -w ./frontend\" \"npm run dev -w ./backend\" \"npm run dev -w ./sanity\"",
+    "deploy-sanity": "npm run deploy -w ./sanity"
   },
   "keywords": [],
   "author": "Magdi Hazaa",
   "license": "ISC",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.62.0",
-    "@typescript-eslint/parser": "^5.62.0",
-    "concurrently": "^7.6.0",
+    "@portabletext/types": "^2.0.8",
+    "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@typescript-eslint/parser": "^7.0.2",
+    "concurrently": "^8.2.2",
     "eslint": "^8.56.0",
     "eslint-plugin-react": "^7.33.2",
     "typescript": "^5.3.3"

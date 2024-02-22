@@ -8,11 +8,11 @@ export default {
       name: 'bio',
       type: 'array',
       of: [
-          {
-              type: 'block',
-          },
+        {
+          type: 'block',
+        },
       ],
       validation: (Rule: any) => Rule.required(),
-  },
+    },
   ],
 };

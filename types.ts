@@ -1,7 +1,9 @@
+import { TypedObject } from '@portabletext/types';
+
 export type Pages = '/' | '/artist' | '/writer' | '/bio' | '/resume' | '/contact' | '/error';
 
 export interface BioPage {
-	bio: string;
+	bio: string | TypedObject | TypedObject[];
 };
 
 export interface SocialMediaLinks {
