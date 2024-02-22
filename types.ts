@@ -18,7 +18,7 @@ export interface Post {
 	medium: string;
 	url: string;
 	year: string;
-	markdown?: string;
+	markdown?: TypedObject | TypedObject[];
 }[];
 
 export interface Portfolio {

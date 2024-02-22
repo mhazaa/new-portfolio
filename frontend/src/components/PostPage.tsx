@@ -64,8 +64,6 @@ const PostPage: React.FC<PostPageProps> = ({
 
 			<div style={styles.contentWrapper}>
 				{markdown &&
-					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-					//@ts-ignore
 					<PortableText value={markdown} />
 				}
 			</div>
