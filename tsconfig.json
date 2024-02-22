@@ -2,7 +2,7 @@
 	"compilerOptions": {
 		"target": "esnext",
 		"jsx": "react",
-		"module": "esnext",
+		"module": "commonjs",
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"esModuleInterop": true,
@@ -10,9 +10,8 @@
 		"strict": true,
 		"skipLibCheck": true,
 	},
-	"ts-node": {
-		"compilerOptions": {
-			"module": "commonjs",
-		},
-	},
+	"include": [
+		"./backend/*.ts",
+		"./@types/custom.d.ts",
+	],
 }

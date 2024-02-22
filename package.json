@@ -1,5 +1,5 @@
 {
-  "name": "magdi-hazaa-new-portfolio",
+  "name": "new-portfolio",
   "version": "1.0.0",
   "description": "",
   "workspaces": [
@@ -8,7 +8,8 @@
     "sanity"
   ],
   "scripts": {
-    "start": "npm run build -w ./frontend && npm run start -w ./backend",
+    "build": "concurrently \"npm run build -w ./frontend\" \"npm run build -w ./backend\"",
+    "start": "npm run build && npm run start -w ./backend",
     "stop": "npm run stop -w ./backend",
     "dev": "concurrently \"npm run dev -w ./frontend\" \"npm run dev -w ./backend\" \"npm run sanity\"",
     "sanity": "npm run dev -w ./sanity"
@@ -17,12 +18,12 @@
   "author": "Magdi Hazaa",
   "license": "ISC",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.51.0",
-    "@typescript-eslint/parser": "^5.51.0",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
     "concurrently": "^7.6.0",
-    "eslint": "^8.34.0",
-    "eslint-plugin-react": "^7.32.2",
-    "typescript": "^4.9.5"
+    "eslint": "^8.56.0",
+    "eslint-plugin-react": "^7.33.2",
+    "typescript": "^5.3.3"
   },
   "dependencies": {
     "@mhazaa/analytics-engine": "^1.0.31"

@@ -17,8 +17,6 @@ export interface Post {
 	url: string;
 	year: string;
 	markdown?: string;
-	likes?: number;
-	comments?: Comment[];
 }[];
 
 export interface Portfolio {
@@ -37,20 +35,4 @@ export interface PostContactFormData {
 	name: string;
 	email: string;
 	message: string;
-};
-
-export interface Comment {
-	name: string;
-	comment: string;
-};
-
-export interface PostLikeData {
-	userId: string;
-	postId: string;
-};
-
-export interface PostCommentData {
-	userId: string;
-	postId: string;
-	comment: Comment;
 };

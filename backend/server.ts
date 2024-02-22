@@ -8,11 +8,11 @@ import router from './router';
 
 dotenv.config();
 
-const PORT = 3000;
+const PORT = 80;
 const app: express.Application = express();
 app.listen(PORT, () => console.log(`Listening to port: ${PORT}`));
 
-//app.use(helmet());
+app.use(helmet());
 app.use(express.json());
 app.use(express.static(resolve('../frontend/build')));
 
@@ -29,13 +29,12 @@ const start = async () => {
 	await db.connect();
 
 	const analyticsCollection = db.collection(process.env.ANALYTICS_COLLECTION || 'analytics');
-	const postsCollection = db.collection(process.env.POSTS_COLLECTION || 'posts');
 	const contactFormsCollection = db.collection(process.env.CONTACT_FORMS_COLLECTION || 'contact-forms');
 	
 	AnalyticsEngine.connectUsingCollection(analyticsCollection);
 	AnalyticsEngine.routes(app);
 	
-	router(app, { postsCollection, contactFormsCollection });
+	router(app, { contactFormsCollection });
 };
 
 start();
