@@ -14,7 +14,7 @@ export default (app: Application, collections: Collections): void => {
 	app.get('/get-all-data', async (_req, res) => {
 		try {
 			const allData: AllData = await getAllData();
-			console.log(allData);
+			console.log('allData', allData);
 			res.status(200).send(allData);
 		} catch (error) {
 			console.error(error);
@@ -29,10 +29,10 @@ export default (app: Application, collections: Collections): void => {
 	app.post('/post-contact-form', async (req, res) => {
 		try {
 			const reqData: PostContactFormData = req.body;
-			console.log(reqData);
+			console.log('contactFormReqData', reqData);
 
 			const resData = await contactFormsCollection.insertOne(reqData);
-			console.log(resData);
+			console.log('contactFormResData', resData);
 			res.status(200).send(resData);
 		} catch (error) {
 			console.log(error);

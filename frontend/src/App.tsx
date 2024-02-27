@@ -45,7 +45,6 @@ const App: React.FC = () => {
 		
 		(async () => {
 			const allData: AllData = await getAllData();
-			console.log('allData:', allData);
 			seAlltData(allData);
 		})();
 	}, []);
