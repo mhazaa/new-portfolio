@@ -8,7 +8,7 @@ import router from './router';
 
 dotenv.config();
 
-const PORT = 80;
+const PORT = 3000;
 const app: express.Application = express();
 app.listen(PORT, () => console.log(`Listening to port: ${PORT}`));
 
