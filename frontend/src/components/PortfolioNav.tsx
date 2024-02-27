@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useRef, CSSProperties } from 'react';
-import arrow from '../assets/arrow.svg';
 import map from '../helperFunctions/map';
-import { globalStyles } from '../theme';
+import globalStyles from '../theme';
 import { Pages, Post } from '../../../types';
+import arrow from '../assets/arrow.svg';
 
 interface PortfolioNavProps {
 	posts: Post[];
-	changePost: (post: string | null) => void;
+	changePostUrl: (postUrl: string | null) => void;
 }
 
 const PortfolioNav: React.FC<PortfolioNavProps> = ({
 	posts,
-	changePost,
+	changePostUrl,
 }) => {
 	const [topArrowVisible, setTopArrowVisible] = useState<boolean>(false);
 	const [bottomArrowVisible, setBottomArrowVisible] = useState<boolean>(true);
@@ -34,12 +34,12 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 		itemsWrapper: {
 			height: '300px',
 			overflowY: 'scroll',
-			paddingRight: '30px',
+			paddingRight: globalStyles.spacing.double,
 			scrollBehavior: 'smooth',
 		},
 		item: {
 			display: 'block',
-			marginTop: '10px',
+			marginTop: globalStyles.spacing.standard,
 		},
 		firstItem: {
 			marginTop: '0',
@@ -53,17 +53,17 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 			overflow: 'hidden',
 		},
 		scrollback: {
-			background: globalStyles.colors.orangeSecondary,
+			background: globalStyles.colors.brown,
 			position: 'absolute',
 			height: '100%',
 			width: '100%',
 			top: '0',
 			left: '0',
 			zIndex: '0',
-			opacity: '0.65',
+			opacity: '0.5',
 		},
 		scrollfront: {
-			background: globalStyles.colors.brownPrimary,
+			background: globalStyles.colors.brown,
 			position: 'absolute',
 			height: scrollHeight + '%',
 			width: '100%',
@@ -72,7 +72,7 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 			zIndex: '1',
 		},
 		arrowWrapperTop: {
-			marginBottom: '10px',
+			margin: `${globalStyles.spacing.standard} 0`,
 			opacity: topArrowVisible ? '1' : '0',
 			transition: `opacity ${globalStyles.transitions.fast}`,
 		},
@@ -81,7 +81,7 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 			transform: 'rotate(180deg)',
 		},
 		arrowWrapperBottom: {
-			marginTop: '10px',
+			marginTop: globalStyles.spacing.standard,
 			opacity: bottomArrowVisible ? '1' : '0',
 			transition: `opacity ${globalStyles.transitions.fast}`,
 		},
@@ -136,9 +136,9 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 		setBottomArrowVisible(false);
 	};
 
-	const itemOnClick = (e: React.MouseEvent) => {
-		const url = e.currentTarget.getAttribute('data-url') as Pages;
-		if (url) changePost(url);
+	const itemOnClick = (url: Pages, isExternal: boolean = false) => {
+		if (!url) return;
+		(isExternal) ? window.open(url, '_blank') : changePostUrl(url);
 	};
 
 	return (
@@ -155,11 +155,11 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 								...(i === 0 && {...styles.firstItem})
 							}}
 							key={i}
-							data-url={post.url}
-							onClick={itemOnClick}
+							onClick={() => itemOnClick(post.url as Pages, post.isExternal)}
 						>
 							<h3>{post.title}</h3>
 							<h4>{post.medium}, {post.year}</h4>
+							{post && <h4>{post.publication}</h4>}
 						</a>
 					))}
 				</div>

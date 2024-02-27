@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import express from 'express';
-import helmet from  'helmet';
+//import helmet from  'helmet';
 import { resolve } from 'path';
 import AnalyticsEngine from '@mhazaa/analytics-engine';
 import DB, { Config } from '@mhazaa/mongo-controller';
@@ -12,7 +12,7 @@ const PORT = 80;
 const app: express.Application = express();
 app.listen(PORT, () => console.log(`Listening to port: ${PORT}`));
 
-app.use(helmet());
+//app.use(helmet());
 app.use(express.json());
 app.use(express.static(resolve('../frontend/build')));
 

@@ -14,14 +14,13 @@ const Background: React.FC = () => {
 			height: '100%',
 			justifyContent: 'center',
 			alignItems: 'center',
-			zIndex: '-1',
 			overflow: 'hidden',
 		},
 		img: {
 			width: '100%',
 			minWidth: '700px',
 			maxWidth: '1200px',
-			opacity: '0.7',
+			opacity: '0.5',
 		},
 	};
 

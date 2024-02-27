@@ -1,29 +1,30 @@
 import React, { CSSProperties } from 'react';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import { postContactForm } from '../requests';
+import globalStyles from '../theme';
 import { PostContactFormData } from '../../../types';
 
 const Contact: React.FC = () => {
 	const styles: {
 		[key: string]: CSSProperties;
 	} = {
+		title: {
+			marginBottom: globalStyles.spacing.standard,
+		},
 		textWrapper: {
 			maxWidth: '400px',
-			marginTop: '10px',
+			marginBottom: globalStyles.spacing.standard,
 		},
 		formWrapper: {
 			alignItems: 'end',
 		},
 		input: {
 			width: '100%',
-			marginTop: '20px',
+			marginBottom: globalStyles.spacing.standard,
 		},
 		textarea: {
 			width: '100%',
-			marginTop: '20px',
-		},
-		submit: {
-			marginTop: '20px',
+			marginBottom: globalStyles.spacing.standard,
 		},
 	};
 
@@ -47,13 +48,13 @@ const Contact: React.FC = () => {
 
 	return (
 		<div>
-			<h2>Contact</h2>
+			<h2 style={styles.title}>Contact</h2>
 			<h4 style={styles.textWrapper}>Feel free to email me directly at magdihazaa@gmail.com or fill the form below:</h4>
 			<form style={styles.formWrapper} onSubmit={onSubmit}>
 				<input style={styles.input} name='name' type='name' placeholder='NAME' required></input>
 				<input style={styles.input} name='email' type="email" placeholder='EMAIL' required></input>
 				<textarea style={styles.textarea} className='message' rows={10} placeholder='MESSAGE' required />
-				<a><input style={styles.submit} type='submit' value="send" /></a>
+				<a><input type='submit' value="send" /></a>
 			</form>
 		</div>
 	);

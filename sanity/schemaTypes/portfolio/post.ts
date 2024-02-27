@@ -22,16 +22,27 @@ export default {
             validation: (Rule: any) => Rule.required(),
         },
         {
+            title: 'Year',
+            name: 'year',
+            type: 'string',
+            validation: (Rule: any) => Rule.required(),
+        },
+        {
+            title: 'Publication',
+            name: 'publication',
+            type: 'string',
+        },
+        {
             title: 'URL',
             name: 'url',
             type: 'string',
             validation: (Rule: any) => Rule.required(),
         },
         {
-            title: 'Year',
-            name: 'year',
-            type: 'string',
-            validation: (Rule: any) => Rule.required(),
+            title: 'Is External',
+            name: 'isExternal',
+            type: 'boolean',
+            initialValue: false,
         },
         {
             title: 'Markdown',

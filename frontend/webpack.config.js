@@ -6,7 +6,7 @@ module.exports = {
 	mode: 'production',
 
 	resolve: {
-		extensions: ['.js', 'jsx', '.ts', '.tsx'],
+		extensions: ['.ts', '.tsx', '.js', '.jsx'],
 	},
 
 	entry: './src/index.tsx',

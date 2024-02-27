@@ -1,4 +1,4 @@
-export const globalStyles = {
+const globalStyles = {
 	fontWeights: {
 		thin: 100,
 		light: 300,
@@ -7,15 +7,21 @@ export const globalStyles = {
 		bold: 700,
 		black: 900,
 	},
+	sizes: {
+		maxWidth: '800px',
+	},
+	spacing: {
+		half: '5px',
+		standard: '10px',
+		double: '20px',
+		extraDouble: '40px',
+	},
 	colors: {
 		beige: '#ffeed9',
+		orange: '#cc6933', // Background linework color
 		yellow: '#ffc758',
 		teal: '#8dcb97',
-		brownPrimary: '#6e523b',
-		brownSecondary: '#9d6a4a',
-		orangePrimary: '#ff7c49',
-		orangeSecondary: '#cc6933', // Outline color
-		pink: '#f75658',
+		brown: '#6e523b',
 	},
 	transitions: {
 		fast: '0.2s ease',
@@ -27,3 +33,5 @@ export const globalStyles = {
 		tablet: 1024,
 	},
 };
+
+export default globalStyles;

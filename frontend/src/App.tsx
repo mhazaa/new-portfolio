@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './styles/stylesheet.scss';
 import Background from './components/Background';
 import Header from './components/Header';
-import CateogryNav from './components/CateogryNav';
+import CategoryNav from './components/CategoryNav';
 import PortfolioNav from './components/PortfolioNav';
 import Bio from './components/Bio';
 import Contact from './components/Contact';
@@ -10,7 +10,7 @@ import Error from './components/Error';
 import Loading from './components/Loading';
 import PostPage from './components/PostPage';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
-import { Pages, AllData } from '../../types';
+import { Pages, Post, AllData } from '../../types';
 import { getAllData } from './requests';
 import Page from './components/Page';
 import Logo from './components/Logo';
@@ -35,8 +35,9 @@ setUrl(initialPage);
 
 const App: React.FC = () => {
 	const [allData, seAlltData] = useState<AllData>();
-	const [page, setPage] = useState<Pages>(initialPage);
-	const [post, setPost] = useState<string | null>(null);
+	const [pageUrl, setPageUrl] = useState<Pages>(initialPage);
+	const [postUrl, setPostUrl] = useState<string | null>(null);
+	const [post, setPost] = useState<Post | null | undefined>(null);
 
 	useEffect(() => {
 		AnalyticsEngineClient.connect();
@@ -44,27 +45,29 @@ const App: React.FC = () => {
 		
 		(async () => {
 			const allData: AllData = await getAllData();
+			console.log('allData:', allData);
 			seAlltData(allData);
 		})();
 	}, []);
 
-	const changePage = (page: Pages) => {
-		setPage(page);
-		setPost(null);
-		setUrl(page);
-		console.log(page);
+	useEffect(() => {
+		if (pageUrl !== '/artist' && pageUrl !== '/writer') return setPost(null);
+		// @ts-ignore
+		const _post: Post | undefined = allData?.portfolio[pageUrl.substring(1)].find((post: Post) => post.url === postUrl);
+		setPost(_post);
+	}, [postUrl]);
+
+	const changePageUrl = (pageUrl: Pages) => {
+		setPageUrl(pageUrl);
+		setPostUrl(null);
+		setUrl(pageUrl);
+		console.log('pageUrl:', pageUrl);
 	};
 
-	const changePost = (post: string | null) => {
-		setPost(post);
-		if (post) setUrl(post);
-		console.log(post);
-	};
-
-	const portfolioPage = (): 'artist' | 'writer' => {
-		if (page === '/artist') return 'artist';
-		if (page === '/writer') return 'writer';
-		return 'artist';
+	const changePostUrl = (postUrl: string | null) => {
+		setPostUrl(postUrl);
+		if (postUrl) setUrl(pageUrl + postUrl);
+		console.log('postUrl', postUrl);
 	};
 
 	if (!allData) return (
@@ -80,52 +83,44 @@ const App: React.FC = () => {
 	return (
 		<div>
 			<Background />
-			
-			<Page zIndex={'1'} variant={page === '/' ? 'fullscreen' : 'header'}>
-				{page === '/' && <Logo />}
-				<CateogryNav
-					page={page}
-					changePage={changePage}
+
+			<Header changePageUrl={changePageUrl} />
+
+			<Page variant={post ? 'sprawling' : 'fullscreen'}>
+				{pageUrl === '/' &&
+					<Logo />
+				}
+				
+				<CategoryNav
+					pageUrl={pageUrl}
+					changePageUrl={changePageUrl}
 					variant={
-						(page === '/' || page === '/artist' || page === '/writer') && !post ? 'big' : 'small'
+						(pageUrl === '/' || pageUrl === '/artist' || pageUrl === '/writer') && !post ? 'big' : 'small'
 					}
 				/>
-			</Page>
 
-			{(page === '/artist' || page === '/writer') &&
-				<>
-					{post
-						?
-						<Page variant={'sprawling'}>
-							<PostPage {...allData.portfolio.artist[0]} changePage={changePage} />
-						</Page>
-						:
-						<Page>
-							<PortfolioNav posts={allData.portfolio[portfolioPage()]} changePost={changePost} />
-						</Page>
-					}
-				</>
-			}
+				{(pageUrl === '/artist' || pageUrl === '/writer') &&
+					<>
+						{post
+							? <PostPage {...post} changePageUrl={changePageUrl} />
+							// @ts-ignore
+							: <PortfolioNav posts={allData.portfolio[pageUrl.substring(1)]} changePostUrl={changePostUrl} />
+						}
+					</>
+				}
 
-			{page === '/bio' &&
-				<Page>
+				{pageUrl === '/bio' &&
 					<Bio bio={allData.bioPage.bio} />
-				</Page>
-			}
+				}
 
-			{page === '/contact' &&
-				<Page>
+				{pageUrl === '/contact' &&
 					<Contact />
-				</Page>
-			}
+				}
 
-			{page === '/error' &&
-				<Page>
+				{pageUrl === '/error' &&
 					<Error />
-				</Page>
-			}
-
-			<Header socialMediaLinks={allData.socialMediaLinks} changePage={changePage} />
+				}
+			</Page>
 		</div>
 	);
 };

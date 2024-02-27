@@ -1,20 +1,15 @@
 import React, { CSSProperties, ReactNode } from 'react';
-import useResponsive from '../hooks/useResponsive';
-import { globalStyles } from '../theme';
+import globalStyles from '../theme';
 
 interface PageProps {
-	zIndex?: string;
-	variant?: 'fullscreen' | 'header' | 'sprawling';
+	variant?: 'fullscreen' | 'sprawling';
 	children: ReactNode;
 }
 
 const Page: React.FC<PageProps> = ({
-	zIndex = '0',
 	variant = 'fullscreen',
 	children,
 }) => {
-	const { isMobile } = useResponsive();
-
 	const styles: {
 		[key: string]: CSSProperties;
 	} = {
@@ -23,17 +18,18 @@ const Page: React.FC<PageProps> = ({
 			flexDirection: 'column',
 			justifyContent: 'center',
 			alignItems: 'center',
-			position: variant === 'sprawling' ? 'relative' : 'absolute',
-			top: variant === 'sprawling' ? '300px' : '0',
+			position: variant === 'fullscreen' ? 'absolute' : 'relative',
+			top: variant === 'fullscreen' ? '50%' : '0',
 			left: '0',
 			width: '100%',
-			height: variant === 'fullscreen' ? '100%' : variant === 'header' ? '300px' : variant === 'sprawling' ? 'auto' : '100%',
-			transition: `height ${globalStyles.transitions.verySlow}`,
-			zIndex: zIndex,
+			height: variant === 'fullscreen' ? '100%' : 'auto',
+			padding: variant === 'fullscreen' ? '0' : '200px 0',
+			transform: variant === 'fullscreen' ? 'translateY(-50%)' : 'none',
+			//transition: `height ${globalStyles.transitions.verySlow}`,
 		},
 		contentWrapper: {
-			width: isMobile ? '90%' : '70%',
-			maxWidth: '1200px',	
+			width: '90%',
+			maxWidth: globalStyles.sizes.maxWidth,
 		},
 	};
 

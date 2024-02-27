@@ -7,15 +7,20 @@ $regular: 400;
 $medium: 500;
 $bold: 700;
 $black: 900;
+/* spacing */
+$spacingStandard: 10px;
+$spacingDouble: 20px;
+$spacingExtraDouble: 40px;
 /* colors */
 $beige: #ffeed9;
 $yellow: #ffc758;
 $teal: #8dcb97;
-$brownPrimary: #6e523b;
+$brown: #6e523b;
 /* transitions */
 $transitionFast: 0.2s ease;
 /* breakpoints */
-$mobileBreakpoint: 768px;
+$breakpointMobile: 768px;
+$breakpointTablet: 1024px;
 
 * {
 	margin: 0;
@@ -32,15 +37,16 @@ $mobileBreakpoint: 768px;
 }
 
 html, body {
+	background: $beige;
 	width: 100%;
 	overflow-x: hidden;
-}
-
-body {
-	background: $beige;
 	font-size: 16px;
 
-	@media (max-width: $mobileBreakpoint) {
+	@media (max-width: $breakpointTablet) {
+		font-size: 14px;
+	}
+
+	@media (max-width: $breakpointMobile) {
 		font-size: 12px;
 	}
 }
@@ -61,50 +67,53 @@ a:hover {
 
 p {
 	font-family: "Times New Roman", Times, serif;
-	font-size: 1.2em;
-	color: $brownPrimary;
+	font-size: 1.2rem;
+	color: $brown;
 }
 
 h1, h2, h3, h4, h5, button, input, textarea {
 	font-family: "brandon-grotesque", sans-serif;
-	line-height: 1;
 }
 
 h2 {
 	text-transform: uppercase;
-	font-size: 7em;
-	letter-spacing: -0.03em;
+	font-size: 6.5rem;
+	line-height: 5rem;
+	letter-spacing: -0.03rem;
 	font-weight: $black;
 	color: $yellow;
 }
 
 h3 {
-	font-size: 1.8em;
+	font-size: 1.8rem;
+	line-height: 1.7rem;
 	font-weight: $regular;
-	color: $brownPrimary;
+	color: $brown;
 }
 
 h4 {
 	text-transform: uppercase;
-	font-size: 1.4em;
+	font-size: 1.4rem;
+	line-height: 1.4rem;
 	font-weight: $black;
 	color: $teal;
 }
 
 h5 {
 	text-transform: uppercase;
-	font-size: 0.9em;
+	font-size: 0.9rem;
+	line-height: 1rem;
 	font-weight: $black;
 	color: $teal;
 }
 
 input, textarea {
-	padding: 0.8em;
+	padding: $spacingStandard;
 	box-sizing: border-box;
 
 	outline-color: $teal;
-	font-size: 1em;
-	color: $brownPrimary;
+	font-size: 1rem;
+	color: $brown;
 	font-weight: $black;
 }
 
@@ -116,10 +125,10 @@ button, input[type=submit] {
 	background: $yellow;
 	cursor: pointer;
 	border: none;
-	padding: 1.5em 6em;
+	padding: $spacingDouble $spacingExtraDouble;
 
 	text-transform: uppercase;
-	font-size: 1em;
+	font-size: 1rem;
 	font-weight: $black;
 	color: $beige;
 }
@@ -130,5 +139,5 @@ form {
 }
 
 *::placeholder {
-    color: $brownPrimary;
+    color: $brown;
 }

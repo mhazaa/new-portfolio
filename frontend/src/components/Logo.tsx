@@ -1,4 +1,5 @@
 import React, { CSSProperties } from 'react';
+import globalStyles from '../theme';
 import logo from '../assets/logo.svg';
 
 interface LogoProps {
@@ -14,6 +15,7 @@ const Logo: React.FC<LogoProps> = ({
 		container: {
 			display: 'flex',
 			width: '100%',
+			marginBottom: globalStyles.spacing.standard,
 		},
 		logoHiddenText: {
 			position: 'absolute',

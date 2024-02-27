@@ -1,17 +1,17 @@
 import React, { CSSProperties } from 'react';
 import useResponsive from '../hooks/useResponsive';
-import { globalStyles } from '../theme';
+import globalStyles from '../theme';
 import { Pages } from '../../../types';
 
-interface CateogryNavProps {
-	page: Pages;
-	changePage: (page: Pages) => void;
+interface CategoryNavProps {
+	pageUrl: Pages;
+	changePageUrl: (pageUrl: Pages) => void;
 	variant?: 'big' | 'small';
 }
 
-const CateogryNav: React.FC<CateogryNavProps> = ({
-	page,
-	changePage,
+const CategoryNav: React.FC<CategoryNavProps> = ({
+	pageUrl,
+	changePageUrl,
 	variant = 'big',
 }) => {
 	const { isMobile } = useResponsive();
@@ -20,12 +20,16 @@ const CateogryNav: React.FC<CateogryNavProps> = ({
 		[key: string]: CSSProperties;
 	} = {
 		container: {
+			position: variant === 'big' ? 'relative' : 'fixed',
+			top: '0',
+			margin: variant === 'big' ? '0' : `${globalStyles.spacing.standard} 0`,
 			display: 'flex',
 			justifyContent: 'center',
 			alignItems: 'center',
 			flexDirection: isMobile ? 'column' : 'row',
 			transform: variant === 'big' ? 'scale(1)' : 'scale(0.5)',
-			transition: `transform ${globalStyles.transitions.slow}, top ${globalStyles.transitions.slow}`,
+			transformOrigin: 'top center',
+			//transition: `transform ${globalStyles.transitions.slow}, top ${globalStyles.transitions.slow}`,
 		},
 		text: {
 			userSelect: 'none',
@@ -45,21 +49,21 @@ const CateogryNav: React.FC<CateogryNavProps> = ({
 		};
 	};
 
-	const artistOnClick = () => changePage('/artist');
+	const artistOnClick = () => changePageUrl('/artist');
 
-	const writerOnClick = () => changePage('/writer');
+	const writerOnClick = () => changePageUrl('/writer');
 
 	return (
 		<div style={styles.container}>
 			<a onClick={artistOnClick}>
-				<h2 style={textStyle(page === '/artist')}>Artist</h2>
+				<h2 style={textStyle(pageUrl === '/artist')}>Artist</h2>
 			</a>
 			<h2 style={styles.text}>&nbsp;+&nbsp;</h2>
 			<a onClick={writerOnClick}>
-				<h2 style={textStyle(page === '/writer')}>Writer</h2>
+				<h2 style={textStyle(pageUrl === '/writer')}>Writer</h2>
 			</a>
 		</div>
 	);
 };
 
-export default CateogryNav;
+export default CategoryNav;

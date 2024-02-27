@@ -1,5 +1,5 @@
 
-import { BioPage, SocialMediaLinks, Post, AllData } from '../../types';
+import { BioPage, Post, AllData } from '../../types';
 import { fetch } from '.';
 import { SanityDocument } from '@sanity/client';
 
@@ -7,13 +7,6 @@ const getAllData = async (): Promise<AllData> => {
 	const bioPageSanityData: SanityDocument = await fetch('*[_type == "bioPage"]');
 	const bioPage: BioPage = {
 		bio: bioPageSanityData[0].bio,
-	};
-
-	const socialMediaLinksSanityData: SanityDocument = await fetch('*[_type == "socialMediaLinks"]');
-	const socialMediaLinks: SocialMediaLinks = {
-		instagram: socialMediaLinksSanityData[0]?.links.instagram,
-		github: socialMediaLinksSanityData[0]?.links.github,
-		spotify: socialMediaLinksSanityData[0]?.links.spotify,
 	};
 
 	const artistPortfolioSanityData: SanityDocument = await fetch('*[_type == "artistPortfolio"]');
@@ -24,7 +17,6 @@ const getAllData = async (): Promise<AllData> => {
 
 	const allData: AllData = {
 		bioPage,
-		socialMediaLinks,
 		portfolio: {
 			artist: artistPortfolio,
 			writer: writerPortfolio,

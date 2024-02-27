@@ -1,22 +1,23 @@
 import React, { CSSProperties } from 'react';
 import { PortableText } from '@portabletext/react';
 import { Post, Pages } from '../../../types';
-import backArrow from '../assets/back_arrow.svg';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import useResponsive from '../hooks/useResponsive';
+import globalStyles from '../theme';
+import backArrow from '../assets/back_arrow.svg';
 
 interface PostPageProps extends Post {
-	changePage: (page: Pages) => void;
+	changePageUrl: (pageUrl: Pages) => void;
 }
 
 const PostPage: React.FC<PostPageProps> = ({
 	postId,
 	title,
 	medium,
-	url,
 	year,
+	publication,
 	markdown,
-	changePage,
+	changePageUrl,
 }) => {
 	const { isMobile, isTablet } = useResponsive();
 
@@ -30,12 +31,13 @@ const PostPage: React.FC<PostPageProps> = ({
 		},
 		backArrowWrapper: {
 			display: 'block',
-			marginBottom: '10px',
+			marginBottom: globalStyles.spacing.standard,
 		},
 		backArrow: {
 			width: '40px',
 		},
 		title: {
+			marginBottom: globalStyles.spacing.standard,
 		},
 		contentWrapper: {
 			display: 'flex',
@@ -48,9 +50,7 @@ const PostPage: React.FC<PostPageProps> = ({
 		},
 	};
 
-	const backArrowOnClick = () => changePage('/');
-	
-	console.log(markdown);
+	const backArrowOnClick = () => changePageUrl('/');
 
 	return (
 		<div style={styles.container}>

@@ -1,57 +1,56 @@
 import React, { CSSProperties } from 'react';
-import { Pages, SocialMediaLinks } from '../../../types';
+import { Pages } from '../../../types';
 import Logo from './Logo';
+import globalStyles from '../theme';
 import instagram from '../assets/instagram.svg';
 import github from '../assets/github.svg';
 import spotify from '../assets/spotify.svg';
 import resume from '../assets/resume.pdf';
 
 interface HeaderProps {
-	socialMediaLinks: SocialMediaLinks;
-	changePage: (page: Pages) => void;
+	changePageUrl: (page: Pages) => void;
 }
 
 const Header: React.FC<HeaderProps> = ({
-	socialMediaLinks,
-	changePage,
+	changePageUrl,
 }) => {
 	const styles: {
 		[key: string]: CSSProperties;
 	} = {
 		container: {
 			position: 'fixed',
-			bottom: '10px',
-			left: '10px',
+			bottom: globalStyles.spacing.standard,
+			left: globalStyles.spacing.standard,
 			zIndex: '999',
 		},
 		menuItems: {
 			
 		},
 		socialMediaWrapper: {
-			margin: '5px 0',
+			margin: `${globalStyles.spacing.half} 0`,
 		},
 		socialMediaIcon: {
 			width: '25px',
-			marginRight: '5px',
+			marginRight: globalStyles.spacing.half,
 		},
 		logoWrapper: {
 			width: '200px',
 		},
 	};
 
-	const instagramOnClick = () => window.open(socialMediaLinks.instagram, '_blank');
+	const instagramOnClick = () => window.open('https://www.instagram.com/magdi_hazaa', '_blank');
 	
-	const githubOnClick = () => window.open(socialMediaLinks.instagram, '_blank');
+	const githubOnClick = () => window.open('https://github.com/mhazaa', '_blank');
 	
-	const spotifyOnClick = () => window.open(socialMediaLinks.instagram, '_blank');
+	const spotifyOnClick = () => window.open('#', '_blank');
 
-	const bioOnClick = () => changePage('/bio');
+	const bioOnClick = () => changePageUrl('/bio');
 	
 	const resumeOnClick = () => window.open(resume, '_blank');
 	
-	const contactOnClick = () => changePage('/contact');
+	const contactOnClick = () => changePageUrl('/contact');
 	
-	const logoOnClick = () => changePage('/');
+	const logoOnClick = () => changePageUrl('/');
 
 	return (
 		<div style={styles.container}>
@@ -71,10 +70,10 @@ const Header: React.FC<HeaderProps> = ({
 					<img style={styles.socialMediaIcon} src={instagram} alt='instagram' />
 				</a>
 				<a onClick={githubOnClick}>
-					<img style={styles.socialMediaIcon} src={instagram} alt='github' />
+					<img style={styles.socialMediaIcon} src={github} alt='github' />
 				</a>
 				<a onClick={spotifyOnClick}>
-					<img style={styles.socialMediaIcon} src={instagram} alt='spotify' />
+					<img style={styles.socialMediaIcon} src={spotify} alt='spotify' />
 				</a>
 			</div>
 			<div style={styles.logoWrapper}>
