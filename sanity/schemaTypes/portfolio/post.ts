@@ -4,12 +4,6 @@ export default {
     type: 'object',
     fields: [
         {
-            title: 'Post ID',
-            name: 'postId',
-            type: 'string',
-            validation: (Rule: any) => Rule.required(),
-        },
-        {
             title: 'Title',
             name: 'title',
             type: 'string',

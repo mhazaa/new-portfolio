@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React, { useEffect, CSSProperties } from 'react';
 import { PortableText } from '@portabletext/react';
 import { Post, Pages } from '../../../types';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
@@ -11,7 +11,7 @@ interface PostPageProps extends Post {
 }
 
 const PostPage: React.FC<PostPageProps> = ({
-	postId,
+	id,
 	title,
 	medium,
 	year,
@@ -42,13 +42,16 @@ const PostPage: React.FC<PostPageProps> = ({
 		contentWrapper: {
 			display: 'flex',
 			flexDirection: 'column',
-			alignItems: 'end',
 			position: 'relative',
 			width: isMobile ? '100%' : isTablet ? '85%' : '70%',
 			left: isMobile ? '0' : isTablet ? '15%' : '30%',
 			margin: '60px 0',
 		},
 	};
+
+	useEffect(() => {
+		AnalyticsEngineClient.sendMetric(`Viewed ${title}__${id}`);
+	}, []);
 
 	const backArrowOnClick = () => changePageUrl('/');
 

@@ -7,7 +7,7 @@ const data: AllData = {
 	portfolio: {
 		artist: [
 			{
-				postId: '0',
+				id: '0',
 				title: 'Insomnia',
 				medium: 'Painting',
 				year: '2023',
@@ -16,14 +16,14 @@ const data: AllData = {
 		],
 		writer: [
 			{
-				postId: '0',
+				id: '0',
 				title: 'The Shams Cabaret',
 				medium: 'Short Fiction',
 				url: '/writer/the-shams-cabarat',
 				year: '2023',
 			},
 			{
-				postId: '0',
+				id: '0',
 				title: 'External Article',
 				medium: 'Interview',
 				year: '2023',

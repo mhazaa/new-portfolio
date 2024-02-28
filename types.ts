@@ -7,7 +7,7 @@ export interface BioPage {
 };
 
 export interface Post {
-	postId: string;
+	id: string;
 	title: string;
 	medium: string;
 	year: string;
