@@ -8,7 +8,7 @@ Compiles both frontend and backend files
 
 ### npm run start
 
-Stops and clean project, rebuilds project and restarts a PM2 server at **localhost:3000**, and finally deploys Sanity studio to **[mhazaa.sanity.studio](https://mhazaa.sanity.studio)**
+Stops and clean project, rebuilds project and restarts a PM2 server at **localhost:3000**, and finally deploys Sanity studio to **https://mhazaa.sanity.studio**
 
 ### npm run start-yaml-test
 
@@ -24,7 +24,7 @@ Spins a dev server at **localhost:3000** for the project, and a sanity dev serve
 
 ### npm run deploy-sanity
 
-deploys Sanity studio to **mhazaa.sanity.studio**
+deploys Sanity studio to **https://mhazaa.sanity.studio**
 
 ### npm run clean
 
