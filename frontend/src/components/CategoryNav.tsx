@@ -1,5 +1,6 @@
 import React, { CSSProperties } from 'react';
 import useResponsive from '../hooks/useResponsive';
+import Logo from '../components/Logo';
 import globalStyles from '../theme';
 import { Pages } from '../../../types';
 
@@ -20,16 +21,18 @@ const CategoryNav: React.FC<CategoryNavProps> = ({
 		[key: string]: CSSProperties;
 	} = {
 		container: {
-			position: variant === 'big' ? 'relative' : 'fixed',
+			position: variant === 'big' ? 'relative' : 'sticky',
+			width: '100%',
 			top: '0',
-			margin: variant === 'big' ? '0' : `${globalStyles.spacing.standard} 0`,
+			margin: variant === 'big' ? '0' : `${globalStyles.spacing.double} 0`,
+		},
+		categoriesWrapper: {
 			display: 'flex',
 			justifyContent: 'center',
 			alignItems: 'center',
 			flexDirection: isMobile ? 'column' : 'row',
 			transform: variant === 'big' ? 'scale(1)' : 'scale(0.5)',
 			transformOrigin: 'top center',
-			//transition: `transform ${globalStyles.transitions.slow}, top ${globalStyles.transitions.slow}`,
 		},
 		text: {
 			userSelect: 'none',
@@ -37,8 +40,12 @@ const CategoryNav: React.FC<CategoryNavProps> = ({
 			color: 'rgba(0,0,0,0)',
 		},
 		selectedText: {
-			WebkitTextStroke: 'none',
+			WebkitTextStroke: '0',
 			color: globalStyles.colors.yellow,
+		},
+		plusSign: {
+			lineHeight: isMobile ? '3.5rem' : '6.5rem',
+			padding: isMobile ? `${globalStyles.spacing.standard} 0` : '0',
 		},
 	};
 
@@ -55,13 +62,17 @@ const CategoryNav: React.FC<CategoryNavProps> = ({
 
 	return (
 		<div style={styles.container}>
-			<a onClick={artistOnClick}>
-				<h2 style={textStyle(pageUrl === '/artist')}>Artist</h2>
-			</a>
-			<h2 style={styles.text}>&nbsp;+&nbsp;</h2>
-			<a onClick={writerOnClick}>
-				<h2 style={textStyle(pageUrl === '/writer')}>Writer</h2>
-			</a>
+			<Logo changePageUrl={changePageUrl} />
+
+			<div style={styles.categoriesWrapper}>
+				<a onClick={artistOnClick}>
+					<h2 style={textStyle(pageUrl === '/artist')}>Artist</h2>
+				</a>
+				<h2 style={{ ...styles.text, ...styles.plusSign} }>&nbsp;+&nbsp;</h2>
+				<a onClick={writerOnClick}>
+					<h2 style={textStyle(pageUrl === '/writer')}>Writer</h2>
+				</a>
+			</div>
 		</div>
 	);
 };

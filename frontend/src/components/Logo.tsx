@@ -1,13 +1,14 @@
 import React, { CSSProperties } from 'react';
 import globalStyles from '../theme';
 import logo from '../assets/logo.svg';
+import { Pages } from '../../../types';
 
 interface LogoProps {
-	onClick?: () => void;
+	changePageUrl: (pageUrl: Pages) => void;
 }
 
 const Logo: React.FC<LogoProps> = ({
-	onClick = () => null,
+	changePageUrl,
 }) => {
 	const styles: {
 		[key: string]: CSSProperties;
@@ -15,7 +16,8 @@ const Logo: React.FC<LogoProps> = ({
 		container: {
 			display: 'flex',
 			width: '100%',
-			marginBottom: globalStyles.spacing.standard,
+			maxWidth: '250px',
+			margin: `0 auto ${globalStyles.spacing.double} auto`,
 		},
 		logoHiddenText: {
 			position: 'absolute',
@@ -25,6 +27,8 @@ const Logo: React.FC<LogoProps> = ({
 			width: '100%',
 		},
 	};
+
+	const onClick = () => changePageUrl('/');
 
 	return (
 		<a style={styles.container} onClick={onClick}>

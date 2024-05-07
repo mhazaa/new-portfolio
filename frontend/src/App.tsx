@@ -13,7 +13,6 @@ import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import { Pages, Post, AllData } from '../../types';
 import { getAllData } from './requests';
 import Page from './components/Page';
-import Logo from './components/Logo';
 
 const setUrl = (url: string) => history.pushState(null, '', `${url}`);
 const url = window.location.href;
@@ -83,13 +82,11 @@ const App: React.FC = () => {
 		<div>
 			<Background />
 
-			<Header changePageUrl={changePageUrl} />
+			{!post &&
+				<Header changePageUrl={changePageUrl} />
+			}
 
 			<Page variant={post ? 'sprawling' : 'fullscreen'}>
-				{pageUrl === '/' &&
-					<Logo />
-				}
-				
 				<CategoryNav
 					pageUrl={pageUrl}
 					changePageUrl={changePageUrl}

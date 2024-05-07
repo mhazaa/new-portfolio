@@ -1,24 +1,28 @@
-@import url("https://use.typekit.net/kdg5doa.css");
+@import url('https://use.typekit.net/kdg5doa.css');
 
-/* fontWeights */
+/* FONT FAMILIES */
+$fontPrimary: 'brandon-grotesque', sans-serif;
+$fontSecondary: 'citrus-gothic-rough', sans-serif;
+$fontParagraph: 'Times New Roman', Times, serif;
+/* FONT WEIGHT */
 $thin: 100;
 $light: 300;
 $regular: 400;
 $medium: 500;
 $bold: 700;
 $black: 900;
-/* spacing */
+/* SPACING */
 $spacingStandard: 10px;
 $spacingDouble: 20px;
 $spacingExtraDouble: 40px;
-/* colors */
+/* COLOR */
 $beige: #ffeed9;
 $yellow: #ffc758;
 $teal: #8dcb97;
 $brown: #6e523b;
-/* transitions */
+/* TRANSITIONS */
 $transitionFast: 0.2s ease;
-/* breakpoints */
+/* BREAKPOINTS */
 $breakpointMobile: 768px;
 $breakpointTablet: 1024px;
 
@@ -66,27 +70,28 @@ a:hover {
 }
 
 p {
-	font-family: "Times New Roman", Times, serif;
+	font-family: $fontParagraph;
 	font-size: 1.2rem;
 	color: $brown;
 }
 
-h1, h2, h3, h4, h5, button, input, textarea {
-	font-family: "brandon-grotesque", sans-serif;
+h1, h2, h3, h4, h5, h6, button, input, textarea {
+	font-family: $fontPrimary;
 }
 
 h2 {
+	font-family: $fontSecondary;
 	text-transform: uppercase;
-	font-size: 6.5rem;
-	line-height: 5rem;
+	font-size: 7rem;
+	line-height: 6.5rem;
 	letter-spacing: -0.03rem;
-	font-weight: $black;
+	font-weight: $regular;
 	color: $yellow;
 }
 
 h3 {
 	font-size: 1.8rem;
-	line-height: 1.7rem;
+	line-height: 2.2rem;
 	font-weight: $regular;
 	color: $brown;
 }
@@ -100,9 +105,18 @@ h4 {
 }
 
 h5 {
+	font-family: $fontSecondary;
 	text-transform: uppercase;
-	font-size: 0.9rem;
-	line-height: 1rem;
+	font-size: 1.5rem;
+	line-height: 1.5rem;
+	font-weight: $light;
+	color: $yellow;
+}
+
+h6 {
+	text-transform: uppercase;
+	font-size: 1rem;
+	line-height: 1.1rem;
 	font-weight: $black;
 	color: $teal;
 }

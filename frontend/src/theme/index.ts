@@ -15,6 +15,7 @@ const globalStyles = {
 		standard: '10px',
 		double: '20px',
 		extraDouble: '40px',
+		postPadding: '60px',
 	},
 	colors: {
 		beige: '#ffeed9',

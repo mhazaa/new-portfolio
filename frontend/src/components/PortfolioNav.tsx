@@ -106,8 +106,8 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 		sp = Math.floor(sp);
 		setScrollPercentage(sp);
 
-		(elScrollTop <= 0) ? setTopArrowVisible(false) : setTopArrowVisible(true);
-		(elScrollTop >= maxScroll) ? setBottomArrowVisible(false) : setBottomArrowVisible(true);
+		(elScrollTop <= 2) ? setTopArrowVisible(false) : setTopArrowVisible(true);
+		(elScrollTop >= maxScroll - 2) ? setBottomArrowVisible(false) : setBottomArrowVisible(true);
 	};
 
 	useEffect(() => {
@@ -159,7 +159,7 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 						>
 							<h3>{post.title}</h3>
 							<h4>{post.medium}, {post.year}</h4>
-							{post && <h4>{post.publication}</h4>}
+							{post.publication && <h5>{post.publication}</h5>}
 						</a>
 					))}
 				</div>

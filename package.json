@@ -10,6 +10,7 @@
   "scripts": {
     "build": "concurrently \"npm run build -w ./frontend\" \"npm run build -w ./backend\"",
     "start": "npm run stop && npm run build && npm run start -w ./backend && npm run deploy-sanity",
+    "yaml-test": "npm run stop && npm run build && npm run start -w ./backend",
     "stop": "npm run stop -w ./backend",
     "dev": "concurrently \"npm run dev -w ./frontend\" \"npm run dev -w ./backend\" \"npm run dev -w ./sanity\"",
     "deploy-sanity": "npm run deploy -w ./sanity"
@@ -19,11 +20,8 @@
   "license": "ISC",
   "devDependencies": {
     "@portabletext/types": "^2.0.8",
-    "@typescript-eslint/eslint-plugin": "^7.0.2",
-    "@typescript-eslint/parser": "^7.0.2",
     "concurrently": "^8.2.2",
-    "eslint": "^8.56.0",
-    "eslint-plugin-react": "^7.33.2",
+    "eslint": "^9.2.0",
     "typescript": "^5.3.3"
   },
   "dependencies": {
