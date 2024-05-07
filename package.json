@@ -10,7 +10,7 @@
   "scripts": {
     "build": "concurrently \"npm run build -w ./frontend\" \"npm run build -w ./backend\"",
     "start": "npm run stop && npm run build && npm run start -w ./backend && npm run deploy-sanity",
-    "yaml-test": "npm run stop && npm run build && npm run start -w ./backend",
+    "start-yaml-test": "npm run stop && npm run build && npm run start -w ./backend",
     "stop": "npm run stop -w ./backend",
     "dev": "concurrently \"npm run dev -w ./frontend\" \"npm run dev -w ./backend\" \"npm run dev -w ./sanity\"",
     "deploy-sanity": "npm run deploy -w ./sanity"
