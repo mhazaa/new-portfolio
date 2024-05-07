@@ -9,11 +9,12 @@
   ],
   "scripts": {
     "build": "concurrently \"npm run build -w ./frontend\" \"npm run build -w ./backend\"",
-    "start": "npm run stop && npm run build && npm run start -w ./backend && npm run deploy-sanity",
+    "start": "npm run stop && npm run clean && npm run build && npm run start -w ./backend && npm run deploy-sanity",
     "start-yaml-test": "npm run stop && npm run build && npm run start -w ./backend",
     "stop": "npm run stop -w ./backend",
     "dev": "concurrently \"npm run dev -w ./frontend\" \"npm run dev -w ./backend\" \"npm run dev -w ./sanity\"",
-    "deploy-sanity": "npm run deploy -w ./sanity"
+    "deploy-sanity": "npm run deploy -w ./sanity",
+    "clean": "rm -f ./types.js & rm -rf ./frontend/build & rm -f ./backend/*.js & rm -f ./backend/**/*.js & rm -rf ./sanity/dist"
   },
   "keywords": [],
   "author": "Magdi Hazaa",
