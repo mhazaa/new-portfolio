@@ -6,7 +6,7 @@
     "build": "tsc",
     "start": "pm2 start server.js",
     "stop": "pm2 kill",
-    "dev": "ts-node-dev server"
+    "dev": "ts-node-dev --prefer-ts-exts server"
   },
   "keywords": [],
   "author": "Magdi Hazaa",
