@@ -1,6 +1,6 @@
 import React, { useEffect, CSSProperties } from 'react';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
-import SanityMarkdown from './SanityMarkdown';
+//import SanityMarkdown from './SanityMarkdown';
 import useResponsive from '../hooks/useResponsive';
 import globalStyles from '../theme';
 import backArrow from '../assets/back_arrow.svg';
