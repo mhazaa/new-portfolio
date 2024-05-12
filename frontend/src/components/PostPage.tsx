@@ -70,9 +70,9 @@ const PostPage: React.FC<PostPageProps> = ({
 			</div>
 
 			<div style={styles.contentWrapper}>
-				{markdown &&
+				{/*markdown &&
 					<SanityMarkdown markdown={markdown} />
-				}
+				*/}
 			</div>
 		</div>
 	);
