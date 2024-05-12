@@ -35,7 +35,7 @@ const Logo: React.FC<LogoProps> = ({
 			<h1 style={styles.logoHiddenText}>
 				Magdi Hazaa
 			</h1>
-			<img style={styles.logoImg} src={logo} alt='magdi hazaa' />
+			<img style={styles.logoImg} src={logo} alt='Magdi Hazaa' />
 		</a>
 	);
 };

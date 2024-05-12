@@ -1,7 +1,7 @@
 export default {
     title: 'Post',
     name: 'post',
-    type: 'object',
+    type: 'document',
     fields: [
         {
             title: 'Title',
@@ -44,21 +44,10 @@ export default {
             type: 'array',
             of: [
                 {
-                    type: 'block'
+                    type: 'block',
                 },
                 {
-                    type: 'image',
-                    fields: [
-                        {
-                            title: 'Alt',
-                            name: 'alt',
-                            type: 'text',
-                            description: 'alt description',
-                            options: {
-                                isHighlighted: true,
-                            },
-                        },
-                    ],
+                    type: 'image',  
                 },
             ],
         },

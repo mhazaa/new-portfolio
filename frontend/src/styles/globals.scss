@@ -131,15 +131,11 @@ input, textarea {
 	font-weight: $black;
 }
 
-input {
-	text-transform: uppercase;
-}
-
 button, input[type=submit] {
 	background: $yellow;
 	cursor: pointer;
 	border: none;
-	padding: $spacingDouble $spacingExtraDouble;
+	padding: $spacingStandard $spacingExtraDouble;
 
 	text-transform: uppercase;
 	font-size: 1rem;

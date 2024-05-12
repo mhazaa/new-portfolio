@@ -1,9 +1,15 @@
 import { TypedObject } from '@portabletext/types';
 
+export interface Image {
+	src: string;
+	alt?: string;
+}
+
 export type Pages = '/' | '/artist' | '/writer' | '/bio' | '/resume' | '/contact' | '/error';
 
 export interface BioPage {
-	bio: string | TypedObject | TypedObject[];
+	image?: Image;
+	bio: TypedObject | TypedObject[];
 };
 
 export interface Post {
@@ -15,7 +21,7 @@ export interface Post {
 	url: string;
 	isExternal?: boolean;
 	markdown?: TypedObject | TypedObject[];
-}[];
+};
 
 export interface Portfolio {
 	artist: Post[];
@@ -24,6 +30,7 @@ export interface Portfolio {
 
 export interface AllData {
 	bioPage: BioPage;
+	resume: string;
 	portfolio: Portfolio;
 };
 

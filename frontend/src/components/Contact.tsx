@@ -25,6 +25,7 @@ const Contact: React.FC = () => {
 		textarea: {
 			width: '100%',
 			marginBottom: globalStyles.spacing.standard,
+			maxHeight: '150px',
 		},
 	};
 

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './styles/stylesheet.scss';
 import Background from './components/Background';
+import Footer from './components/Footer';
 import Header from './components/Header';
-import CategoryNav from './components/CategoryNav';
-import PortfolioNav from './components/PortfolioNav';
-import Bio from './components/Bio';
+import Portfolio from './components/Portfolio';
+import BioPage from './components/BioPage';
 import Contact from './components/Contact';
 import Error from './components/Error';
 import Loading from './components/Loading';
@@ -83,11 +83,11 @@ const App: React.FC = () => {
 			<Background />
 
 			{!post &&
-				<Header changePageUrl={changePageUrl} />
+				<Footer resume={allData.resume} changePageUrl={changePageUrl} />
 			}
 
 			<Page variant={post ? 'sprawling' : 'fullscreen'}>
-				<CategoryNav
+				<Header
 					pageUrl={pageUrl}
 					changePageUrl={changePageUrl}
 					variant={
@@ -100,13 +100,13 @@ const App: React.FC = () => {
 						{post
 							? <PostPage {...post} changePageUrl={changePageUrl} />
 							// @ts-ignore
-							: <PortfolioNav posts={allData.portfolio[pageUrl.substring(1)]} changePostUrl={changePostUrl} />
+							: <Portfolio posts={allData.portfolio[pageUrl.substring(1)]} changePostUrl={changePostUrl} />
 						}
 					</>
 				}
 
 				{pageUrl === '/bio' &&
-					<Bio bio={allData.bioPage.bio} />
+					<BioPage bio={allData.bioPage.bio} image={allData.bioPage.image} />
 				}
 
 				{pageUrl === '/contact' &&

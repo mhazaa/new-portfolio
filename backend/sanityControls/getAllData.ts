@@ -1,30 +1,53 @@
-
 import { BioPage, Post, AllData } from '../../types';
 import { fetch } from '.';
 import { SanityDocument } from '@sanity/client';
 
 const getAllData = async (): Promise<AllData> => {
-	const bioPageSanityData: SanityDocument = await fetch('*[_type == "bioPage"]');
-	const bioPage: BioPage = {
-		bio: bioPageSanityData[0].bio,
-	};
+	const bioPage: BioPage = await fetch(`
+		*[_type == "bioPage"] {
+			"image": {
+				"src": image.asset->url,
+				"alt": image.asset->altText,
+			},
+			"bio": bio,
+		}[0]
+	`);
 
-	const artistPortfolioSanityData: SanityDocument = await fetch('*[_type == "artistPortfolio"]');
-	const artistPortfolio: Post[] = artistPortfolioSanityData.map((document: SanityDocument) => ({
-		id: document?._id,
-		...document?.post
-	}));
+	const resume: SanityDocument = await fetch (`
+		*[_type == "resume"] {
+			"resume": resume.asset->url,
+		}[0]
+	`);
 
-	const writerPortfolioSanityData: SanityDocument = await fetch('*[_type == "writerPortfolio"]');
-	const writerPortfolio: Post[] = writerPortfolioSanityData.map((document: SanityDocument) => document?.post);
+	const filterPortfolio = (array: SanityDocument[]): Post[] => (
+		array.map((post: SanityDocument) => (
+			{
+				id: post._key,
+				title: post.title,
+				medium: post.medium,
+				year: post.year,
+				publication: post.publication,
+				url: post.url,
+				isExternal: post.isExternal,
+				markdown: post.markdown,
+			}
+		))
+	);
+
+	const portfolioSanityData: SanityDocument = await fetch('*[_type == "portfolio"]');
+	const artist = filterPortfolio(portfolioSanityData[0]?.artist || []);
+	const writer = filterPortfolio(portfolioSanityData[0]?.writer || []);
 
 	const allData: AllData = {
 		bioPage,
+		resume: resume.resume,
 		portfolio: {
-			artist: artistPortfolio,
-			writer: writerPortfolio,
+			artist: artist,
+			writer: writer,
 		},
 	};
+
+	console.log('b', bioPage);
 
 	return allData;
 };

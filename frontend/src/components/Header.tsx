@@ -1,73 +1,77 @@
 import React, { CSSProperties } from 'react';
-import { Pages } from '../../../types';
+import useResponsive from '../hooks/useResponsive';
+import Logo from './Logo';
 import globalStyles from '../theme';
-import instagram from '../assets/instagram.svg';
-import tiktok from '../assets/tiktok.svg';
-import github from '../assets/github.svg';
-import resume from '../assets/resume.pdf';
+import { Pages } from '../../../types';
 
 interface HeaderProps {
-	changePageUrl: (page: Pages) => void;
+	pageUrl: Pages;
+	changePageUrl: (pageUrl: Pages) => void;
+	variant?: 'big' | 'small';
 }
 
 const Header: React.FC<HeaderProps> = ({
+	pageUrl,
 	changePageUrl,
+	variant = 'big',
 }) => {
+	const { isMobile } = useResponsive();
+
 	const styles: {
 		[key: string]: CSSProperties;
 	} = {
 		container: {
-			position: 'fixed',
-			bottom: globalStyles.spacing.standard,
-			left: globalStyles.spacing.standard,
-			zIndex: '999',
+			position: variant === 'big' ? 'relative' : 'absolute',
+			width: '100%',
+			top: '0',
+			left: '0',
+			margin: variant === 'big' ? '0' : `${globalStyles.spacing.double} 0`,
 		},
-		menuItems: {
-			
+		categoriesWrapper: {
+			display: 'flex',
+			justifyContent: 'center',
+			alignItems: 'center',
+			flexDirection: isMobile ? 'column' : 'row',
+			transform: variant === 'big' ? 'scale(1)' : 'scale(0.5)',
+			transformOrigin: 'top center',
 		},
-		socialMediaWrapper: {
-			marginTop: globalStyles.spacing.half,
+		text: {
+			userSelect: 'none',
+			WebkitTextStroke: `3px ${globalStyles.colors.yellow}`,
+			color: 'rgba(0,0,0,0)',
 		},
-		socialMediaIcon: {
-			height: '25px',
-			marginRight: globalStyles.spacing.half,
+		selectedText: {
+			WebkitTextStroke: '0',
+			color: globalStyles.colors.yellow,
+		},
+		plusSign: {
+			lineHeight: isMobile ? '3.5rem' : '6.5rem',
+			padding: isMobile ? `${globalStyles.spacing.standard} 0` : '0',
 		},
 	};
 
-	const instagramOnClick = () => window.open('https://www.instagram.com/magdi_hazaa', '_blank');
-	
-	const tiktokOnClick = () => window.open('https://www.tiktok.com/@magsartzone', '_blank');
+	const textStyle = (selected: boolean) => {
+		return {
+			...styles.text,
+			...(selected && {...styles.selectedText}),
+		};
+	};
 
-	const githubOnClick = () => window.open('https://github.com/mhazaa', '_blank');
+	const artistOnClick = () => changePageUrl('/artist');
 
-	const bioOnClick = () => changePageUrl('/bio');
-	
-	const resumeOnClick = () => window.open(resume, '_blank');
-	
-	const contactOnClick = () => changePageUrl('/contact');
+	const writerOnClick = () => changePageUrl('/writer');
 
 	return (
 		<div style={styles.container}>
-			<ul style={styles.menuItems}>
-				<li>
-					<a onClick={bioOnClick}><h6>Bio</h6></a>
-				</li>
-				<li>
-					<a onClick={resumeOnClick}><h6>Resumé</h6></a>
-				</li>
-				<li>
-					<a onClick={contactOnClick}><h6>Contact</h6></a>
-				</li>
-			</ul>
-			<div style={styles.socialMediaWrapper}>
-				<a onClick={instagramOnClick}>
-					<img style={styles.socialMediaIcon} src={instagram} alt='instagram' />
+			<Logo changePageUrl={changePageUrl} />
+
+			<div style={styles.categoriesWrapper}>
+				<a onClick={artistOnClick}>
+					<h2 style={textStyle(pageUrl === '/artist')}>Artist</h2>
 				</a>
-				<a onClick={tiktokOnClick}>
-					<img style={styles.socialMediaIcon} src={tiktok} alt='tiktok' />
-				</a>
-				<a onClick={githubOnClick}>
-					<img style={styles.socialMediaIcon} src={github} alt='github' />
+				<h2 style={{ ...styles.text, ...styles.plusSign} }>&nbsp;+&nbsp;</h2>
+				<a onClick={writerOnClick}>
+					<h2 style={textStyle(pageUrl === '/writer')}>Writer</h2>
 				</a>
 			</div>
 		</div>

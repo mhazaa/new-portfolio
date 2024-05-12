@@ -14,18 +14,16 @@ const Page: React.FC<PageProps> = ({
 		[key: string]: CSSProperties;
 	} = {
 		container: {
+			position: variant === 'fullscreen' ? 'absolute' : 'relative',
 			display: 'flex',
 			flexDirection: 'column',
 			justifyContent: 'center',
 			alignItems: 'center',
-			position: variant === 'fullscreen' ? 'absolute' : 'relative',
 			top: variant === 'fullscreen' ? '50%' : '0',
 			left: '0',
-			width: '100%',
 			height: variant === 'fullscreen' ? '100%' : 'auto',
-			padding: variant === 'fullscreen' ? '0' : '200px 0',
+			width: '100%',
 			transform: variant === 'fullscreen' ? 'translateY(-50%)' : 'none',
-			//transition: `height ${globalStyles.transitions.verySlow}`,
 		},
 		contentWrapper: {
 			width: '90%',
@@ -39,7 +37,6 @@ const Page: React.FC<PageProps> = ({
 				{children}
 			</div>
 		</div>
-
 	);
 };
 

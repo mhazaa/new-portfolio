@@ -1,9 +1,9 @@
-import bioPage from "./bioPage";
-import artistPortfolio from "./portfolio/artistPortfolio";
-import writerPortfolio from "./portfolio/writerPortfolio";
+import bioPage from './bioPage';
+import resume from './resume';
+import portfolio from './portfolio';
 
 export const schemaTypes = [
     bioPage,
-    artistPortfolio,
-    writerPortfolio,
+    resume,
+    portfolio,
 ];

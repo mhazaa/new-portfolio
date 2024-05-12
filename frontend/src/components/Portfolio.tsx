@@ -4,12 +4,12 @@ import globalStyles from '../theme';
 import { Pages, Post } from '../../../types';
 import arrow from '../assets/arrow.svg';
 
-interface PortfolioNavProps {
+interface PortfolioProps {
 	posts: Post[];
 	changePostUrl: (postUrl: string | null) => void;
 }
 
-const PortfolioNav: React.FC<PortfolioNavProps> = ({
+const Portfolio: React.FC<PortfolioProps> = ({
 	posts,
 	changePostUrl,
 }) => {
@@ -144,7 +144,7 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 	return (
 		<div style={styles.container}>
 			<a style={styles.arrowWrapperTop} onClick={topArrowOnClick}>
-				<img style={styles.arrowTop} src={arrow} alt='up arrow' />
+				<img style={styles.arrowTop} src={arrow} alt='Up arrow' />
 			</a>
 			<div style={styles.contentWrapper}>
 				<div style={styles.itemsWrapper} ref={itemsWrapperEl}>
@@ -169,10 +169,10 @@ const PortfolioNav: React.FC<PortfolioNavProps> = ({
 				</div>
 			</div>
 			<a style={styles.arrowWrapperBottom} onClick={bottomArrowOnClick}>
-				<img style={styles.arrowBottom} src={arrow} alt='down arrow' />
+				<img style={styles.arrowBottom} src={arrow} alt='Down arrow' />
 			</a>
 		</div>
 	);
 };
 
-export default PortfolioNav;
+export default Portfolio;

@@ -1,10 +1,10 @@
 import React, { useEffect, CSSProperties } from 'react';
-import { PortableText } from '@portabletext/react';
-import { Post, Pages } from '../../../types';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
+import SanityMarkdown from './SanityMarkdown';
 import useResponsive from '../hooks/useResponsive';
 import globalStyles from '../theme';
 import backArrow from '../assets/back_arrow.svg';
+import { Post, Pages } from '../../../types';
 
 interface PostPageProps extends Post {
 	changePageUrl: (pageUrl: Pages) => void;
@@ -39,13 +39,16 @@ const PostPage: React.FC<PostPageProps> = ({
 		title: {
 			marginBottom: globalStyles.spacing.standard,
 		},
+		mediumYear: {
+			marginBottom: globalStyles.spacing.half,
+		},
 		contentWrapper: {
 			display: 'flex',
 			flexDirection: 'column',
 			position: 'relative',
 			width: isMobile ? '100%' : isTablet ? '85%' : '70%',
 			left: isMobile ? '0' : isTablet ? '15%' : '30%',
-			margin: '60px 0',
+			margin: `${globalStyles.spacing.postPadding} 0`,
 		},
 	};
 
@@ -59,15 +62,16 @@ const PostPage: React.FC<PostPageProps> = ({
 		<div style={styles.container}>
 			<div style={styles.titleWrapper}>
 				<a style={styles.backArrowWrapper} onClick={backArrowOnClick}>
-					<img style={styles.backArrow} src={backArrow} alt='back arrow' />
+					<img style={styles.backArrow} src={backArrow} alt='Back arrow' />
 				</a>
 				<h2 style={styles.title}>{title}</h2>
-				<h4>{medium}, {year}</h4>
+				<h4 style={styles.mediumYear}>{medium}, {year}</h4>
+				{publication && <h5>{publication}</h5>}
 			</div>
 
 			<div style={styles.contentWrapper}>
 				{markdown &&
-					<PortableText value={markdown} />
+					<SanityMarkdown markdown={markdown} />
 				}
 			</div>
 		</div>

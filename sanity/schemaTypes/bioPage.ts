@@ -4,6 +4,11 @@ export default {
   type: 'document',
   fields: [
     {
+      title: 'Image',
+      name: 'image',
+      type: 'image',
+    },
+    {
       title: 'Bio',
       name: 'bio',
       type: 'array',
@@ -15,4 +20,11 @@ export default {
       validation: (Rule: any) => Rule.required(),
     },
   ],
+  preview: {
+		prepare () {
+			return {
+				title: 'Bio Page',
+			}
+		},
+	},
 };
