@@ -1,6 +1,6 @@
 import React, { useEffect, CSSProperties } from 'react';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
-//import SanityMarkdown from './SanityMarkdown';
+import Markdown from './Markdown';
 import useResponsive from '../hooks/useResponsive';
 import globalStyles from '../theme';
 import backArrow from '../assets/back_arrow.svg';
@@ -25,13 +25,15 @@ const PostPage: React.FC<PostPageProps> = ({
 		[key: string]: CSSProperties;
 	} = {
 		container: {
+			marginTop: '250px',
 		},
 		titleWrapper: {
 			width: isMobile ? '100%' : isTablet ? '85%' : '70%',
 		},
 		backArrowWrapper: {
-			display: 'block',
-			marginBottom: globalStyles.spacing.standard,
+			position: 'relative',
+			display: 'inline-flex',
+			paddingBottom: globalStyles.spacing.double,
 		},
 		backArrow: {
 			width: '40px',
@@ -70,9 +72,9 @@ const PostPage: React.FC<PostPageProps> = ({
 			</div>
 
 			<div style={styles.contentWrapper}>
-				{/*markdown &&
-					<SanityMarkdown markdown={markdown} />
-				*/}
+				{markdown &&
+					<Markdown markdown={markdown} />
+				}
 			</div>
 		</div>
 	);
