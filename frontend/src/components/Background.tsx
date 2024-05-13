@@ -10,8 +10,8 @@ const Background: React.FC = () => {
 			display: 'flex',
 			top: '0',
 			left: '0',
-			width: '100%',
 			height: '100%',
+			width: '100%',
 			justifyContent: 'center',
 			alignItems: 'center',
 			overflow: 'hidden',
@@ -26,7 +26,7 @@ const Background: React.FC = () => {
 
 	return (
 		<div style={styles.container}>
-			<img style={styles.img} src={background} />
+			<img style={styles.img} src={background} alt='Background' />
 		</div>
 	);
 };
