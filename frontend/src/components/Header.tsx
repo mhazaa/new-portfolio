@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({
 		[key: string]: CSSProperties;
 	} = {
 		container: {
-			position: variant === 'big' ? 'relative' : 'absolute',
+			position: variant === 'big' ? 'relative' : 'fixed',
 			width: '100%',
 			top: '0',
 			left: '0',
@@ -31,13 +31,14 @@ const Header: React.FC<HeaderProps> = ({
 			display: 'flex',
 			justifyContent: 'center',
 			alignItems: 'center',
-			flexDirection: isMobile ? 'column' : 'row',
+			flexDirection: isMobile && variant !== 'small' ? 'column' : 'row',
 			transform: variant === 'big' ? 'scale(1)' : 'scale(0.5)',
 			transformOrigin: 'top center',
+			marginTop: variant === 'big' ? globalStyles.spacing.double : globalStyles.spacing.standard,
 		},
 		text: {
 			userSelect: 'none',
-			WebkitTextStroke: `3px ${globalStyles.colors.yellow}`,
+			WebkitTextStroke: `2.5px ${globalStyles.colors.yellow}`,
 			color: 'rgba(0,0,0,0)',
 		},
 		selectedText: {
@@ -45,8 +46,7 @@ const Header: React.FC<HeaderProps> = ({
 			color: globalStyles.colors.yellow,
 		},
 		plusSign: {
-			lineHeight: isMobile ? '3.5rem' : '6.5rem',
-			padding: isMobile ? `${globalStyles.spacing.standard} 0` : '0',
+			margin: isMobile ? `-${globalStyles.spacing.standard} 0` : '0',
 		},
 	};
 

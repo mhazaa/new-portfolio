@@ -44,6 +44,9 @@ const Portfolio: React.FC<PortfolioProps> = ({
 		firstItem: {
 			marginTop: '0',
 		},
+		medium: {
+			marginBottom: globalStyles.spacing.half,
+		},
 		scrollbar: {
 			position: 'absolute',
 			height: '90%',
@@ -158,7 +161,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 							onClick={() => itemOnClick(post.url as Pages, post.isExternal)}
 						>
 							<h3>{post.title}</h3>
-							<h4>{post.medium}, {post.year}</h4>
+							<h4 style={styles.medium}>{post.medium}, {post.year}</h4>
 							{post.publication && <h5>{post.publication}</h5>}
 						</a>
 					))}

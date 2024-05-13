@@ -1,5 +1,4 @@
 import React, { CSSProperties } from 'react';
-import globalStyles from '../theme';
 import logo from '../assets/logo.svg';
 import { Pages } from '../../../types';
 
@@ -17,7 +16,7 @@ const Logo: React.FC<LogoProps> = ({
 			display: 'flex',
 			width: '100%',
 			maxWidth: '250px',
-			margin: `0 auto ${globalStyles.spacing.double} auto`,
+			margin: 'auto',
 		},
 		logoHiddenText: {
 			position: 'absolute',
