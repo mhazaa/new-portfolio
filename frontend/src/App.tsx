@@ -64,7 +64,7 @@ const App: React.FC = () => {
 
 	const changePostUrl = (postUrl: string | null) => {
 		setPostUrl(postUrl);
-		if (postUrl) setUrl(pageUrl + postUrl);
+		(postUrl) ? setUrl(pageUrl + postUrl) : setUrl(pageUrl);
 		console.log('postUrl', postUrl);
 	};
 
@@ -102,7 +102,7 @@ const App: React.FC = () => {
 				{(pageUrl === '/artist' || pageUrl === '/writer') &&
 					<>
 						{post
-							? <PostPage {...post} changePageUrl={changePageUrl} publicationOnClick={publicationOnClick} />
+							? <PostPage {...post} changePostUrl={changePostUrl} publicationOnClick={publicationOnClick} />
 							// @ts-ignore
 							: <Portfolio posts={allData.portfolio[pageUrl.substring(1)]} changePostUrl={changePostUrl} publicationOnClick={publicationOnClick} />
 						}
