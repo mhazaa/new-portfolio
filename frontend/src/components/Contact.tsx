@@ -1,13 +1,24 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import { postContactForm } from '../requests';
 import globalStyles from '../theme';
-import { PostContactFormData } from '../../../types';
+import { Pages, PostContactFormData } from '../../../types';
 
-const Contact: React.FC = () => {
+interface ContactProps {
+	changePageUrl: (pageUrl: Pages) => void;
+}
+
+const Contact: React.FC<ContactProps> = ({
+	changePageUrl,
+}) => {
+	const [isThankYouPage, setIsThankYouPage] = useState<boolean>(false);
+
 	const styles: {
 		[key: string]: CSSProperties;
 	} = {
+		thankYouWrapper: {
+			textAlign: 'center',
+		},
 		title: {
 			marginBottom: globalStyles.spacing.standard,
 		},
@@ -15,17 +26,22 @@ const Contact: React.FC = () => {
 			maxWidth: '400px',
 			marginBottom: globalStyles.spacing.standard,
 		},
-		formWrapper: {
-			alignItems: 'end',
+		nameEmailWrapper: {
+			display: 'flex',
+			justifyContent: 'space-between',
 		},
 		input: {
-			width: '100%',
+			width: '49%',
 			marginBottom: globalStyles.spacing.standard,
 		},
 		textarea: {
 			width: '100%',
 			marginBottom: globalStyles.spacing.standard,
 			maxHeight: '150px',
+		},
+		submitWrapper: {
+			display: 'flex',
+			justifyContent: 'end',
 		},
 	};
 
@@ -39,23 +55,40 @@ const Contact: React.FC = () => {
 
 		const data: PostContactFormData = {
 			userId: AnalyticsEngineClient.getUserId(),
-			name: name.value.toUpperCase(),
-			email: email.value.toUpperCase(),
+			name: name.value,
+			email: email.value,
 			message: message.value,
 		};
 
-		await postContactForm(data);
+		const resData = await postContactForm(data);
+		console.log('trrrrsrsrs', resData);
+		if (resData.status !== 200) return;
+		setIsThankYouPage(true);
+		setTimeout(() => changePageUrl('/'), 10000);
 	};
+
+	if (isThankYouPage) return (
+		<div style={styles.thankYouWrapper}>
+			<h4>
+				Thanks for reaching out! I&apos;ll get back to you as soon as I can.<br></br>
+				You&apos;ll be redirected to the homepage shortly.
+			</h4>
+		</div>
+	);
 
 	return (
 		<div>
 			<h2 style={styles.title}>Contact</h2>
-			<h4 style={styles.textWrapper}>Feel free to email me directly at magdihazaa@gmail.com or fill the form below:</h4>
-			<form style={styles.formWrapper} onSubmit={onSubmit}>
-				<input style={styles.input} name='name' type='name' placeholder='NAME' required></input>
-				<input style={styles.input} name='email' type="email" placeholder='EMAIL' required></input>
+			<h5 style={styles.textWrapper}>Feel free to email me directly at magdihazaa@gmail.com or fill the form below:</h5>
+			<form onSubmit={onSubmit}>
+				<div style={styles.nameEmailWrapper}>
+					<input style={styles.input} name='name' type='name' placeholder='NAME' required></input>
+					<input style={styles.input} name='email' type="email" placeholder='EMAIL' required></input>
+				</div>
 				<textarea style={styles.textarea} className='message' rows={10} placeholder='MESSAGE' required />
-				<a><input type='submit' value="send" /></a>
+				<a style={styles.submitWrapper}>
+					<input type='submit' value="send" />
+				</a>
 			</form>
 		</div>
 	);
