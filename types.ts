@@ -19,7 +19,7 @@ export interface Post {
 	year: string;
 	publication?: string;
 	url: string;
-	isExternal?: boolean;
+	externalUrl?: string;
 	markdown?: TypedObject | TypedObject[];
 };
 

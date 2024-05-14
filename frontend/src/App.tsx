@@ -68,6 +68,10 @@ const App: React.FC = () => {
 		console.log('postUrl', postUrl);
 	};
 
+	const publicationOnClick = (externalUrl?: string) => {
+		if (externalUrl) window.open(externalUrl, '_blank');
+	};
+
 	if (!allData) return (
 		<div>
 			<Background />
@@ -98,9 +102,9 @@ const App: React.FC = () => {
 				{(pageUrl === '/artist' || pageUrl === '/writer') &&
 					<>
 						{post
-							? <PostPage {...post} changePageUrl={changePageUrl} />
+							? <PostPage {...post} changePageUrl={changePageUrl} publicationOnClick={publicationOnClick} />
 							// @ts-ignore
-							: <Portfolio posts={allData.portfolio[pageUrl.substring(1)]} changePostUrl={changePostUrl} />
+							: <Portfolio posts={allData.portfolio[pageUrl.substring(1)]} changePostUrl={changePostUrl} publicationOnClick={publicationOnClick} />
 						}
 					</>
 				}
@@ -110,7 +114,7 @@ const App: React.FC = () => {
 				}
 
 				{pageUrl === '/contact' &&
-					<Contact />
+					<Contact changePageUrl={changePageUrl} />
 				}
 
 				{pageUrl === '/error' &&
