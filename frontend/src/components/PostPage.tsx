@@ -4,10 +4,10 @@ import Markdown from './Markdown';
 import useResponsive from '../hooks/useResponsive';
 import globalStyles from '../theme';
 import backArrow from '../assets/back_arrow.svg';
-import { Post, Pages } from '../../../types';
+import { Post } from '../../../types';
 
 interface PostPageProps extends Post {
-	changePageUrl: (pageUrl: Pages) => void;
+	changePostUrl: (postUrl: string | null) => void;
 	publicationOnClick: (externalUrl?: string) => void;
 }
 
@@ -19,7 +19,7 @@ const PostPage: React.FC<PostPageProps> = ({
 	publication,
 	externalUrl,
 	markdown,
-	changePageUrl,
+	changePostUrl,
 	publicationOnClick,
 }) => {
 	const { isMobile, isTablet } = useResponsive();
@@ -62,7 +62,7 @@ const PostPage: React.FC<PostPageProps> = ({
 		AnalyticsEngineClient.sendMetric(`Viewed ${title}__${id}`);
 	}, []);
 
-	const backArrowOnClick = () => changePageUrl('/');
+	const backArrowOnClick = () => changePostUrl(null);
 
 	return (
 		<div style={styles.container}>

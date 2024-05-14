@@ -33,28 +33,12 @@ const Portfolio: React.FC<PortfolioProps> = ({
 			position: 'relative',
 			display: 'flex',
 		},
-		itemsWrapper: {
-			height: '300px',
-			overflowY: 'scroll',
-			paddingRight: globalStyles.spacing.double,
-			scrollBehavior: 'smooth',
-		},
-		item: {
-			display: 'block',
-			marginTop: globalStyles.spacing.standard,
-		},
-		firstItem: {
-			marginTop: '0',
-		},
-		medium: {
-			marginBottom: globalStyles.spacing.half,
-		},
 		scrollbar: {
 			position: 'absolute',
 			height: '90%',
 			width: '3px',
 			top: '5%',
-			right: '0',
+			left: '0',
 			overflow: 'hidden',
 		},
 		scrollback: {
@@ -75,6 +59,25 @@ const Portfolio: React.FC<PortfolioProps> = ({
 			top: scrollPercentage + '%',
 			left: '0',
 			zIndex: '1',
+		},
+		itemsWrapper: {
+			display: 'flex',
+			flexDirection: 'column',
+			height: '250px',
+			overflowY: 'scroll',
+			paddingLeft: globalStyles.spacing.double,
+			scrollBehavior: 'smooth',
+		},
+		item: {
+			display: 'block',
+			marginTop: globalStyles.spacing.standard,
+		},
+		firstItem: {
+			marginTop: '0',
+		},
+		publication: {
+			display: 'block',
+			marginTop: globalStyles.spacing.half,
 		},
 		arrowWrapperTop: {
 			margin: `${globalStyles.spacing.standard} 0`,
@@ -151,6 +154,10 @@ const Portfolio: React.FC<PortfolioProps> = ({
 				<img style={styles.arrowTop} src={arrow} alt='Up arrow' />
 			</a>
 			<div style={styles.contentWrapper}>
+				<div style={styles.scrollbar}>
+					<div style={styles.scrollback}></div>
+					<div style={styles.scrollfront}></div>
+				</div>
 				<div style={styles.itemsWrapper} ref={itemsWrapperEl}>
 					{posts.map((post: Post, i) => (
 						<div key={i}>
@@ -162,17 +169,15 @@ const Portfolio: React.FC<PortfolioProps> = ({
 								onClick={() => itemOnClick(post.url)}
 							>
 								<h3>{post.title}</h3>
-								<h4 style={styles.medium}>{post.medium}, {post.year}</h4>
+								<h4>{post.medium}, {post.year}</h4>
 							</a>
-							<a onClick={() => publicationOnClick(post.externalUrl)}>
-								{post.publication && <h5>{post.publication}</h5>}
-							</a>
+							{post.publication &&
+								<a style={styles.publication} onClick={() => publicationOnClick(post.externalUrl)}>
+									<h5>{post.publication}</h5>
+								</a>
+							}
 						</div>
 					))}
-				</div>
-				<div style={styles.scrollbar}>
-					<div style={styles.scrollback}></div>
-					<div style={styles.scrollfront}></div>
 				</div>
 			</div>
 			<a style={styles.arrowWrapperBottom} onClick={bottomArrowOnClick}>
