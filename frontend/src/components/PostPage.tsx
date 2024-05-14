@@ -8,6 +8,7 @@ import { Post, Pages } from '../../../types';
 
 interface PostPageProps extends Post {
 	changePageUrl: (pageUrl: Pages) => void;
+	publicationOnClick: (externalUrl?: string) => void;
 }
 
 const PostPage: React.FC<PostPageProps> = ({
@@ -16,8 +17,10 @@ const PostPage: React.FC<PostPageProps> = ({
 	medium,
 	year,
 	publication,
+	externalUrl,
 	markdown,
 	changePageUrl,
+	publicationOnClick,
 }) => {
 	const { isMobile, isTablet } = useResponsive();
 
@@ -38,11 +41,12 @@ const PostPage: React.FC<PostPageProps> = ({
 		backArrow: {
 			width: '40px',
 		},
-		title: {
-			marginBottom: globalStyles.spacing.standard,
-		},
 		mediumYear: {
-			marginBottom: globalStyles.spacing.half,
+			marginTop: globalStyles.spacing.standard,
+		},
+		publication: {
+			display: 'block',
+			marginTop: globalStyles.spacing.half,
 		},
 		contentWrapper: {
 			display: 'flex',
@@ -50,7 +54,7 @@ const PostPage: React.FC<PostPageProps> = ({
 			position: 'relative',
 			width: isMobile ? '100%' : isTablet ? '85%' : '70%',
 			left: isMobile ? '0' : isTablet ? '15%' : '30%',
-			margin: `${globalStyles.spacing.postPadding} 0`,
+			margin: isMobile ? `${globalStyles.spacing.extraDouble} 0` : `${globalStyles.spacing.postPadding} 0`,
 		},
 	};
 
@@ -66,9 +70,13 @@ const PostPage: React.FC<PostPageProps> = ({
 				<a style={styles.backArrowWrapper} onClick={backArrowOnClick}>
 					<img style={styles.backArrow} src={backArrow} alt='Back arrow' />
 				</a>
-				<h2 style={styles.title}>{title}</h2>
+				<h2>{title}</h2>
 				<h4 style={styles.mediumYear}>{medium}, {year}</h4>
-				{publication && <h5>{publication}</h5>}
+				{publication &&
+					<a style={styles.publication} onClick={() => publicationOnClick(externalUrl)}>
+						<h5>{publication}</h5>
+					</a>
+				}
 			</div>
 
 			<div style={styles.contentWrapper}>

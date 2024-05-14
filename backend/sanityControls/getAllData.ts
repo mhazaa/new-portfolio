@@ -29,7 +29,7 @@ const getAllData = async (): Promise<AllData> => {
 			year,
 			publication,
 			url,
-			isExternal,
+			externalUrl,
 			'markdown': markdown[] {
 		 		 _type == 'block' => {
 					...,

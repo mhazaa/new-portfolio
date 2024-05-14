@@ -1,17 +1,19 @@
 import React, { useState, useEffect, useRef, CSSProperties } from 'react';
 import map from '../helperFunctions/map';
 import globalStyles from '../theme';
-import { Pages, Post } from '../../../types';
+import { Post } from '../../../types';
 import arrow from '../assets/arrow.svg';
 
 interface PortfolioProps {
 	posts: Post[];
 	changePostUrl: (postUrl: string | null) => void;
+	publicationOnClick: (externalUrl?: string) => void;
 }
 
 const Portfolio: React.FC<PortfolioProps> = ({
 	posts,
 	changePostUrl,
+	publicationOnClick,
 }) => {
 	const [topArrowVisible, setTopArrowVisible] = useState<boolean>(false);
 	const [bottomArrowVisible, setBottomArrowVisible] = useState<boolean>(true);
@@ -139,9 +141,8 @@ const Portfolio: React.FC<PortfolioProps> = ({
 		setBottomArrowVisible(false);
 	};
 
-	const itemOnClick = (url: Pages, isExternal: boolean = false) => {
-		if (!url) return;
-		(isExternal) ? window.open(url, '_blank') : changePostUrl(url);
+	const itemOnClick = (url: string) => {
+		if (url) changePostUrl(url);
 	};
 
 	return (
@@ -152,18 +153,21 @@ const Portfolio: React.FC<PortfolioProps> = ({
 			<div style={styles.contentWrapper}>
 				<div style={styles.itemsWrapper} ref={itemsWrapperEl}>
 					{posts.map((post: Post, i) => (
-						<a
-							style={{
-								...styles.item,
-								...(i === 0 && {...styles.firstItem})
-							}}
-							key={i}
-							onClick={() => itemOnClick(post.url as Pages, post.isExternal)}
-						>
-							<h3>{post.title}</h3>
-							<h4 style={styles.medium}>{post.medium}, {post.year}</h4>
-							{post.publication && <h5>{post.publication}</h5>}
-						</a>
+						<div key={i}>
+							<a
+								style={{
+									...styles.item,
+									...(i === 0 && {...styles.firstItem})
+								}}
+								onClick={() => itemOnClick(post.url)}
+							>
+								<h3>{post.title}</h3>
+								<h4 style={styles.medium}>{post.medium}, {post.year}</h4>
+							</a>
+							<a onClick={() => publicationOnClick(post.externalUrl)}>
+								{post.publication && <h5>{post.publication}</h5>}
+							</a>
+						</div>
 					))}
 				</div>
 				<div style={styles.scrollbar}>

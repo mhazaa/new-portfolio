@@ -33,10 +33,9 @@ export default {
             validation: (Rule: any) => Rule.required(),
         },
         {
-            title: 'Is External',
-            name: 'isExternal',
-            type: 'boolean',
-            initialValue: false,
+            title: 'External URL',
+            name: 'externalUrl',
+            type: 'string',
         },
         {
             title: 'Markdown',
