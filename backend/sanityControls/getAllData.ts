@@ -1,51 +1,65 @@
-import { BioPage, Post, AllData } from '../../types';
+import { BioPage, Portfolio, AllData } from '../../types';
 import { fetch } from '.';
 import { SanityDocument } from '@sanity/client';
 
 const getAllData = async (): Promise<AllData> => {
 	const bioPage: BioPage = await fetch(`
-		*[_type == "bioPage"] {
+		*[_type == 'bioPage'][0] {
 			image != null => {
-				"image": {
-					"src": image.asset->url,
-					"alt": image.asset->altText,
+				'image': {
+					'src': image.asset->url,
+					'alt': image.asset->altText,
 				},
 			},
-			"bio": bio,
-		}[0]
+			'bio': bio,
+		}
 	`);
 
 	const resume: SanityDocument = await fetch (`
-		*[_type == "resume"] {
-			"resume": resume.asset->url,
-		}[0]
+		*[_type == 'resume'][0] {
+			'resume': resume.asset->url,
+		}
 	`);
 
-	const filterPortfolio = (array: SanityDocument[]): Post[] => (
-		array.map((post: SanityDocument) => (
-			{
-				id: post._key,
-				title: post.title,
-				medium: post.medium,
-				year: post.year,
-				publication: post.publication,
-				url: post.url,
-				isExternal: post.isExternal,
-				markdown: post.markdown,
-			}
-		))
-	);
+	const portfolioGROQ = `
+		_type == 'post' => { 
+			'id': _key,
+			title,
+			medium,
+			year,
+			publication,
+			url,
+			isExternal,
+			'markdown': markdown[] {
+		 		 _type == 'block' => {
+					...,
+		  		},
+				_type == 'image' => { 
+					'_type': 'image',
+					'src': asset->url,
+					'alt': asset->altText,
+				},
+			}, 
+		}
+	`;
 
-	const portfolioSanityData: SanityDocument = await fetch('*[_type == "portfolio"][0]');
-	const artist = filterPortfolio(portfolioSanityData?.artist || []);
-	const writer = filterPortfolio(portfolioSanityData?.writer || []);
+	const portfolio: Portfolio = await fetch(`
+		*[_type == 'portfolio'][0] {
+			artist[] {
+				${portfolioGROQ}
+			},
+			writer[] {
+				${portfolioGROQ}
+			},
+	  	}
+	`);
 
 	const allData: AllData = {
 		bioPage,
 		resume: resume?.resume,
 		portfolio: {
-			artist: artist,
-			writer: writer,
+			artist: portfolio.artist || [],
+			writer: portfolio.writer || [],
 		},
 	};
 
