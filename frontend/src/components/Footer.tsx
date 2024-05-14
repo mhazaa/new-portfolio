@@ -1,4 +1,5 @@
 import React, { CSSProperties } from 'react';
+import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import { Pages } from '../../../types';
 import globalStyles from '../theme';
 import instagram from '../assets/instagram.svg';
@@ -35,15 +36,27 @@ const Footer: React.FC<FooterProps> = ({
 		},
 	};
 
-	const instagramOnClick = () => window.open('https://www.instagram.com/magdi_hazaa', '_blank');
+	const instagramOnClick = () => {
+		AnalyticsEngineClient.sendMetric('CLICKED_ON: INSTAGRAM');
+		window.open('https://www.instagram.com/magdi_hazaa', '_blank');
+	};
 	
-	const tiktokOnClick = () => window.open('https://www.tiktok.com/@magsartzone', '_blank');
+	const tiktokOnClick = () => {
+		AnalyticsEngineClient.sendMetric('CLICKED_ON: TIKTOK');
+		window.open('https://www.tiktok.com/@magsartzone', '_blank');
+	};
 
-	const githubOnClick = () => window.open('https://github.com/mhazaa', '_blank');
+	const githubOnClick = () => {
+		AnalyticsEngineClient.sendMetric('CLICKED_ON: GITHUB');
+		window.open('https://github.com/mhazaa', '_blank');
+	};
 
 	const bioOnClick = () => changePageUrl('/bio');
 	
-	const resumeOnClick = () => window.open(resume, '_blank');
+	const resumeOnClick = () => {
+		AnalyticsEngineClient.sendMetric('CLICKED_ON: RESUME');
+		window.open(resume, '_blank');
+	};
 
 	const contactOnClick = () => changePageUrl('/contact');
 

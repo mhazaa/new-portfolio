@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './styles/stylesheet.scss';
 import Background from './components/Background';
 import Footer from './components/Footer';
 import Header from './components/Header';
@@ -13,6 +12,7 @@ import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import { Pages, Post, AllData } from '../../types';
 import { getAllData } from './requests';
 import Page from './components/Page';
+import './styles/stylesheet.scss';
 
 const setUrl = (url: string) => history.pushState(null, '', `${url}`);
 const url = window.location.href;
@@ -40,7 +40,7 @@ const App: React.FC = () => {
 
 	useEffect(() => {
 		AnalyticsEngineClient.connect();
-		AnalyticsEngineClient.sendMetric('Viewed homepage');
+		if (pageUrl === '/') AnalyticsEngineClient.sendMetric('VIEWED_HOMEPAGE');
 		
 		(async () => {
 			const allData: AllData = await getAllData();
@@ -69,7 +69,9 @@ const App: React.FC = () => {
 	};
 
 	const publicationOnClick = (externalUrl?: string) => {
-		if (externalUrl) window.open(externalUrl, '_blank');
+		if (!externalUrl) return;
+		AnalyticsEngineClient.sendMetric(`CLICKED_ON: ${externalUrl}`);
+		window.open(externalUrl, '_blank');
 	};
 
 	if (!allData) return (

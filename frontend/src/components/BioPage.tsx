@@ -1,5 +1,6 @@
-import React, { CSSProperties } from 'react';
+import React, { useEffect, CSSProperties } from 'react';
 import { PortableText } from '@portabletext/react';
+import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import useResponsive from '../hooks/useResponsive';
 import globalStyles from '../theme';
 import { BioPage } from '../../../types';
@@ -32,6 +33,10 @@ const BioPage: React.FC<BioPageProps> = ({
 			textAlign: isMobile ? 'center' : 'left',
 		},
 	};
+
+	useEffect(() => {
+		AnalyticsEngineClient.sendMetric('VIEWED_BIO_PAGE');
+	}, []);
 
 	return (
 		<div style={styles.container}>

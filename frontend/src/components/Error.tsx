@@ -1,4 +1,5 @@
-import React, { CSSProperties } from 'react';
+import React, { useEffect, CSSProperties } from 'react';
+import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 
 const Error: React.FC = () => {
 	const styles: {
@@ -8,6 +9,10 @@ const Error: React.FC = () => {
 			textAlign: 'center',
 		},
 	};
+
+	useEffect(() => {
+		AnalyticsEngineClient.sendMetric('VIEWED_ERROR_PAGE');
+	}, []);
 
 	return (
 		<div style={styles.container}>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, CSSProperties } from 'react';
+import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import map from '../helperFunctions/map';
 import globalStyles from '../theme';
 import { Post } from '../../../types';
@@ -97,6 +98,10 @@ const Portfolio: React.FC<PortfolioProps> = ({
 			width: '40px',
 		},
 	};
+
+	useEffect(() => {
+		AnalyticsEngineClient.sendMetric('VIEWED_PORTFOLIO');
+	}, []);
 
 	const refreshScroll = () => {
 		const el = itemsWrapperEl.current;

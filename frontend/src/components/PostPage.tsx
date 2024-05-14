@@ -59,7 +59,7 @@ const PostPage: React.FC<PostPageProps> = ({
 	};
 
 	useEffect(() => {
-		AnalyticsEngineClient.sendMetric(`Viewed ${title}__${id}`);
+		AnalyticsEngineClient.sendMetric(`VIEWED_POST: ${title}__${id}`);
 	}, []);
 
 	const backArrowOnClick = () => changePostUrl(null);

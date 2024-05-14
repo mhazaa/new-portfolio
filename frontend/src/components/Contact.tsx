@@ -1,4 +1,4 @@
-import React, { CSSProperties, useState } from 'react';
+import React, { useState, useEffect, CSSProperties } from 'react';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import { postContactForm } from '../requests';
 import globalStyles from '../theme';
@@ -45,6 +45,10 @@ const Contact: React.FC<ContactProps> = ({
 		},
 	};
 
+	useEffect(() => {
+		AnalyticsEngineClient.sendMetric('VIEWED_CONTACT_PAGE');
+	}, []);
+
 	const onSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		
@@ -63,6 +67,7 @@ const Contact: React.FC<ContactProps> = ({
 		const resData = await postContactForm(data);
 		console.log('trrrrsrsrs', resData);
 		if (resData.status !== 200) return;
+		AnalyticsEngineClient.sendMetric('SENT_CONTACT_FORM');
 		setIsThankYouPage(true);
 		setTimeout(() => changePageUrl('/'), 10000);
 	};
