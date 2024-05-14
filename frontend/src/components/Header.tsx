@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({
 		[key: string]: CSSProperties;
 	} = {
 		container: {
-			position: variant === 'big' ? 'relative' : 'fixed',
+			position: variant === 'big' ? 'relative' : 'absolute',
 			width: '100%',
 			top: '0',
 			left: '0',
