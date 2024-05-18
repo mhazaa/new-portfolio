@@ -1,5 +1,5 @@
 import { StructureBuilder } from 'sanity/structure';
-import { RobotIcon, BillIcon, CubeIcon } from '@sanity/icons';
+import { RobotIcon, BillIcon, ComponentIcon, CubeIcon } from '@sanity/icons';
 
 export default (S: StructureBuilder) =>
 	S.list()
@@ -21,6 +21,16 @@ export default (S: StructureBuilder) =>
 					S.document()
 						.schemaType('resume')
 						.documentId('resume'),
+					),
+
+			S.divider(),
+
+			S.listItem()
+				.title('Posts')
+				.icon(ComponentIcon)
+				.child(
+					S.documentTypeList('post')
+						.title('Posts'),
 					),
 
 			S.listItem()

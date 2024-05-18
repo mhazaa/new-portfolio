@@ -7,8 +7,8 @@ const getAllData = async (): Promise<AllData> => {
 		*[_type == 'bioPage'][0] {
 			image != null => {
 				'image': {
-					'src': image.asset->url,
-					'alt': image.asset->altText,
+					'src': image.asset -> url,
+					'alt': image.asset -> altText,
 				},
 			},
 			'bio': bio,
@@ -17,13 +17,13 @@ const getAllData = async (): Promise<AllData> => {
 
 	const resume: SanityDocument = await fetch (`
 		*[_type == 'resume'][0] {
-			'resume': resume.asset->url,
+			'resume': resume.asset -> url,
 		}
 	`);
 
-	const portfolioGROQ = `
-		_type == 'post' => { 
-			'id': _key,
+	const postGROQ = `
+		{ 
+			'id': _id,
 			title,
 			medium,
 			year,
@@ -36,21 +36,17 @@ const getAllData = async (): Promise<AllData> => {
 		  		},
 				_type == 'image' => { 
 					'_type': 'image',
-					'src': asset->url,
-					'alt': asset->altText,
+					'src': asset -> url,
+					'alt': asset -> altText,
 				},
 			}, 
-		}
+		},
 	`;
 
 	const portfolio: Portfolio = await fetch(`
 		*[_type == 'portfolio'][0] {
-			artist[] {
-				${portfolioGROQ}
-			},
-			writer[] {
-				${portfolioGROQ}
-			},
+			artist[] -> ${postGROQ}
+			writer[] -> ${postGROQ}
 	  	}
 	`);
 

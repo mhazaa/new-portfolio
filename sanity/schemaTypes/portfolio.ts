@@ -10,7 +10,14 @@ export default {
       name: 'artist',
       type: 'array',
       of: [
-        post,
+        {
+          type: 'reference',
+          to: [
+            {
+              type: 'post',
+            },
+          ],
+        },
       ],
     },
     {
@@ -18,7 +25,14 @@ export default {
       name: 'writer',
       type: 'array',
       of: [
-        post,
+        {
+          type: 'reference',
+          to: [
+            {
+              type: 'post',
+            },
+          ],
+        },
       ],
     },
   ],
