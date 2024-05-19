@@ -11,12 +11,21 @@ interface ContactProps {
 const Contact: React.FC<ContactProps> = ({
 	changePageUrl,
 }) => {
-	const [isThankYouPage, setIsThankYouPage] = useState<boolean>(false);
+	const [responseMessage, setResponseMessage] = useState<React.JSX.Element | null>(null);
+
+	const successfulResponseMessage =
+		<h4>Thanks for reaching out! I&apos;ll get back to you as soon as I can.<br></br>
+		You&apos;ll be redirected to the homepage shortly.</h4>;
+
+	const failedResponseMessage = 
+		<h4>Looks like there was a technical problem delivering your email.<br></br>
+		Try again later or email me directly at magdihazaa@gmail.com.<br></br>
+		You&apos;ll be redirected to the homepage shortly.</h4>;
 
 	const styles: {
 		[key: string]: CSSProperties;
 	} = {
-		thankYouWrapper: {
+		responseMessageWrapper: {
 			textAlign: 'center',
 		},
 		title: {
@@ -65,19 +74,18 @@ const Contact: React.FC<ContactProps> = ({
 		};
 
 		const resData = await postContactForm(data);
-		console.log('trrrrsrsrs', resData);
-		if (resData.status !== 200) return;
-		AnalyticsEngineClient.sendMetric('SENT_CONTACT_FORM');
-		setIsThankYouPage(true);
+		if (resData.status !== 200) {
+			setResponseMessage(failedResponseMessage);
+		} else {
+			AnalyticsEngineClient.sendMetric('SENT_CONTACT_FORM');
+			setResponseMessage(successfulResponseMessage);
+		}
 		setTimeout(() => changePageUrl('/'), 10000);
 	};
 
-	if (isThankYouPage) return (
-		<div style={styles.thankYouWrapper}>
-			<h4>
-				Thanks for reaching out! I&apos;ll get back to you as soon as I can.<br></br>
-				You&apos;ll be redirected to the homepage shortly.
-			</h4>
+	if (responseMessage) return (
+		<div style={styles.responseMessageWrapper}>
+			<h4>{responseMessage}</h4>
 		</div>
 	);
 

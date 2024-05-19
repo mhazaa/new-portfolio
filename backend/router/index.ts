@@ -2,6 +2,7 @@ import { resolve } from 'path';
 import { Application } from 'express';
 import { Collection } from '@mhazaa/mongo-controller';
 import getAllData from '../sanityControls/getAllData';
+import mailer from '../mailer';
 import { AllData, PostContactFormData } from '../../types';
 
 interface Collections {
@@ -31,7 +32,12 @@ export default (app: Application, collections: Collections): void => {
 			const reqData: PostContactFormData = req.body;
 			console.log('contactFormReqData', reqData);
 
-			const resData = await contactFormsCollection.insertOne(reqData);
+			const mailerResData = await mailer(reqData);
+			const mongoResData = await contactFormsCollection.insertOne(reqData);
+			const resData = {
+				mailerResData,
+				mongoResData,
+			};
 			console.log('contactFormResData', resData);
 			res.status(200).send(resData);
 		} catch (error) {
