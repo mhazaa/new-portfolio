@@ -15,6 +15,7 @@ export const postContactForm = async (data: PostContactFormData): Promise<Respon
 		},
 		body: JSON.stringify(data),
 	});
-	console.log('postContactForm', response);
+	const responseData = await response.json();
+	console.log('postContactForm', response, responseData);
 	return response;
 };

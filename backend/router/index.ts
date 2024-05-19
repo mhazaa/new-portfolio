@@ -29,17 +29,17 @@ export default (app: Application, collections: Collections): void => {
 
 	app.post('/post-contact-form', async (req, res) => {
 		try {
-			const reqData: PostContactFormData = req.body;
-			console.log('contactFormReqData', reqData);
+			const requestData: PostContactFormData = req.body;
+			console.log('postContactFormRequestData', requestData);
 
-			const mailerResData = await mailer(reqData);
-			const mongoResData = await contactFormsCollection.insertOne(reqData);
-			const resData = {
-				mailerResData,
-				mongoResData,
+			const mailerResponseData = await mailer(requestData);
+			const mongoResponseData = await contactFormsCollection.insertOne(requestData);
+			const responeData = {
+				mailerResponseData,
+				mongoResponseData,
 			};
-			console.log('contactFormResData', resData);
-			res.status(200).send(resData);
+			console.log('postContactFormResponseData', responeData);
+			res.status(200).send(responeData);
 		} catch (error) {
 			console.log(error);
 			return res.status(400).send(error);

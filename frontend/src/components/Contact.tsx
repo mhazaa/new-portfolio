@@ -12,6 +12,7 @@ const Contact: React.FC<ContactProps> = ({
 	changePageUrl,
 }) => {
 	const [responseMessage, setResponseMessage] = useState<React.JSX.Element | null>(null);
+	const [blockClick, setBlockClick] = useState<boolean>(false);
 
 	const successfulResponseMessage =
 		<h4>Thanks for reaching out! I&apos;ll get back to you as soon as I can.<br></br>
@@ -19,8 +20,7 @@ const Contact: React.FC<ContactProps> = ({
 
 	const failedResponseMessage = 
 		<h4>Looks like there was a technical problem delivering your email.<br></br>
-		Try again later or email me directly at magdihazaa@gmail.com.<br></br>
-		You&apos;ll be redirected to the homepage shortly.</h4>;
+		Try again later or email me directly at magdihazaa@gmail.com<br></br></h4>;
 
 	const styles: {
 		[key: string]: CSSProperties;
@@ -60,6 +60,7 @@ const Contact: React.FC<ContactProps> = ({
 
 	const onSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+		if (blockClick) return;
 		
 		const form = e.target as HTMLFormElement;
 		const name = form.querySelector('input[name="name"]') as HTMLInputElement;
@@ -73,14 +74,17 @@ const Contact: React.FC<ContactProps> = ({
 			message: message.value,
 		};
 
-		const resData = await postContactForm(data);
-		if (resData.status !== 200) {
+		setBlockClick(true);
+
+		const responseData = await postContactForm(data);
+
+		if (responseData.status !== 200) {
 			setResponseMessage(failedResponseMessage);
 		} else {
 			AnalyticsEngineClient.sendMetric('SENT_CONTACT_FORM');
 			setResponseMessage(successfulResponseMessage);
+			setTimeout(() => changePageUrl('/'), 10000);
 		}
-		setTimeout(() => changePageUrl('/'), 10000);
 	};
 
 	if (responseMessage) return (

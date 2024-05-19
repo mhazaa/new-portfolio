@@ -18,10 +18,12 @@ export default async (data: PostContactFormData) => {
 	const clientEmail = await transporter.sendMail({
 		from: `"${data.name}: ${data.userId}" <${data.email}>`,
 		to: process.env.EMAIL,
-		subject: 'NEW PORTFOLIO EMAIL!',
+		subject: `NEW-PORTFOLIO EMAIL: ${data.name}`,
 		text: data.message,
 		html: data.message,
 	});
 	
-	console.log('Message sent: %s', clientEmail.messageId);
+	console.log('Email sent');
+
+	return clientEmail;
 };
