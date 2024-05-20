@@ -15,12 +15,21 @@ const transporter = nodemailer.createTransport({
 });
 
 export default async (data: PostContactFormData) => {
+
+	const emailBody = `
+		<b>
+			<i>NAME:</i> ${data.name}<br>
+			<i>USER_ID:</i> ${data.userId}<br>
+			<i>EMAIL:</i> ${data.email}<br>
+		</b>
+		<p style="white-space: pre-wrap">${data.message}</p>
+	`;
+	
 	const clientEmail = await transporter.sendMail({
-		from: `"${data.name}: ${data.userId}" <${data.email}>`,
+		from: `${data.name} | ${data.userId} <${data.email}>`,
 		to: process.env.EMAIL,
 		subject: `NEW-PORTFOLIO EMAIL: ${data.name}`,
-		text: data.message,
-		html: data.message,
+		html: emailBody,
 	});
 	
 	console.log('Email sent');

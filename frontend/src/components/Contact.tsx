@@ -22,6 +22,8 @@ const Contact: React.FC<ContactProps> = ({
 		<h4>Looks like there was a technical problem delivering your email.<br></br>
 		Try again later or email me directly at magdihazaa@gmail.com<br></br></h4>;
 
+	const pendingResponseMessage = <h4>Sending...</h4>;
+
 	const styles: {
 		[key: string]: CSSProperties;
 	} = {
@@ -60,6 +62,8 @@ const Contact: React.FC<ContactProps> = ({
 	const onSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		if (blockClick) return;
+
+		setResponseMessage(pendingResponseMessage);
 		
 		const form = e.target as HTMLFormElement;
 		const name = form.querySelector('input[name="name"]') as HTMLInputElement;
@@ -72,8 +76,6 @@ const Contact: React.FC<ContactProps> = ({
 			email: email.value,
 			message: message.value,
 		};
-
-		console.log('mmm', message.value);
 
 		setBlockClick(true);
 
