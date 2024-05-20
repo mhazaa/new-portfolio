@@ -1,5 +1,6 @@
 import React, { useState, useEffect, CSSProperties } from 'react';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
+import useResponsive from '../hooks/useResponsive';
 import { postContactForm } from '../requests';
 import globalStyles from '../theme';
 import { Pages, PostContactFormData } from '../../../types';
@@ -11,6 +12,7 @@ interface ContactProps {
 const Contact: React.FC<ContactProps> = ({
 	changePageUrl,
 }) => {
+	const { isMobile } = useResponsive();
 	const [responseMessage, setResponseMessage] = useState<React.JSX.Element | null>(null);
 	const [blockClick, setBlockClick] = useState<boolean>(false);
 
@@ -34,15 +36,15 @@ const Contact: React.FC<ContactProps> = ({
 			marginBottom: globalStyles.spacing.standard,
 		},
 		textWrapper: {
-			maxWidth: '400px',
 			marginBottom: globalStyles.spacing.standard,
 		},
 		nameEmailWrapper: {
 			display: 'flex',
+			flexDirection: isMobile ? 'column' : 'row',
 			justifyContent: 'space-between',
 		},
 		input: {
-			width: '49%',
+			width: isMobile ? '100%' : '49%',
 			marginBottom: globalStyles.spacing.standard,
 		},
 		textarea: {
@@ -99,7 +101,7 @@ const Contact: React.FC<ContactProps> = ({
 	return (
 		<div>
 			<h2 style={styles.title}>Contact</h2>
-			<h5 style={styles.textWrapper}>Feel free to email me directly at magdihazaa@gmail.com or fill the form below:</h5>
+			<h5 style={styles.textWrapper}>Fill out the form below or email me directly at magdihazaa@gmail.com</h5>
 			<form onSubmit={onSubmit}>
 				<div style={styles.nameEmailWrapper}>
 					<input style={styles.input} name='name' type='name' placeholder='NAME' required></input>
