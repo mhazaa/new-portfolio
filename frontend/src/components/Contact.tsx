@@ -48,9 +48,8 @@ const Contact: React.FC<ContactProps> = ({
 			marginBottom: globalStyles.spacing.standard,
 			maxHeight: '150px',
 		},
-		submitWrapper: {
-			display: 'flex',
-			justifyContent: 'end',
+		submitButton: {
+			width: '100%',
 		},
 	};
 
@@ -73,6 +72,8 @@ const Contact: React.FC<ContactProps> = ({
 			email: email.value,
 			message: message.value,
 		};
+
+		console.log('mmm', message.value);
 
 		setBlockClick(true);
 
@@ -103,8 +104,8 @@ const Contact: React.FC<ContactProps> = ({
 					<input style={styles.input} name='email' type="email" placeholder='EMAIL' required></input>
 				</div>
 				<textarea style={styles.textarea} className='message' rows={10} placeholder='MESSAGE' required />
-				<a style={styles.submitWrapper}>
-					<input type='submit' value="send" />
+				<a>
+					<input style={styles.submitButton} type='submit' value="send" />
 				</a>
 			</form>
 		</div>
