@@ -3,7 +3,7 @@ import { TypedObject } from '@portabletext/types';
 export interface Image {
 	src: string;
 	alt?: string;
-}
+};
 
 export type Pages = '/' | '/artist' | '/writer' | '/bio' | '/resume' | '/contact' | '/error';
 

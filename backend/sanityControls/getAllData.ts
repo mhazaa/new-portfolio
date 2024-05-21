@@ -15,11 +15,13 @@ const getAllData = async (): Promise<AllData> => {
 		}
 	`);
 
-	const resume: SanityDocument = await fetch (`
+	const resumeDocument: SanityDocument = await fetch (`
 		*[_type == 'resume'][0] {
 			'resume': resume.asset -> url,
 		}
 	`);
+
+	const resume: string = resumeDocument?.resume;
 
 	const postGROQ = `
 		{ 
@@ -52,7 +54,7 @@ const getAllData = async (): Promise<AllData> => {
 
 	const allData: AllData = {
 		bioPage,
-		resume: resume?.resume,
+		resume,
 		portfolio: {
 			artist: portfolio.artist || [],
 			writer: portfolio.writer || [],
