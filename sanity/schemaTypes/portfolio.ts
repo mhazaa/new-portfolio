@@ -17,6 +17,9 @@ export default {
               type: 'post',
             },
           ],
+          options: {
+            filter: `category == 'artist'`,
+          }, 
         },
       ],
     },
@@ -32,6 +35,9 @@ export default {
               type: 'post',
             },
           ],
+          options: {
+            filter: `category == 'writer'`,
+          },        
         },
       ],
     },
