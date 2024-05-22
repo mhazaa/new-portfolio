@@ -27,15 +27,32 @@ export default {
             type: 'string',
         },
         {
-            title: 'URL',
-            name: 'url',
+            title: 'Internal URL',
+            name: 'internalUrl',
             type: 'string',
-            validation: (Rule: any) => Rule.required(),
         },
         {
             title: 'External URL',
             name: 'externalUrl',
             type: 'string',
+        },
+        {
+            title: 'Category',
+            name: 'category',
+            type: 'string',
+            options: {
+                list: [
+                    {
+                        title: 'Artist',
+                        value: 'artist',
+                    },
+                    {
+                        title: 'Writer',
+                        value: 'writer',
+                    },
+                ],
+            },
+            validation: (Rule: any) => Rule.required(),
         },
         {
             title: 'Markdown',
