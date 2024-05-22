@@ -5,7 +5,7 @@ export interface Image {
 	alt?: string;
 };
 
-export type Pages = '/' | '/artist' | '/writer' | '/bio' | '/resume' | '/contact' | '/error';
+export type Pages = '/' | '/artist' | '/writer' | '/bio' | '/contact' | '/error';
 
 export type Categories = 'artist' | 'writer';
 
