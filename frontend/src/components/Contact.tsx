@@ -5,6 +5,8 @@ import { postContactForm } from '../requests';
 import globalStyles from '../theme';
 import { Pages, PostContactFormData } from '../../../types';
 
+let _timeout: ReturnType<typeof setTimeout> | undefined;
+
 interface ContactProps {
 	changePageUrl: (pageUrl: Pages) => void;
 }
@@ -59,6 +61,7 @@ const Contact: React.FC<ContactProps> = ({
 
 	useEffect(() => {
 		AnalyticsEngineClient.sendMetric('VIEWED_CONTACT_PAGE');
+		return () => clearTimeout(_timeout);
 	}, []);
 
 	const onSubmit = async (e: React.FormEvent) => {
@@ -88,7 +91,7 @@ const Contact: React.FC<ContactProps> = ({
 		} else {
 			AnalyticsEngineClient.sendMetric('SENT_CONTACT_FORM');
 			setResponseMessage(successfulResponseMessage);
-			setTimeout(() => changePageUrl('/'), 10000);
+			_timeout = setTimeout(() => changePageUrl('/'), 10000);
 		}
 	};
 
