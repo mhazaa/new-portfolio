@@ -37,7 +37,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 		scrollbar: {
 			position: 'absolute',
 			height: '100%',
-			width: '3px',
+			width: '2px',
 			left: '0',
 			overflow: 'hidden',
 		},
