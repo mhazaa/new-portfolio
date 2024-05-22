@@ -7,6 +7,8 @@ export interface Image {
 
 export type Pages = '/' | '/artist' | '/writer' | '/bio' | '/resume' | '/contact' | '/error';
 
+export type Categories = 'artist' | 'writer';
+
 export interface BioPage {
 	image?: Image;
 	bio: TypedObject | TypedObject[];
@@ -18,8 +20,9 @@ export interface Post {
 	medium: string;
 	year: string;
 	publication?: string;
-	url: string;
+	internalUrl?: string;
 	externalUrl?: string;
+	category: Categories;
 	markdown?: TypedObject | TypedObject[];
 };
 
