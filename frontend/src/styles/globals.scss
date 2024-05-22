@@ -121,10 +121,19 @@ h6 {
 	color: $teal;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+	border: 0px solid $teal;
+	-webkit-text-fill-color: $brown;
+	-webkit-box-shadow: 0 0 0 1000px white inset;
+
+}
+
 input, textarea {
 	padding: $spacingStandard;
 	box-sizing: border-box;
-
+	border: none;
 	outline-color: $teal;
 	font-size: 1rem;
 	color: $brown;
