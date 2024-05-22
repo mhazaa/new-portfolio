@@ -2,17 +2,16 @@ import React, { CSSProperties } from 'react';
 import useResponsive from '../hooks/useResponsive';
 import Logo from './Logo';
 import globalStyles from '../theme';
-import { Pages } from '../../../types';
 
 interface HeaderProps {
-	pageUrl: Pages;
-	changePageUrl: (pageUrl: Pages) => void;
+	url: string;
+	setUrl: (url: string) => void;
 	variant?: 'big' | 'small';
 }
 
 const Header: React.FC<HeaderProps> = ({
-	pageUrl,
-	changePageUrl,
+	url,
+	setUrl,
 	variant = 'big',
 }) => {
 	const { isMobile } = useResponsive();
@@ -57,21 +56,21 @@ const Header: React.FC<HeaderProps> = ({
 		};
 	};
 
-	const artistOnClick = () => changePageUrl('/artist');
+	const artistOnClick = () => setUrl('/artist');
 
-	const writerOnClick = () => changePageUrl('/writer');
+	const writerOnClick = () => setUrl('/writer');
 
 	return (
 		<div style={styles.container}>
-			<Logo changePageUrl={changePageUrl} />
+			<Logo setUrl={setUrl} />
 
 			<div style={styles.categoriesWrapper}>
 				<a onClick={artistOnClick}>
-					<h2 style={textStyle(pageUrl === '/artist')}>Artist</h2>
+					<h2 style={textStyle(url === '/artist')}>Artist</h2>
 				</a>
 				<h2 style={{ ...styles.text, ...styles.plusSign} }>&nbsp;+&nbsp;</h2>
 				<a onClick={writerOnClick}>
-					<h2 style={textStyle(pageUrl === '/writer')}>Writer</h2>
+					<h2 style={textStyle(url === '/writer')}>Writer</h2>
 				</a>
 			</div>
 		</div>

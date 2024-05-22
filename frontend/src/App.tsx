@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
+import { getAllData } from './requests';
+import { setBrowserUrl, getInitialUrl } from './routing';
+import Page from './components/Page';
 import Background from './components/Background';
 import Footer from './components/Footer';
 import Header from './components/Header';
@@ -8,39 +12,20 @@ import Contact from './components/Contact';
 import Error from './components/Error';
 import Loading from './components/Loading';
 import PostPage from './components/PostPage';
-import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
-import { Pages, Post, AllData } from '../../types';
-import { getAllData } from './requests';
-import Page from './components/Page';
+import { Post, AllData, Categories } from '../../types';
 import './styles/stylesheet.scss';
 
-const setUrl = (url: string) => history.pushState(null, '', `${url}`);
-const url = window.location.href;
-const pathname = new URL(url).pathname;
-
-const initialPage: Pages = 
-	(
-		pathname === '/' ||
-		pathname === '/artist' ||
-		pathname === '/writer' ||
-		pathname === '/bio' ||
-		pathname === '/resume' ||
-		pathname === '/contact'
-	)
-		? pathname
-		: '/error';
-
-setUrl(initialPage);
+const initialUrl = getInitialUrl();
+setBrowserUrl(initialUrl);
 
 const App: React.FC = () => {
 	const [allData, seAlltData] = useState<AllData>();
-	const [pageUrl, setPageUrl] = useState<Pages>(initialPage);
-	const [postUrl, setPostUrl] = useState<string | null>(null);
-	const [post, setPost] = useState<Post | null | undefined>(null);
+	const [url, setUrl] = useState<string>(initialUrl);
+	const [post, setPost] = useState<Post | null>(null);
 
 	useEffect(() => {
 		AnalyticsEngineClient.connect();
-		if (pageUrl === '/') AnalyticsEngineClient.sendMetric('VIEWED_HOMEPAGE');
+		if (url === '/') AnalyticsEngineClient.sendMetric('VIEWED_HOMEPAGE');
 		
 		(async () => {
 			const allData: AllData = await getAllData();
@@ -49,26 +34,21 @@ const App: React.FC = () => {
 	}, []);
 
 	useEffect(() => {
-		if (pageUrl !== '/artist' && pageUrl !== '/writer') return setPost(null);
-		// @ts-ignore
-		const _post: Post | undefined = allData?.portfolio[pageUrl.substring(1)].find((post: Post) => post.url === postUrl);
-		setPost(_post);
-	}, [postUrl]);
+		setPost(null);
+		setBrowserUrl(url);
+		console.log('url:', url);
 
-	const changePageUrl = (pageUrl: Pages) => {
-		setPageUrl(pageUrl);
-		setPostUrl(null);
-		setUrl(pageUrl);
-		console.log('pageUrl:', pageUrl);
-	};
+		const isWriterOrArtistUrl = ( url.includes('/artist') && url !== '/artist' ||  url.includes('/writer') && url !== '/writer');
+		if (!isWriterOrArtistUrl) return;
 
-	const changePostUrl = (postUrl: string | null) => {
-		setPostUrl(postUrl);
-		(postUrl) ? setUrl(pageUrl + postUrl) : setUrl(pageUrl);
-		console.log('postUrl', postUrl);
-	};
+		const category: Categories = url.split('/')[1] as Categories;
+		
+		const _post: Post | undefined =
+			allData?.portfolio[category].find((post: Post) => post.internalUrl === url);
+		(_post) ? setPost(_post) : setUrl('/error');
+	}, [url]);
 
-	const publicationOnClick = (externalUrl?: string) => {
+	const openExternalUrl = (externalUrl?: string) => {
 		if (!externalUrl) return;
 		AnalyticsEngineClient.sendMetric(`CLICKED_ON: ${externalUrl}`);
 		window.open(externalUrl, '_blank');
@@ -89,37 +69,52 @@ const App: React.FC = () => {
 			<Background />
 
 			{!post &&
-				<Footer resume={allData.resume} changePageUrl={changePageUrl} />
+				<Footer resume={allData.resume} setUrl={setUrl} />
 			}
 
 			<Page variant={post ? 'sprawling' : 'fullscreen'}>
-				<Header
-					pageUrl={pageUrl}
-					changePageUrl={changePageUrl}
-					variant={
-						(pageUrl === '/' || pageUrl === '/artist' || pageUrl === '/writer') && !post ? 'big' : 'small'
-					}
-				/>
+				{(url === '/' || url === '/artist' || url === '/writer') ? (
+					<Header
+						url={url}
+						setUrl={setUrl}
+						variant='big'
+					/>
+				) : (
+					<Header
+						url={url}
+						setUrl={setUrl}
+						variant='small'
+					/>
+				)}
 
-				{(pageUrl === '/artist' || pageUrl === '/writer') &&
-					<>
-						{post
-							? <PostPage {...post} changePostUrl={changePostUrl} publicationOnClick={publicationOnClick} />
-							// @ts-ignore
-							: <Portfolio posts={allData.portfolio[pageUrl.substring(1)]} changePostUrl={changePostUrl} publicationOnClick={publicationOnClick} />
-						}
-					</>
+				{(url === '/artist' || url === '/writer') &&
+					<Portfolio
+						posts={allData.portfolio[url.substring(1) as Categories]}
+						setUrl={setUrl}
+						openExternalUrl={openExternalUrl}
+					/>
 				}
 
-				{pageUrl === '/bio' &&
-					<BioPage bio={allData.bioPage.bio} image={allData.bioPage.image} />
+				{post &&
+					<PostPage 
+						{...post}
+						setUrl={setUrl}
+						openExternalUrl={openExternalUrl}
+					/> 
 				}
 
-				{pageUrl === '/contact' &&
-					<Contact changePageUrl={changePageUrl} />
+				{url === '/bio' &&
+					<BioPage
+						bio={allData.bioPage.bio}
+						image={allData.bioPage.image}
+					/>
 				}
 
-				{pageUrl === '/error' &&
+				{url === '/contact' &&
+					<Contact setUrl={setUrl} />
+				}
+
+				{url === '/error' &&
 					<Error />
 				}
 			</Page>

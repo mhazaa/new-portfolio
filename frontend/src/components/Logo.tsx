@@ -1,13 +1,12 @@
 import React, { CSSProperties } from 'react';
 import logo from '../assets/logo.svg';
-import { Pages } from '../../../types';
 
 interface LogoProps {
-	changePageUrl: (pageUrl: Pages) => void;
+	setUrl: (url: string) => void;
 }
 
 const Logo: React.FC<LogoProps> = ({
-	changePageUrl,
+	setUrl,
 }) => {
 	const styles: {
 		[key: string]: CSSProperties;
@@ -27,7 +26,7 @@ const Logo: React.FC<LogoProps> = ({
 		},
 	};
 
-	const onClick = () => changePageUrl('/');
+	const onClick = () => setUrl('/');
 
 	return (
 		<a style={styles.container} onClick={onClick}>

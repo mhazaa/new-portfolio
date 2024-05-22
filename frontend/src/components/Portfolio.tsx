@@ -7,14 +7,14 @@ import arrow from '../assets/arrow.svg';
 
 interface PortfolioProps {
 	posts: Post[];
-	changePostUrl: (postUrl: string | null) => void;
-	publicationOnClick: (externalUrl?: string) => void;
+	setUrl: (url: string) => void;
+	openExternalUrl: (externalUrl?: string) => void;
 }
 
 const Portfolio: React.FC<PortfolioProps> = ({
 	posts,
-	changePostUrl,
-	publicationOnClick,
+	setUrl,
+	openExternalUrl,
 }) => {
 	const [topArrowVisible, setTopArrowVisible] = useState<boolean>(false);
 	const [bottomArrowVisible, setBottomArrowVisible] = useState<boolean>(true);
@@ -148,8 +148,8 @@ const Portfolio: React.FC<PortfolioProps> = ({
 		setBottomArrowVisible(false);
 	};
 
-	const itemOnClick = (url: string) => {
-		if (url) changePostUrl(url);
+	const itemOnClick = (internalUrl?: string) => {
+		if (internalUrl) setUrl(internalUrl);
 	};
 
 	return (
@@ -170,13 +170,13 @@ const Portfolio: React.FC<PortfolioProps> = ({
 									...styles.item,
 									...(i === 0 && {...styles.firstItem})
 								}}
-								onClick={() => itemOnClick(post.url)}
+								onClick={() => itemOnClick(post.internalUrl)}
 							>
 								<h3>{post.title}</h3>
 								<h4>{post.medium}, {post.year}</h4>
 							</a>
 							{post.publication &&
-								<a style={styles.publication} onClick={() => publicationOnClick(post.externalUrl)}>
+								<a style={styles.publication} onClick={() => openExternalUrl(post.externalUrl)}>
 									<h5>{post.publication}</h5>
 								</a>
 							}

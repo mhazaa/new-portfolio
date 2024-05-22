@@ -7,8 +7,8 @@ import backArrow from '../assets/back_arrow.svg';
 import { Post } from '../../../types';
 
 interface PostPageProps extends Post {
-	changePostUrl: (postUrl: string | null) => void;
-	publicationOnClick: (externalUrl?: string) => void;
+	setUrl: (url: string) => void;
+	openExternalUrl: (externalUrl?: string) => void;
 }
 
 const PostPage: React.FC<PostPageProps> = ({
@@ -18,9 +18,10 @@ const PostPage: React.FC<PostPageProps> = ({
 	year,
 	publication,
 	externalUrl,
+	category,
 	markdown,
-	changePostUrl,
-	publicationOnClick,
+	setUrl,
+	openExternalUrl,
 }) => {
 	const { isMobile, isTablet } = useResponsive();
 
@@ -62,7 +63,7 @@ const PostPage: React.FC<PostPageProps> = ({
 		AnalyticsEngineClient.sendMetric(`VIEWED_POST: ${title}__${id}`);
 	}, []);
 
-	const backArrowOnClick = () => changePostUrl(null);
+	const backArrowOnClick = () => setUrl('/' + category);
 
 	return (
 		<div style={styles.container}>
@@ -73,7 +74,7 @@ const PostPage: React.FC<PostPageProps> = ({
 				<h2>{title}</h2>
 				<h4 style={styles.mediumYear}>{medium}, {year}</h4>
 				{publication &&
-					<a style={styles.publication} onClick={() => publicationOnClick(externalUrl)}>
+					<a style={styles.publication} onClick={() => openExternalUrl(externalUrl)}>
 						<h5>{publication}</h5>
 					</a>
 				}

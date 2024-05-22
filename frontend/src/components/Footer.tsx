@@ -1,6 +1,5 @@
 import React, { CSSProperties } from 'react';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
-import { Pages } from '../../../types';
 import globalStyles from '../theme';
 import instagram from '../assets/instagram.svg';
 import tiktok from '../assets/tiktok.svg';
@@ -8,12 +7,12 @@ import github from '../assets/github.svg';
 
 interface FooterProps {
 	resume: string;
-	changePageUrl: (page: Pages) => void;
+	setUrl: (url: string) => void;
 }
 
 const Footer: React.FC<FooterProps> = ({
 	resume,
-	changePageUrl,
+	setUrl,
 }) => {
 	const styles: {
 		[key: string]: CSSProperties;
@@ -51,14 +50,14 @@ const Footer: React.FC<FooterProps> = ({
 		window.open('https://github.com/mhazaa', '_blank');
 	};
 
-	const bioOnClick = () => changePageUrl('/bio');
+	const bioOnClick = () => setUrl('/bio');
 	
 	const resumeOnClick = () => {
 		AnalyticsEngineClient.sendMetric('CLICKED_ON: RESUME');
 		window.open(resume, '_blank');
 	};
 
-	const contactOnClick = () => changePageUrl('/contact');
+	const contactOnClick = () => setUrl('/contact');
 
 	return (
 		<div style={styles.container}>

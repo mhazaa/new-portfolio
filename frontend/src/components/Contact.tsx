@@ -3,16 +3,16 @@ import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import useResponsive from '../hooks/useResponsive';
 import { postContactForm } from '../requests';
 import globalStyles from '../theme';
-import { Pages, PostContactFormData } from '../../../types';
+import { PostContactFormData } from '../../../types';
 
 let _timeout: ReturnType<typeof setTimeout> | undefined;
 
 interface ContactProps {
-	changePageUrl: (pageUrl: Pages) => void;
+	setUrl: (url: string) => void;
 }
 
 const Contact: React.FC<ContactProps> = ({
-	changePageUrl,
+	setUrl,
 }) => {
 	const { isMobile } = useResponsive();
 	const [responseMessage, setResponseMessage] = useState<React.JSX.Element | null>(null);
@@ -91,7 +91,7 @@ const Contact: React.FC<ContactProps> = ({
 		} else {
 			AnalyticsEngineClient.sendMetric('SENT_CONTACT_FORM');
 			setResponseMessage(successfulResponseMessage);
-			_timeout = setTimeout(() => changePageUrl('/'), 10000);
+			_timeout = setTimeout(() => setUrl('/'), 10000);
 		}
 	};
 
