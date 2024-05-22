@@ -19,10 +19,10 @@ export interface Post {
 	title: string;
 	medium: string;
 	year: string;
+	category: Categories;
 	publication?: string;
 	internalUrl?: string;
 	externalUrl?: string;
-	category: Categories;
 	markdown?: TypedObject | TypedObject[];
 };
 

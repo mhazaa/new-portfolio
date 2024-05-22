@@ -22,21 +22,6 @@ export default {
             validation: (Rule: any) => Rule.required(),
         },
         {
-            title: 'Publication',
-            name: 'publication',
-            type: 'string',
-        },
-        {
-            title: 'Internal URL',
-            name: 'internalUrl',
-            type: 'string',
-        },
-        {
-            title: 'External URL',
-            name: 'externalUrl',
-            type: 'string',
-        },
-        {
             title: 'Category',
             name: 'category',
             type: 'string',
@@ -53,6 +38,21 @@ export default {
                 ],
             },
             validation: (Rule: any) => Rule.required(),
+        },
+        {
+            title: 'Publication',
+            name: 'publication',
+            type: 'string',
+        },
+        {
+            title: 'Internal URL',
+            name: 'internalUrl',
+            type: 'string',
+        },
+        {
+            title: 'External URL',
+            name: 'externalUrl',
+            type: 'string',
         },
         {
             title: 'Markdown',
