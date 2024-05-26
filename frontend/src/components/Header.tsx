@@ -66,11 +66,11 @@ const Header: React.FC<HeaderProps> = ({
 
 			<div style={styles.categoriesWrapper}>
 				<a onClick={artistOnClick}>
-					<h2 style={textStyle(url === '/artist')}>Artist</h2>
+					<h2 style={textStyle(url.includes('/artist'))}>Artist</h2>
 				</a>
 				<h2 style={{ ...styles.text, ...styles.plusSign} }>&nbsp;+&nbsp;</h2>
 				<a onClick={writerOnClick}>
-					<h2 style={textStyle(url === '/writer')}>Writer</h2>
+					<h2 style={textStyle(url.includes('/writer'))}>Writer</h2>
 				</a>
 			</div>
 		</div>
