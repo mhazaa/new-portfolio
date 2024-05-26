@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, CSSProperties } from 'react';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
+import { openExternalUrl } from '../routing';
 import map from '../helperFunctions/map';
 import globalStyles from '../theme';
 import { Post } from '../../../types';
@@ -8,13 +9,11 @@ import arrow from '../assets/arrow.svg';
 interface PortfolioProps {
 	posts: Post[];
 	setUrl: (url: string) => void;
-	openExternalUrl: (externalUrl?: string) => void;
 }
 
 const Portfolio: React.FC<PortfolioProps> = ({
 	posts,
 	setUrl,
-	openExternalUrl,
 }) => {
 	const [topArrowVisible, setTopArrowVisible] = useState<boolean>(false);
 	const [bottomArrowVisible, setBottomArrowVisible] = useState<boolean>(true);
@@ -68,20 +67,24 @@ const Portfolio: React.FC<PortfolioProps> = ({
 			paddingLeft: globalStyles.spacing.double,
 			scrollBehavior: 'smooth',
 		},
-		item: {
-			display: 'block',
+		postLabel: {
+			cursor: 'default',
 			marginTop: globalStyles.spacing.standard,
 		},
-		firstItem: {
+		firstPostLabel: {
 			marginTop: '0',
+		},
+		item: {
+			display: 'block',
 		},
 		publication: {
 			display: 'block',
 			marginTop: globalStyles.spacing.half,
 		},
 		arrowWrapperTop: {
-			margin: `${globalStyles.spacing.standard} 0`,
+			margin: `${globalStyles.spacing.double} 0`,
 			opacity: topArrowVisible ? '1' : '0',
+			cursor: topArrowVisible ? 'pointer' : 'default',
 			transition: `opacity ${globalStyles.transitions.fast}`,
 		},
 		arrowTop: {
@@ -89,8 +92,9 @@ const Portfolio: React.FC<PortfolioProps> = ({
 			transform: 'rotate(180deg)',
 		},
 		arrowWrapperBottom: {
-			marginTop: globalStyles.spacing.standard,
+			marginTop: globalStyles.spacing.double,
 			opacity: bottomArrowVisible ? '1' : '0',
+			cursor: bottomArrowVisible ? 'pointer' : 'default',
 			transition: `opacity ${globalStyles.transitions.fast}`,
 		},
 		arrowBottom: {
@@ -132,6 +136,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 	}, [posts]);
 
 	const topArrowOnClick = () => {
+		if (!topArrowVisible) return;
 		const el = itemsWrapperEl.current;
 		if (!el) return;
 		el.scrollTo(0, 0);
@@ -139,6 +144,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 	};
 
 	const bottomArrowOnClick = () => {
+		if (!bottomArrowVisible) return;
 		const el = itemsWrapperEl.current;
 		if (!el) return;
 		const elHeight = el.offsetHeight;
@@ -148,8 +154,51 @@ const Portfolio: React.FC<PortfolioProps> = ({
 		setBottomArrowVisible(false);
 	};
 
+	const onClick = (internalUrl?: string, externalUrl?: string) => {
+		if (internalUrl && externalUrl) return;
+		if (internalUrl) itemOnClick(internalUrl);
+		if (externalUrl) publicationOnClick(externalUrl);
+	};
+
 	const itemOnClick = (internalUrl?: string) => {
 		if (internalUrl) setUrl(internalUrl);
+	};
+
+	const publicationOnClick = (externalUrl?: string) => {
+		if (externalUrl) openExternalUrl(externalUrl);
+	};
+
+	const PostLabel = (post: Post, i: number) => {
+		const onlyOneUrl =
+			(post.internalUrl || post.externalUrl) && !(post.internalUrl && post.externalUrl);
+
+		return (
+			<div
+				style={{
+					...styles.postLabel,
+					...(i === 0 && {...styles.firstPostLabel})
+				}}
+				className={onlyOneUrl ? 'clickable' : ''}
+				onClick={() => onlyOneUrl && onClick(post.internalUrl, post.externalUrl)}
+			>
+				<div
+					style={styles.item}
+					className={post.internalUrl && !onlyOneUrl ? 'clickable' : ''}
+					onClick={() => itemOnClick(post.internalUrl)}
+				>
+					<h3>{post.title}</h3>
+					<h4>{post.medium}, {post.year}</h4>
+				</div>
+				{post.publication &&
+					<div
+						style={styles.publication}
+						className={post.externalUrl && !onlyOneUrl ? 'clickable' : ''}
+						onClick={() => publicationOnClick(post.externalUrl)}>
+						<h5>{post.publication}</h5>
+					</div>
+				}
+			</div>
+		);
 	};
 
 	return (
@@ -163,23 +212,9 @@ const Portfolio: React.FC<PortfolioProps> = ({
 					<div style={styles.scrollfront}></div>
 				</div>
 				<div style={styles.itemsWrapper} ref={itemsWrapperEl}>
-					{posts.map((post: Post, i) => (
+					{posts.map((post: Post, i: number) => (
 						<div key={i}>
-							<a
-								style={{
-									...styles.item,
-									...(i === 0 && {...styles.firstItem})
-								}}
-								onClick={() => itemOnClick(post.internalUrl)}
-							>
-								<h3>{post.title}</h3>
-								<h4>{post.medium}, {post.year}</h4>
-							</a>
-							{post.publication &&
-								<a style={styles.publication} onClick={() => openExternalUrl(post.externalUrl)}>
-									<h5>{post.publication}</h5>
-								</a>
-							}
+							{PostLabel(post, i)}
 						</div>
 					))}
 				</div>
