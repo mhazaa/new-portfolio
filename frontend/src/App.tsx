@@ -48,12 +48,6 @@ const App: React.FC = () => {
 		(_post) ? setPost(_post) : setUrl('/error');
 	}, [url]);
 
-	const openExternalUrl = (externalUrl?: string) => {
-		if (!externalUrl) return;
-		AnalyticsEngineClient.sendMetric(`CLICKED_ON: ${externalUrl}`);
-		window.open(externalUrl, '_blank');
-	};
-
 	if (!allData) return (
 		<div>
 			<Background />
@@ -91,7 +85,6 @@ const App: React.FC = () => {
 					<Portfolio
 						posts={allData.portfolio[url.substring(1) as Categories]}
 						setUrl={setUrl}
-						openExternalUrl={openExternalUrl}
 					/>
 				}
 
@@ -99,7 +92,6 @@ const App: React.FC = () => {
 					<PostPage 
 						{...post}
 						setUrl={setUrl}
-						openExternalUrl={openExternalUrl}
 					/> 
 				}
 
