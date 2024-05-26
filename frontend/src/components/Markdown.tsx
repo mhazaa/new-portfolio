@@ -1,7 +1,31 @@
 import React, { CSSProperties } from 'react';
-import { PortableText } from '@portabletext/react';
+import { PortableText, PortableTextBlockComponent, PortableTextReactComponents } from '@portabletext/react';
 import { TypedObject } from '@portabletext/types';
 import { Image } from '../../../types';
+
+/*interface BlockComponentProps {
+	children: JSX.Element;
+}*/
+
+const BlockComponent: PortableTextBlockComponent | undefined = ({
+	//@ts-ignore
+	children,
+}) =>  {
+	const styles: {
+		[key: string]: CSSProperties;
+	} = {
+		paragraph: {
+			textIndent: '2rem',
+			lineHeight: '2rem',
+		},
+	};
+
+	return (
+		<p style={styles.paragraph}>
+			{children}
+		</p>
+	);
+};
 
 interface ImageComponentProps {
 	value: Image;
@@ -23,7 +47,10 @@ const ImageComponent: React.FC<ImageComponentProps> = ({
 	);
 };
 
-const markdownComponents = {
+const markdownComponents: Partial<PortableTextReactComponents> = {
+	block: {
+		normal: BlockComponent,
+	},
 	types: {
 		image: ImageComponent,
 	},
