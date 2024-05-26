@@ -1,9 +1,13 @@
 import React, { CSSProperties } from 'react';
 import { PortableText } from '@portabletext/react';
 import { TypedObject } from '@portabletext/types';
+import { Image } from '../../../types';
 
-const ImageComponent = ({
-	//@ts-ignore
+interface ImageComponentProps {
+	value: Image;
+}
+
+const ImageComponent: React.FC<ImageComponentProps> = ({
 	value,
 }) =>  {
 	const styles: {
@@ -15,7 +19,6 @@ const ImageComponent = ({
 	};
 
 	return (
-		//@ts-ignore
 		<img style={styles.image} src={value.src} alt={value.alt} />
 	);
 };
