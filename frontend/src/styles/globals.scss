@@ -69,6 +69,15 @@ a:hover {
 	opacity: 0.5;
 }
 
+.clickable {
+	cursor: pointer !important;
+	transition: opacity $transitionFast;
+	
+	&:hover {
+		opacity: 0.5;
+	}
+}
+
 p {
 	font-family: $fontParagraph;
 	font-size: 1.2rem;
@@ -127,7 +136,6 @@ input:-webkit-autofill:focus {
 	border: 0px solid $teal;
 	-webkit-text-fill-color: $brown;
 	-webkit-box-shadow: 0 0 0 1000px white inset;
-
 }
 
 input, textarea {
