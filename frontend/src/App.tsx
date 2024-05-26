@@ -38,8 +38,8 @@ const App: React.FC = () => {
 		setBrowserUrl(url);
 		console.log('url:', url);
 
-		const isWriterOrArtistUrl = ( url.includes('/artist') && url !== '/artist' ||  url.includes('/writer') && url !== '/writer');
-		if (!isWriterOrArtistUrl) return;
+		const isPostUrl = ( url.includes('/artist') && url !== '/artist' ||  url.includes('/writer') && url !== '/writer');
+		if (!isPostUrl) return;
 
 		const category: Categories = url.split('/')[1] as Categories;
 		
@@ -67,19 +67,11 @@ const App: React.FC = () => {
 			}
 
 			<Page variant={post ? 'sprawling' : 'fullscreen'}>
-				{(url === '/' || url === '/artist' || url === '/writer') ? (
-					<Header
-						url={url}
-						setUrl={setUrl}
-						variant='big'
-					/>
-				) : (
-					<Header
-						url={url}
-						setUrl={setUrl}
-						variant='small'
-					/>
-				)}
+				<Header
+					url={url}
+					setUrl={setUrl}
+					variant={(url === '/' || url === '/artist' || url === '/writer') ? 'big' : 'small'}
+				/>
 
 				{(url === '/artist' || url === '/writer') &&
 					<Portfolio
