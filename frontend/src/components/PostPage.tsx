@@ -1,14 +1,15 @@
 import React, { useEffect, CSSProperties } from 'react';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
+import { openExternalUrl } from '../routing';
 import Markdown from './Markdown';
 import useResponsive from '../hooks/useResponsive';
 import globalStyles from '../theme';
-import backArrow from '../assets/back_arrow.svg';
 import { Post } from '../../../types';
+import backArrow from '../assets/back_arrow.svg';
+import nextArrow from '../assets/next_arrow.svg';
 
 interface PostPageProps extends Post {
 	setUrl: (url: string) => void;
-	openExternalUrl: (externalUrl?: string) => void;
 }
 
 const PostPage: React.FC<PostPageProps> = ({
@@ -21,7 +22,6 @@ const PostPage: React.FC<PostPageProps> = ({
 	externalUrl,
 	markdown,
 	setUrl,
-	openExternalUrl,
 }) => {
 	const { isMobile, isTablet } = useResponsive();
 
@@ -49,6 +49,13 @@ const PostPage: React.FC<PostPageProps> = ({
 			display: 'block',
 			marginTop: globalStyles.spacing.half,
 		},
+		nextArrowWrapper: {
+			display: 'block',
+			width: '80px',
+			marginTop: globalStyles.spacing.standard,
+		},
+		nextArrow: {
+		},
 		contentWrapper: {
 			display: 'flex',
 			flexDirection: 'column',
@@ -65,6 +72,10 @@ const PostPage: React.FC<PostPageProps> = ({
 
 	const backArrowOnClick = () => setUrl('/' + category);
 
+	const publicationOnClick = (externalUrl?: string) => {
+		if (externalUrl) openExternalUrl(externalUrl);
+	};
+
 	return (
 		<div style={styles.container}>
 			<div style={styles.titleWrapper}>
@@ -73,11 +84,22 @@ const PostPage: React.FC<PostPageProps> = ({
 				</a>
 				<h2>{title}</h2>
 				<h4 style={styles.mediumYear}>{medium}, {year}</h4>
-				{publication &&
-					<a style={styles.publication} onClick={() => openExternalUrl(externalUrl)}>
-						<h5>{publication}</h5>
-					</a>
-				}
+				{publication && (
+					externalUrl
+						?
+						<a onClick={() => publicationOnClick(externalUrl)}>
+							<h5 style={styles.publication}>{publication}</h5>
+							<div style={styles.nextArrowWrapper}>
+								<img
+									style={styles.nextArrow}
+									src={nextArrow}
+									alt='Open external URL arrow'
+								/>
+							</div>
+						</a>
+						:
+						<h5 style={styles.publication}>{publication}</h5>
+				)}
 			</div>
 
 			<div style={styles.contentWrapper}>

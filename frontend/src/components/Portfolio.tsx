@@ -193,7 +193,8 @@ const Portfolio: React.FC<PortfolioProps> = ({
 					<div
 						style={styles.publication}
 						className={post.externalUrl && !onlyOneUrl ? 'clickable' : ''}
-						onClick={() => publicationOnClick(post.externalUrl)}>
+						onClick={() => publicationOnClick(post.externalUrl)}
+					>
 						<h5>{post.publication}</h5>
 					</div>
 				}
