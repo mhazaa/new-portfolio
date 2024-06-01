@@ -1,7 +1,7 @@
 import React, { CSSProperties } from 'react';
 import { PortableText, PortableTextBlockComponent, PortableTextReactComponents } from '@portabletext/react';
 import { TypedObject } from '@portabletext/types';
-import { Image } from '../../../types';
+import { Image } from '../../../../types';
 
 /*interface BlockComponentProps {
 	children: JSX.Element;
@@ -38,12 +38,35 @@ const ImageComponent: React.FC<ImageComponentProps> = ({
 		[key: string]: CSSProperties;
 	} = {
 		image: {
-			width: '100%',
+			maxWidth: '100%',
 		},
 	};
 
 	return (
 		<img style={styles.image} src={value.src} alt={value.alt} />
+	);
+};
+
+interface VideoComponentProps {
+	value: Image;
+}
+
+const VideoComponent: React.FC<VideoComponentProps> = ({
+	value,
+}) =>  {
+	const styles: {
+		[key: string]: CSSProperties;
+	} = {
+		video: {
+			maxWidth: '100%',
+		},
+	};
+
+	return (
+		<video style={styles.video} controls>
+			<source src={value.src} type="video/mp4" />
+			Your browser does not support the video tag.
+		</video>
 	);
 };
 
@@ -53,21 +76,28 @@ const markdownComponents: Partial<PortableTextReactComponents> = {
 	},
 	types: {
 		image: ImageComponent,
+		video: VideoComponent,
 	},
 };
 	
-interface SanityMarkdownProps {
+interface MarkdownProps {
 	markdown: TypedObject | TypedObject[];
 }
 
-const SanityMarkdown: React.FC<SanityMarkdownProps> = ({
+const Markdown: React.FC<MarkdownProps> = ({
 	markdown,
 }) => {
 	const styles: {
 		[key: string]: CSSProperties;
 	} = {
 		container: {
+			display: 'flex',
+			flexDirection: 'column',
+			alignItems: 'end',
 		},
+		video: {
+			maxWidth: '100%',
+		}
 	};
 
 	return (
@@ -80,4 +110,4 @@ const SanityMarkdown: React.FC<SanityMarkdownProps> = ({
 	);
 };
 
-export default SanityMarkdown;
+export default Markdown;
