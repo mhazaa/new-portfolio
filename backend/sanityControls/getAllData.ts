@@ -34,13 +34,17 @@ const getAllData = async (): Promise<AllData> => {
 			internalUrl,
 			externalUrl,
 			'markdown': markdown[] {
-		 		 _type == 'block' => {
+		 		_type == 'block' => {
 					...,
 		  		},
 				_type == 'image' => { 
 					'_type': 'image',
 					'src': asset -> url,
 					'alt': asset -> altText,
+				},
+				_type == 'video' => { 
+					'_type': 'video',
+					'src': src,
 				},
 			}, 
 		},

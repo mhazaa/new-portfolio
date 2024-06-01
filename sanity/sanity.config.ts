@@ -2,7 +2,7 @@ import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { visionTool } from '@sanity/vision';
 import { media } from 'sanity-plugin-media';
-import { schemaTypes } from './schemaTypes';
+import schemas from './schemas';
 import structure from './src/structure';
 
 export default defineConfig({
@@ -21,6 +21,6 @@ export default defineConfig({
   ],
 
   schema: {
-    types: schemaTypes,
+    types: schemas,
   },
 });
