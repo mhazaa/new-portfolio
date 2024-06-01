@@ -57,8 +57,6 @@ const PostPage: React.FC<PostPageProps> = ({
 		nextArrow: {
 		},
 		contentWrapper: {
-			display: 'flex',
-			flexDirection: 'column',
 			position: 'relative',
 			width: isMobile ? '100%' : isTablet ? '85%' : '70%',
 			left: isMobile ? '0' : isTablet ? '15%' : '30%',
