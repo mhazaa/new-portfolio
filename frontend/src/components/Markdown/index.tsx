@@ -3,12 +3,11 @@ import { PortableText, PortableTextBlockComponent, PortableTextReactComponents }
 import { TypedObject } from '@portabletext/types';
 import { Image } from '../../../../types';
 
-/*interface BlockComponentProps {
-	children: JSX.Element;
-}*/
+interface BlockComponentProps {
+	children: JSX.Element[];
+}
 
-const BlockComponent: PortableTextBlockComponent | undefined = ({
-	//@ts-ignore
+const BlockComponent: React.FC<BlockComponentProps> = ({
 	children,
 }) =>  {
 	const styles: {
@@ -19,6 +18,9 @@ const BlockComponent: PortableTextBlockComponent | undefined = ({
 			lineHeight: '1.6rem',
 		},
 	};
+
+	//@ts-ignore
+	if (children.length === 1 && children[0] === '') return <br />;
 
 	return (
 		<p style={styles.paragraph}>
@@ -74,6 +76,7 @@ const VideoComponent: React.FC<VideoComponentProps> = ({
 
 const markdownComponents: Partial<PortableTextReactComponents> = {
 	block: {
+		//@ts-ignore
 		normal: BlockComponent,
 	},
 	types: {
