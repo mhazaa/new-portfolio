@@ -36,9 +36,11 @@ const Contact: React.FC<ContactProps> = ({
 		},
 		title: {
 			marginBottom: globalStyles.spacing.standard,
+			textAlign: isMobile ? 'center' : 'left',
 		},
 		textWrapper: {
 			marginBottom: globalStyles.spacing.standard,
+			textAlign: isMobile ? 'center' : 'left',
 		},
 		nameEmailWrapper: {
 			display: 'flex',
