@@ -1,7 +1,6 @@
 import React, { CSSProperties } from 'react';
 import { PortableText, PortableTextBlockComponent, PortableTextReactComponents } from '@portabletext/react';
 import { TypedObject } from '@portabletext/types';
-import globalStyles from '../../theme';
 import { Image } from '../../../../types';
 
 /*interface BlockComponentProps {
@@ -16,8 +15,8 @@ const BlockComponent: PortableTextBlockComponent | undefined = ({
 		[key: string]: CSSProperties;
 	} = {
 		paragraph: {
-			textIndent: '2rem',
-			lineHeight: '2rem',
+			textIndent: '2.5rem',
+			lineHeight: '1.6rem',
 		},
 	};
 
@@ -40,7 +39,6 @@ const ImageComponent: React.FC<ImageComponentProps> = ({
 	} = {
 		image: {
 			maxWidth: '100%',
-			marginBottom: globalStyles.spacing.standard,
 		},
 	};
 
@@ -63,7 +61,6 @@ const VideoComponent: React.FC<VideoComponentProps> = ({
 	} = {
 		video: {
 			maxWidth: '100%',
-			marginBottom: globalStyles.spacing.standard,
 		},
 	};
 
@@ -105,7 +102,7 @@ const Markdown: React.FC<MarkdownProps> = ({
 	};
 
 	return (
-		<div style={styles.container}>
+		<div style={styles.container} className='markdown'>
 			<PortableText
 				value={markdown}
 				components={markdownComponents}

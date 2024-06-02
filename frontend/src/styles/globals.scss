@@ -169,3 +169,13 @@ form {
 *::placeholder {
     color: $brown;
 }
+
+.markdown {
+	p, img, video {
+		margin-bottom: $spacingStandard;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
