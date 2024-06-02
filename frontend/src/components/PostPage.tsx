@@ -23,7 +23,7 @@ const PostPage: React.FC<PostPageProps> = ({
 	markdown,
 	setUrl,
 }) => {
-	const { isMobile, isTablet } = useResponsive();
+	const { isMobile, isTablet, isDesktop } = useResponsive();
 
 	const styles: {
 		[key: string]: CSSProperties;
@@ -32,7 +32,8 @@ const PostPage: React.FC<PostPageProps> = ({
 			marginTop: '250px',
 		},
 		titleWrapper: {
-			width: isMobile ? '100%' : isTablet ? '85%' : '70%',
+			width: isTablet ? '100%' : isDesktop ? '85%' : '70%',
+			textAlign: isMobile ? 'center' : 'left',
 		},
 		backArrowWrapper: {
 			position: 'relative',
@@ -44,6 +45,11 @@ const PostPage: React.FC<PostPageProps> = ({
 		},
 		mediumYear: {
 			marginTop: globalStyles.spacing.standard,
+		},
+		publicationWrapper: {
+			display: 'flex',
+			flexDirection: 'column',
+			alignItems: isMobile ? 'center' : 'start',
 		},
 		publication: {
 			display: 'block',
@@ -58,9 +64,9 @@ const PostPage: React.FC<PostPageProps> = ({
 		},
 		contentWrapper: {
 			position: 'relative',
-			width: isMobile ? '100%' : isTablet ? '85%' : '70%',
-			left: isMobile ? '0' : isTablet ? '15%' : '30%',
-			margin: isMobile ? `${globalStyles.spacing.extraDouble} 0` : `${globalStyles.spacing.postPadding} 0`,
+			width: isTablet ? '100%' : isDesktop ? '85%' : '70%',
+			left: isTablet ? '0' : isDesktop ? '15%' : '30%',
+			margin: isTablet ? `${globalStyles.spacing.extraDouble} 0` : `${globalStyles.spacing.postPadding} 0`,
 		},
 	};
 
@@ -85,7 +91,7 @@ const PostPage: React.FC<PostPageProps> = ({
 				{publication && (
 					externalUrl
 						?
-						<a onClick={() => publicationOnClick(externalUrl)}>
+						<a style={styles.publicationWrapper} onClick={() => publicationOnClick(externalUrl)}>
 							<h5 style={styles.publication}>{publication}</h5>
 							<div style={styles.nextArrowWrapper}>
 								<img

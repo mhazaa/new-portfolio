@@ -23,8 +23,9 @@ $brown: #6e523b;
 /* TRANSITIONS */
 $transitionFast: 0.2s ease;
 /* BREAKPOINTS */
-$breakpointMobile: 768px;
-$breakpointTablet: 1024px;
+$breakpointMobile: 568px;
+$breakpointTablet: 768px;
+$breakpointDesktop: 1024px;
 
 * {
 	margin: 0;
@@ -46,11 +47,11 @@ html, body {
 	overflow-x: hidden;
 	font-size: 16px;
 
-	@media (max-width: $breakpointTablet) {
+	@media (max-width: $breakpointDesktop) {
 		font-size: 14px;
 	}
 
-	@media (max-width: $breakpointMobile) {
+	@media (max-width: $breakpointTablet) {
 		font-size: 12px;
 	}
 }

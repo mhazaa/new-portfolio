@@ -14,7 +14,7 @@ interface ContactProps {
 const Contact: React.FC<ContactProps> = ({
 	setUrl,
 }) => {
-	const { isMobile } = useResponsive();
+	const { isMobile, isTablet } = useResponsive();
 	const [responseMessage, setResponseMessage] = useState<React.JSX.Element | null>(null);
 	const [blockClick, setBlockClick] = useState<boolean>(false);
 
@@ -44,11 +44,11 @@ const Contact: React.FC<ContactProps> = ({
 		},
 		nameEmailWrapper: {
 			display: 'flex',
-			flexDirection: isMobile ? 'column' : 'row',
+			flexDirection: isTablet ? 'column' : 'row',
 			justifyContent: 'space-between',
 		},
 		input: {
-			width: isMobile ? '100%' : '49%',
+			width: isTablet ? '100%' : '49%',
 			marginBottom: globalStyles.spacing.standard,
 		},
 		textarea: {

@@ -30,8 +30,9 @@ const globalStyles = {
 		verySlow: '1.2s cubic-bezier(.07,.76,.35,1.06)',
 	},
 	breakpoints: {
-		mobile: 768,
-		tablet: 1024,
+		mobile: 568,
+		tablet: 768,
+		desktop: 1024,
 	},
 };
 

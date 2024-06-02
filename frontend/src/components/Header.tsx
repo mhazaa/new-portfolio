@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({
 	setUrl,
 	variant = 'big',
 }) => {
-	const { isMobile } = useResponsive();
+	const { isTablet } = useResponsive();
 
 	const styles: {
 		[key: string]: CSSProperties;
@@ -30,7 +30,7 @@ const Header: React.FC<HeaderProps> = ({
 			display: 'flex',
 			justifyContent: 'center',
 			alignItems: 'center',
-			flexDirection: isMobile && variant !== 'small' ? 'column' : 'row',
+			flexDirection: isTablet && variant !== 'small' ? 'column' : 'row',
 			transform: variant === 'big' ? 'scale(1)' : 'scale(0.5)',
 			transformOrigin: 'top center',
 			marginTop: variant === 'big' ? globalStyles.spacing.double : globalStyles.spacing.standard,
@@ -45,7 +45,7 @@ const Header: React.FC<HeaderProps> = ({
 			color: globalStyles.colors.yellow,
 		},
 		plusSign: {
-			margin: isMobile ? `-${globalStyles.spacing.standard} 0` : '0',
+			margin: isTablet ? `-${globalStyles.spacing.standard} 0` : '0',
 		},
 	};
 
