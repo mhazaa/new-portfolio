@@ -55,6 +55,7 @@ module.exports = {
 		}),
 		new HtmlWebpackPlugin({
 			template: './src/index.html',
+			publicPath: '/',
 			favicon: './src/assets/favicon.svg',
 		}),
 	],

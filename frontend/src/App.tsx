@@ -20,7 +20,7 @@ const initialUrl = getInitialUrl();
 setBrowserUrl(initialUrl);
 
 const App: React.FC = () => {
-	const { isMobile } = useResponsive();
+	const { isTablet } = useResponsive();
 	const [allData, seAlltData] = useState<AllData>();
 	const [url, setUrl] = useState<string>(initialUrl);
 	const [post, setPost] = useState<Post | null>(null);
@@ -44,11 +44,14 @@ const App: React.FC = () => {
 		if (!isPostUrl) return;
 
 		const category: Categories = url.split('/')[1] as Categories;
+
+		if (!allData) return;
 		
 		const _post: Post | undefined =
 			allData?.portfolio[category].find((post: Post) => post.internalUrl === url);
+		
 		(_post) ? setPost(_post) : setUrl('/error');
-	}, [url]);
+	}, [url, allData]);
 
 	if (!allData) return (
 		<div>
@@ -62,8 +65,8 @@ const App: React.FC = () => {
 
 	const headerVariant = () => (
 		url === '/' ||
-		(url === '/artist' && !isMobile) ||
-		(url === '/writer' && !isMobile)
+		(url === '/artist' && !isTablet) ||
+		(url === '/writer' && !isTablet)
 			? 'big'
 			: 'small'
 	);
