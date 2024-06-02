@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import { getAllData } from './requests';
 import { setBrowserUrl, getInitialUrl } from './routing';
+import useResponsive from './hooks/useResponsive';
 import Page from './components/Page';
 import Background from './components/Background';
 import Footer from './components/Footer';
@@ -19,6 +20,7 @@ const initialUrl = getInitialUrl();
 setBrowserUrl(initialUrl);
 
 const App: React.FC = () => {
+	const { isMobile } = useResponsive();
 	const [allData, seAlltData] = useState<AllData>();
 	const [url, setUrl] = useState<string>(initialUrl);
 	const [post, setPost] = useState<Post | null>(null);
@@ -58,6 +60,14 @@ const App: React.FC = () => {
 		</div>
 	);
 
+	const headerVariant = () => (
+		url === '/' ||
+		(url === '/artist' && !isMobile) ||
+		(url === '/writer' && !isMobile)
+			? 'big'
+			: 'small'
+	);
+
 	return (
 		<div>
 			<Background />
@@ -70,7 +80,7 @@ const App: React.FC = () => {
 				<Header
 					url={url}
 					setUrl={setUrl}
-					variant={(url === '/' || url === '/artist' || url === '/writer') ? 'big' : 'small'}
+					variant={headerVariant()}
 				/>
 
 				{(url === '/artist' || url === '/writer') &&
