@@ -24,9 +24,12 @@ const BioPage: React.FC<BioPageProps> = ({
 			flexDirection: isMobile ? 'column' : 'row',
 		},
 		image: {
-			width: '200px',
+			display: 'block',
+			width: isMobile ? '150px' : '200px',
 			marginBottom: isMobile ? globalStyles.spacing.standard : '0',
-			marginRight: isMobile ? '0' : globalStyles.spacing.double,
+			marginRight: isMobile ? 'auto' : globalStyles.spacing.double,
+			marginLeft: isMobile ? 'auto' : '0',
+			borderRadius: '20px',
 		},
 		title: {
 			marginBottom: globalStyles.spacing.standard,
@@ -40,9 +43,10 @@ const BioPage: React.FC<BioPageProps> = ({
 
 	return (
 		<div style={styles.container}>
-			{image && <img style={styles.image} src={image.src} alt={image.alt} /> }
+			{image && !isMobile && <img style={styles.image} src={image.src} alt={image.alt} /> }
 			<div>
 				<h2 style={styles.title}>Bio</h2>
+				{image && isMobile && <img style={styles.image} src={image.src} alt={image.alt} /> }
 				<PortableText value={bio} />
 			</div>
 		</div>
