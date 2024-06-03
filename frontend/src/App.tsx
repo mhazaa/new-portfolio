@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import { getAllData } from './requests';
-import { setBrowserUrl, getInitialUrl } from './routing';
+import { setBrowserUrl, getInitialUrl, isPostUrl, getCategory } from './routing';
 import useResponsive from './hooks/useResponsive';
 import Page from './components/Page';
 import Background from './components/Background';
@@ -39,13 +39,12 @@ const App: React.FC = () => {
 		setPost(null);
 		setBrowserUrl(url);
 		console.log('url:', url);
+		
+		if (!isPostUrl()) return;
 
-		const isPostUrl = ( url.includes('/artist') && url !== '/artist' ||  url.includes('/writer') && url !== '/writer');
-		if (!isPostUrl) return;
+		const category: Categories | false = getCategory();
 
-		const category: Categories = url.split('/')[1] as Categories;
-
-		if (!allData) return;
+		if (!allData || !category) return;
 		
 		const _post: Post | undefined =
 			allData?.portfolio[category].find((post: Post) => post.internalUrl === url);
