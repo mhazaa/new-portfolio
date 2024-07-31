@@ -23,7 +23,7 @@ const Page: React.FC<PageProps> = ({
 			left: '0',
 			height: variant === 'fullscreen' ? '100%' : 'auto',
 			width: '100%',
-			transform: variant === 'fullscreen' ? 'translateY(-50%)' : 'none',
+			transform: variant === 'fullscreen' ? 'translateY(-50%)' : 'translate(0)',
 		},
 		contentWrapper: {
 			width: '90%',
