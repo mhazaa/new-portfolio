@@ -44,7 +44,7 @@ const getAllData = async (): Promise<AllData> => {
 				},
 				_type == 'video' => { 
 					'_type': 'video',
-					'src': src,
+					src,
 				},
 			}, 
 		},
