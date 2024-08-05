@@ -83,7 +83,11 @@ const PostPage: React.FC<PostPageProps> = ({
 	return (
 		<div style={styles.container}>
 			<div style={styles.titleWrapper}>
-				<a style={styles.backArrowWrapper} onClick={backArrowOnClick}>
+				<a
+					style={styles.backArrowWrapper}
+					className='clickable'
+					onClick={backArrowOnClick}
+				>
 					<img style={styles.backArrow} src={backArrow} alt='Back arrow' />
 				</a>
 				<h2>{title}</h2>
@@ -91,7 +95,11 @@ const PostPage: React.FC<PostPageProps> = ({
 				{publication && (
 					externalUrl
 						?
-						<a style={styles.publicationWrapper} onClick={() => publicationOnClick(externalUrl)}>
+						<a
+							style={styles.publicationWrapper}
+							className='clickable'
+							onClick={() => publicationOnClick(externalUrl)}
+						>
 							<h5 style={styles.publication}>{publication}</h5>
 							<div style={styles.nextArrowWrapper}>
 								<img
