@@ -12,10 +12,12 @@ const Logo: React.FC<LogoProps> = ({
 		[key: string]: CSSProperties;
 	} = {
 		container: {
+			position: 'relative',
 			display: 'flex',
 			width: '100%',
 			maxWidth: '250px',
 			margin: 'auto',
+			zIndex: '999',
 		},
 		logoHiddenText: {
 			position: 'absolute',
