@@ -29,11 +29,19 @@ const Logo: React.FC<LogoProps> = ({
 	const onClick = () => setUrl('/');
 
 	return (
-		<a style={styles.container} onClick={onClick}>
+		<a
+			style={styles.container}
+			className='clickable'
+			onClick={onClick}
+		>
 			<h1 style={styles.logoHiddenText}>
 				Magdi Hazaa
 			</h1>
-			<img style={styles.logoImg} src={logo} alt='Magdi Hazaa' />
+			<img
+				style={styles.logoImg}
+				src={logo}
+				alt='Magdi Hazaa'
+			/>
 		</a>
 	);
 };

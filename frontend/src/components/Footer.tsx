@@ -63,23 +63,23 @@ const Footer: React.FC<FooterProps> = ({
 		<div style={styles.container}>
 			<ul style={styles.menuItems}>
 				<li>
-					<a onClick={bioOnClick}><h6>Bio</h6></a>
+					<a className='clickable' onClick={bioOnClick}><h6>Bio</h6></a>
 				</li>
 				<li>
-					<a onClick={resumeOnClick}><h6>Resumé</h6></a>
+					<a className='clickable' onClick={resumeOnClick}><h6>Resumé</h6></a>
 				</li>
 				<li>
-					<a onClick={contactOnClick}><h6>Contact</h6></a>
+					<a className='clickable' onClick={contactOnClick}><h6>Contact</h6></a>
 				</li>
 			</ul>
 			<div style={styles.socialMediaWrapper}>
-				<a onClick={instagramOnClick}>
+				<a className='clickable' onClick={instagramOnClick}>
 					<img style={styles.socialMediaIcon} src={instagram} alt='Instagram' />
 				</a>
-				<a onClick={tiktokOnClick}>
+				<a className='clickable' onClick={tiktokOnClick}>
 					<img style={styles.socialMediaIcon} src={tiktok} alt='TikTok' />
 				</a>
-				<a onClick={githubOnClick}>
+				<a className='clickable' onClick={githubOnClick}>
 					<img style={styles.socialMediaIcon} src={github} alt='GitHub' />
 				</a>
 			</div>
