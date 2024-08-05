@@ -61,6 +61,20 @@ export default {
             of: [
                 {
                     type: 'block',
+                    styles: [
+                        {
+                            title: 'Normal',
+                            value: 'normal',
+                        },
+                        {
+                            title: 'Centered',
+                            value: 'centered',
+                        },
+                        {
+                            title: 'Poetry',
+                            value: 'poetry',
+                        },
+                    ],
                 },
                 {
                     type: 'image',  

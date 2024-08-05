@@ -1,21 +1,24 @@
 import React, { CSSProperties } from 'react';
-import { PortableText, PortableTextBlockComponent, PortableTextReactComponents } from '@portabletext/react';
+import { PortableText, PortableTextReactComponents } from '@portabletext/react';
 import { TypedObject } from '@portabletext/types';
 import { Image } from '../../../../types';
 
 interface BlockComponentProps {
+	type: 'normal' | 'centered' | 'poetry';
 	children: JSX.Element[];
 }
 
 const BlockComponent: React.FC<BlockComponentProps> = ({
+	type,
 	children,
-}) =>  {
+}) => {
 	const styles: {
 		[key: string]: CSSProperties;
 	} = {
 		paragraph: {
-			textIndent: '2.5rem',
+			textIndent: type === 'normal' ? '2.5rem' : '0',
 			lineHeight: '1.6rem',
+			textAlign: type === 'centered' ? 'center' : 'left',
 		},
 	};
 
@@ -29,13 +32,43 @@ const BlockComponent: React.FC<BlockComponentProps> = ({
 	);
 };
 
+const BlockComponentNormal: React.FC<BlockComponentProps> = ({
+	children,
+}) => {
+	return (
+		<BlockComponent type='normal'>
+			{children}
+		</BlockComponent>
+	);
+};
+
+const BlockComponentCentered: React.FC<BlockComponentProps> = ({
+	children,
+}) => {
+	return (
+		<BlockComponent type='centered'>
+			{children}
+		</BlockComponent>
+	);
+};
+
+const BlockComponentPoetry: React.FC<BlockComponentProps> = ({
+	children,
+}) => {
+	return (
+		<BlockComponent type='poetry'>
+			{children}
+		</BlockComponent>
+	);
+};
+
 interface ImageComponentProps {
 	value: Image;
 }
 
 const ImageComponent: React.FC<ImageComponentProps> = ({
 	value,
-}) =>  {
+}) => {
 	const styles: {
 		[key: string]: CSSProperties;
 	} = {
@@ -57,7 +90,7 @@ interface VideoComponentProps {
 
 const VideoComponent: React.FC<VideoComponentProps> = ({
 	value,
-}) =>  {
+}) => {
 	const styles: {
 		[key: string]: CSSProperties;
 	} = {
@@ -77,7 +110,11 @@ const VideoComponent: React.FC<VideoComponentProps> = ({
 const markdownComponents: Partial<PortableTextReactComponents> = {
 	block: {
 		//@ts-ignore
-		normal: BlockComponent,
+		normal: BlockComponentNormal,
+		//@ts-ignore
+		centered: BlockComponentCentered,
+		//@ts-ignore
+		poetry: BlockComponentPoetry,
 	},
 	types: {
 		image: ImageComponent,
