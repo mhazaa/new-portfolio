@@ -109,12 +109,35 @@ const Contact: React.FC<ContactProps> = ({
 			<h5 style={styles.textWrapper}>Fill out the form below or email me directly at magdihazaa@gmail.com</h5>
 			<form onSubmit={onSubmit}>
 				<div style={styles.nameEmailWrapper}>
-					<input style={styles.input} name='name' type='name' placeholder='NAME' required></input>
-					<input style={styles.input} name='email' type="email" placeholder='EMAIL' required></input>
+					<input
+						style={styles.input}
+						name='name'
+						type='name'
+						placeholder='NAME'
+						required
+					/>
+					<input
+						style={styles.input}
+						name='email'
+						type='email'
+						placeholder='EMAIL'
+						required
+					/>
 				</div>
-				<textarea style={styles.textarea} className='message' rows={10} placeholder='MESSAGE' required />
+				<textarea
+					style={styles.textarea}
+					className='message'
+					rows={10}
+					placeholder='MESSAGE'
+					required
+				/>
 				<a>
-					<input style={styles.submitButton} type='submit' value="send" />
+					<input
+						style={styles.submitButton}
+						className='clickable'
+						type='submit'
+						value='send'
+					/>
 				</a>
 			</form>
 		</div>
