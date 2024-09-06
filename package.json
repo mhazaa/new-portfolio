@@ -29,6 +29,6 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@mhazaa/analytics-engine": "^1.0.31"
+    "@mhazaa/analytics-engine": "^1.0.33"
   }
 }

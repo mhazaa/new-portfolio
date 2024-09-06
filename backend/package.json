@@ -12,7 +12,7 @@
   "author": "Magdi Hazaa",
   "license": "ISC",
   "dependencies": {
-    "@mhazaa/mongo-controller": "^1.0.19",
+    "@mhazaa/mongo-controller": "^1.0.20",
     "@sanity/client": "^6.14.2",
     "dotenv": "^16.4.5",
     "express": "^4.18.2",
