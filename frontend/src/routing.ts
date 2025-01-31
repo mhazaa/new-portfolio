@@ -5,14 +5,16 @@ export const setBrowserUrl = (url: string) => history.pushState(null, '', `${url
 
 const getUrl = (): string => {
 	const fullUrl = window.location.href;
-	const url = new URL(fullUrl).pathname;
+	let url = new URL(fullUrl).pathname;
+	if (url.slice(-1) === '/' && url.length > 1)
+		url = url.substring(0, url.length - 1);
 	return url;
 };
 
 const validUrl = (): string | false => {
 	const url = getUrl();
 	const pages: Pages[] = ['/', '/artist', '/writer', '/bio', '/contact'];
-	const isMainUrl: boolean = pages.some(page => page === url);
+	const isMainUrl: boolean = pages.some(page => url === page);
 	return (isMainUrl || isPostUrl()) ? url : false;
 };
 
@@ -24,10 +26,10 @@ export const getInitialUrl = (): string => {
 export const isPostUrl = (): boolean => {
 	const url = getUrl();
 	const isPostUrl = (
-		url.includes('/artist') &&
-		url !== '/artist' ||
-		url.includes('/writer') &&
-		url !== '/writer'
+		url.includes('/artist/') &&
+		url !== '/artist/' ||
+		url.includes('/writer/') &&
+		url !== '/writer/'
 	);
 	return isPostUrl;
 };
