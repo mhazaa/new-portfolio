@@ -100,8 +100,8 @@ const VideoComponent: React.FC<VideoComponentProps> = ({
 	};
 
 	return (
-		<video style={styles.video} controls>
-			<source src={value.src} type="video/mp4" />
+		<video style={styles.video} controls preload='metadata'>
+			<source src={`${value.src}#t=0.01`} type='video/mp4' />
 			Your browser does not support the video tag.
 		</video>
 	);
