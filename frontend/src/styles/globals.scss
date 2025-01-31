@@ -1,5 +1,10 @@
 @import url('https://use.typekit.net/kdg5doa.css');
 
+@font-face {
+    font-family: "BoobsFont";
+    src: url('../assets/fonts/BoobsFont.ttf');
+}
+
 /* FONT FAMILIES */
 $fontPrimary: 'brandon-grotesque', sans-serif;
 $fontSecondary: 'citrus-gothic-rough', sans-serif;
@@ -84,7 +89,7 @@ img {
 
 p {
 	font-family: $fontParagraph;
-	font-size: 1.2rem;
+	font-size: 16px;
 	color: $brown;
 }
 
@@ -93,11 +98,9 @@ h1, h2, h3, h4, h5, h6, button, input, textarea {
 }
 
 h2 {
-	font-family: $fontSecondary;
+	font-family: 'BoobsFont';
 	text-transform: uppercase;
-	font-size: 7.5rem;
-	line-height: 6.5rem;
-	letter-spacing: -0.03rem;
+	font-size: 6rem;
 	font-weight: $regular;
 	color: $yellow;
 }
