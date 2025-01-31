@@ -17,7 +17,7 @@ const BlockComponent: React.FC<BlockComponentProps> = ({
 	} = {
 		paragraph: {
 			textIndent: type === 'normal' ? '2.5rem' : '0',
-			lineHeight: '1.6rem',
+			lineHeight: type === 'poetry' ? '1.2rem' : '1.6rem',
 			textAlign: type === 'centered' ? 'center' : 'left',
 		},
 	};
