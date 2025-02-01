@@ -19,16 +19,16 @@
   "keywords": [],
   "author": "Magdi Hazaa",
   "license": "ISC",
-  "devDependencies": {
-    "@portabletext/types": "^2.0.8",
-    "@typescript-eslint/eslint-plugin": "^7.8.0",
-    "@typescript-eslint/parser": "^7.8.0",
-    "concurrently": "^8.2.2",
-    "eslint": "^8.56.0",
-    "eslint-plugin-react": "^7.34.1",
-    "typescript": "^5.3.3"
-  },
   "dependencies": {
     "@mhazaa/analytics-engine": "^1.0.33"
+  },
+  "devDependencies": {
+    "@portabletext/types": "^2.0.13",
+    "@typescript-eslint/eslint-plugin": "^8.22.0",
+    "@typescript-eslint/parser": "^8.22.0",
+    "concurrently": "^9.1.2",
+    "eslint": "^9.19.0",
+    "eslint-plugin-react": "^7.37.4",
+    "typescript": "^5.7.3"
   }
 }
