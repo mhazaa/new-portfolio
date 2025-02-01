@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, CSSProperties } from 'react';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import { openExternalUrl } from '../routing';
+import useResponsive from '../hooks/useResponsive';
 import map from '../helperFunctions/map';
 import globalStyles from '../theme';
 import { Post } from '../../../types';
@@ -15,6 +16,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 	posts,
 	setUrl,
 }) => {
+	const { isMobile, isTablet, isDesktop } = useResponsive();
 	const [topArrowVisible, setTopArrowVisible] = useState<boolean>(false);
 	const [bottomArrowVisible, setBottomArrowVisible] = useState<boolean>(true);
 	const [scrollHeight, setScrollHeight] = useState<number>(0);
@@ -76,8 +78,15 @@ const Portfolio: React.FC<PortfolioProps> = ({
 		},
 		item: {
 			display: 'block',
+			maxWidth: isMobile ? '200px' : isTablet ? '250px' : 'none',
 		},
-		publication: {
+		itemTitle: {
+			maxWidth: isDesktop ? 'unset' : '300px',
+		},
+		itemMediumYear: {
+			marginTop: globalStyles.spacing.half,
+		},
+		itemPublication: {
 			display: 'block',
 			marginTop: globalStyles.spacing.half,
 		},
@@ -186,12 +195,12 @@ const Portfolio: React.FC<PortfolioProps> = ({
 					className={post.internalUrl && !onlyOneUrl ? 'clickable' : ''}
 					onClick={() => itemOnClick(post.internalUrl)}
 				>
-					<h3>{post.title}</h3>
-					<h4>{post.medium}, {post.year}</h4>
+					<h3 style={styles.itemTitle}>{post.title}</h3>
+					<h4 style={styles.itemMediumYear}>{post.medium}, {post.year}</h4>
 				</div>
 				{post.publication &&
 					<div
-						style={styles.publication}
+						style={styles.itemPublication}
 						className={post.externalUrl && !onlyOneUrl ? 'clickable' : ''}
 						onClick={() => publicationOnClick(post.externalUrl)}
 					>
@@ -204,8 +213,16 @@ const Portfolio: React.FC<PortfolioProps> = ({
 
 	return (
 		<div style={styles.container}>
-			<a style={styles.arrowWrapperTop} onClick={topArrowOnClick}>
-				<img style={styles.arrowTop} src={arrow} alt='Up arrow' />
+			<a
+				style={styles.arrowWrapperTop}
+				className='clickable'
+				onClick={topArrowOnClick}
+			>
+				<img
+					style={styles.arrowTop}
+					src={arrow}
+					alt='Up arrow'
+				/>
 			</a>
 			<div style={styles.contentWrapper}>
 				<div style={styles.scrollbar}>
@@ -220,8 +237,16 @@ const Portfolio: React.FC<PortfolioProps> = ({
 					))}
 				</div>
 			</div>
-			<a style={styles.arrowWrapperBottom} onClick={bottomArrowOnClick}>
-				<img style={styles.arrowBottom} src={arrow} alt='Down arrow' />
+			<a
+				style={styles.arrowWrapperBottom}
+				className='clickable'
+				onClick={bottomArrowOnClick}
+			>
+				<img
+					style={styles.arrowBottom}
+					src={arrow}
+					alt='Down arrow'
+				/>
 			</a>
 		</div>
 	);
