@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, JSX } from 'react';
 import { PortableText, PortableTextReactComponents } from '@portabletext/react';
 import { TypedObject } from '@portabletext/types';
 import { Image } from '../../../../types';
