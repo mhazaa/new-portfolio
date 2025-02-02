@@ -74,10 +74,29 @@ a {
 
 .clickable {
 	cursor: pointer !important;
-	transition: opacity $transitionFast;
+	transform: scale(1) translateX(0);
+	transition: opacity $transitionFast, transform $transitionFast;
 	
 	&:hover {
 		opacity: 0.5 !important;
+	}
+
+	&.scaleHover {
+		&:hover {
+			transform: scale(1.1) !important;
+		}
+	}
+
+	&.translateHover {
+		&:hover {
+			transform: translateX(5px) !important;
+		}
+	}
+
+	&.translateReverseHover {
+		&:hover {
+			transform: translateX(-5px) !important;
+		}
 	}
 }
 
@@ -92,7 +111,29 @@ img {
 p {
 	font-family: $fontParagraph;
 	font-size: 1.2rem;
+	line-height: 1.6rem;
+	text-indent: 0;
+	text-align: left;
 	color: $brown;
+
+	&.normal {
+	}
+
+	&.proseLeft {
+		text-indent: 2.5rem;
+	}
+	
+	&.proseCenter {
+		text-align: center;
+	}
+	
+	&.poetry {
+		margin-bottom: 0 !important;
+	}
+}
+
+.bioTextWrapper p {
+	font-family: $fontPrimary;
 }
 
 h1, h2, h3, h4, h5, h6, button, input, textarea {
@@ -102,40 +143,44 @@ h1, h2, h3, h4, h5, h6, button, input, textarea {
 h2 {
 	font-family: 'BoobsFont';
 	text-transform: uppercase;
-	font-size: 6rem;
+	font-size: 5.9rem;
 	font-weight: $regular;
+	line-height: 6.1rem;
 	color: $yellow;
+
+	&.extraLineHeight {
+		line-height: 7.1rem;
+	}
 }
 
 h3 {
 	font-size: 1.8rem;
-	line-height: 2.2rem;
 	font-weight: $regular;
+	line-height: 2.2rem;
 	color: $brown;
 }
 
 h4 {
 	text-transform: uppercase;
 	font-size: 1.4rem;
-	line-height: 1.4rem;
 	font-weight: $black;
+	line-height: 1.4rem;
 	color: $teal;
 }
 
 h5 {
-	font-family: $fontPrimary;
 	text-transform: uppercase;
 	font-size: 0.9rem;
-	line-height: 0.9rem;
 	font-weight: $medium;
+	line-height: 0.9rem;
 	color: $teal;
 }
 
 h6 {
 	text-transform: uppercase;
 	font-size: 1rem;
-	line-height: 1.1rem;
 	font-weight: $black;
+	line-height: 1.1rem;
 	color: $teal;
 	@extend .unselectable;
 }
