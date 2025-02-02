@@ -2,7 +2,7 @@ import React, { useState, useEffect, CSSProperties } from 'react';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import useResponsive from '../hooks/useResponsive';
 import { postContactForm } from '../requests';
-import globalStyles from '../theme';
+import { globalStyles, animations } from '../theme';
 import { PostContactFormData } from '../../../types';
 
 let _timeout: ReturnType<typeof setTimeout> | undefined;
@@ -25,8 +25,9 @@ const Contact: React.FC<ContactProps> = ({
 			textAlign: 'center',
 		},
 		title: {
-			marginBottom: globalStyles.spacing.standard,
+			marginBottom: globalStyles.spacing.double,
 			textAlign: isMobile ? 'center' : 'left',
+			...animations.titleInk(),
 		},
 		textWrapper: {
 			marginBottom: globalStyles.spacing.standard,
