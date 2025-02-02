@@ -3,17 +3,19 @@ import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import { openExternalUrl } from '../routing';
 import useResponsive from '../hooks/useResponsive';
 import map from '../helperFunctions/map';
-import globalStyles from '../theme';
+import { globalStyles } from '../theme';
 import { Post } from '../../../types';
 import arrow from '../assets/arrow.svg';
 
 interface PortfolioProps {
 	posts: Post[];
+	showScrollbar?: boolean;
 	setUrl: (url: string) => void;
 }
 
 const Portfolio: React.FC<PortfolioProps> = ({
 	posts,
+	showScrollbar = true,
 	setUrl,
 }) => {
 	const { isMobile, isTablet, isDesktop } = useResponsive();
@@ -38,7 +40,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 		scrollbar: {
 			position: 'absolute',
 			height: '100%',
-			width: '2px',
+			width: '3px',
 			left: '0',
 			overflow: 'hidden',
 		},
@@ -66,7 +68,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 			flexDirection: 'column',
 			height: '250px',
 			overflowY: 'scroll',
-			paddingLeft: globalStyles.spacing.double,
+			paddingLeft: showScrollbar ? globalStyles.spacing.double : 0,
 			scrollBehavior: 'smooth',
 		},
 		postLabel: {
@@ -91,20 +93,21 @@ const Portfolio: React.FC<PortfolioProps> = ({
 			marginTop: globalStyles.spacing.half,
 		},
 		arrowWrapperTop: {
-			margin: `${globalStyles.spacing.double} 0`,
+			display: 'inline-block',
+			marginTop: `${globalStyles.spacing.double}`,
+			marginBottom: `${globalStyles.spacing.standard}`,
 			opacity: topArrowVisible ? '1' : '0',
 			cursor: topArrowVisible ? 'pointer' : 'default',
-			transition: `opacity ${globalStyles.transitions.fast}`,
 		},
 		arrowTop: {
 			width: '40px',
 			transform: 'rotate(180deg)',
 		},
 		arrowWrapperBottom: {
-			marginTop: globalStyles.spacing.double,
+			display: 'inline-block',
+			marginTop: globalStyles.spacing.standard,
 			opacity: bottomArrowVisible ? '1' : '0',
 			cursor: bottomArrowVisible ? 'pointer' : 'default',
-			transition: `opacity ${globalStyles.transitions.fast}`,
 		},
 		arrowBottom: {
 			width: '40px',
@@ -187,12 +190,12 @@ const Portfolio: React.FC<PortfolioProps> = ({
 					...styles.postLabel,
 					...(i === 0 && {...styles.firstPostLabel})
 				}}
-				className={onlyOneUrl ? 'clickable' : ''}
+				className={onlyOneUrl ? 'clickable translateHover' : ''}
 				onClick={() => onlyOneUrl && onClick(post.internalUrl, post.externalUrl)}
 			>
 				<div
 					style={styles.item}
-					className={post.internalUrl && !onlyOneUrl ? 'clickable' : ''}
+					className={post.internalUrl && !onlyOneUrl ? 'clickable translateHover' : ''}
 					onClick={() => itemOnClick(post.internalUrl)}
 				>
 					<h3 style={styles.itemTitle}>{post.title}</h3>
@@ -201,7 +204,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 				{post.publication &&
 					<div
 						style={styles.itemPublication}
-						className={post.externalUrl && !onlyOneUrl ? 'clickable' : ''}
+						className={post.externalUrl && !onlyOneUrl ? 'clickable translateHover' : ''}
 						onClick={() => publicationOnClick(post.externalUrl)}
 					>
 						<h5>{post.publication}</h5>
@@ -215,7 +218,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 		<div style={styles.container}>
 			<a
 				style={styles.arrowWrapperTop}
-				className='clickable'
+				className='clickable scaleHover'
 				onClick={topArrowOnClick}
 			>
 				<img
@@ -225,10 +228,13 @@ const Portfolio: React.FC<PortfolioProps> = ({
 				/>
 			</a>
 			<div style={styles.contentWrapper}>
-				<div style={styles.scrollbar}>
-					<div style={styles.scrollback}></div>
-					<div style={styles.scrollfront}></div>
-				</div>
+				{showScrollbar &&
+					<div style={styles.scrollbar}>
+						<div style={styles.scrollback}></div>
+						<div style={styles.scrollfront}></div>
+					</div>
+				}
+				
 				<div style={styles.itemsWrapper} ref={itemsWrapperEl}>
 					{posts.map((post: Post, i: number) => (
 						<div key={i}>
@@ -239,7 +245,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 			</div>
 			<a
 				style={styles.arrowWrapperBottom}
-				className='clickable'
+				className='clickable scaleHover'
 				onClick={bottomArrowOnClick}
 			>
 				<img
