@@ -116,6 +116,16 @@ p {
 	text-align: left;
 	color: $brown;
 
+	@media (max-width: $breakpointDesktop) {
+		font-size: 1.3rem;
+		line-height: 1.7rem;
+	}
+
+	@media (max-width: $breakpointTablet) {
+		font-size: 1.4rem;
+		line-height: 1.8rem;
+	}
+
 	&.normal {
 	}
 
