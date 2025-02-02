@@ -1,7 +1,7 @@
-import React, { CSSProperties } from 'react';
+import React, { useState, CSSProperties } from 'react';
 import useResponsive from '../hooks/useResponsive';
 import Logo from './Logo';
-import globalStyles from '../theme';
+import { globalStyles, animations } from '../theme';
 
 interface HeaderProps {
 	url: string;
@@ -15,6 +15,10 @@ const Header: React.FC<HeaderProps> = ({
 	variant = 'big',
 }) => {
 	const { isTablet } = useResponsive();
+	const [artistHovered, setArtistHovered] = useState<boolean>(false);
+	const [writerHovered, setWriterHovered] = useState<boolean>(false);
+	const isArtistUrl = url.includes('/artist');
+	const isWriterUrl = url.includes('/writer');
 
 	const styles: {
 		[key: string]: CSSProperties;
@@ -29,32 +33,21 @@ const Header: React.FC<HeaderProps> = ({
 		categoriesWrapper: {
 			display: 'flex',
 			justifyContent: 'center',
-			alignItems: 'center',
+			alignItems: 'stretch',
 			flexDirection: isTablet && variant !== 'small' ? 'column' : 'row',
 			transform: variant === 'big' ? 'scale(1)' : 'scale(0.5)',
 			transformOrigin: 'top center',
 			marginTop: variant === 'big' ? globalStyles.spacing.double : globalStyles.spacing.standard,
 		},
-		text: {
-			userSelect: 'none',
-			WebkitTextStroke: `2.5px ${globalStyles.colors.yellow}`,
-			color: 'rgba(0,0,0,0)',
-		},
-		selectedText: {
-			WebkitTextStroke: '0',
-			color: globalStyles.colors.yellow,
-		},
-		plusSign: {
-			margin: isTablet ? `-${globalStyles.spacing.standard} 0` : '0',
+		seperator: {
+			background: globalStyles.colors.yellow,
+			width: '3px',
+			margin: `0 ${globalStyles.spacing.double}`,
+			animation: `header-seperator-animation ${globalStyles.transitions.slow} forwards`,
 		},
 	};
-
-	const textStyle = (selected: boolean) => {
-		return {
-			...styles.text,
-			...(selected && {...styles.selectedText}),
-		};
-	};
+	
+	const textStyle = (selected: boolean) => selected ? animations.titleInk() : animations.titleInkInactive();
 
 	const artistOnClick = () => setUrl('/artist');
 
@@ -65,12 +58,30 @@ const Header: React.FC<HeaderProps> = ({
 			<Logo setUrl={setUrl} />
 
 			<div style={styles.categoriesWrapper}>
-				<a onClick={artistOnClick}>
-					<h2 style={textStyle(url.includes('/artist'))}>Artist</h2>
+				<a
+					onMouseEnter={isArtistUrl ? () => {} : () => setArtistHovered(true)}
+					onMouseLeave={isArtistUrl ? () => {} : () => setArtistHovered(false)}
+					onClick={artistOnClick}
+				>
+					<h2
+						style={textStyle(artistHovered || isArtistUrl)}
+						className='unselectable'
+					>
+						Artist
+					</h2>
 				</a>
-				<h2 style={{ ...styles.text, ...styles.plusSign} }>&nbsp;+&nbsp;</h2>
-				<a onClick={writerOnClick}>
-					<h2 style={textStyle(url.includes('/writer'))}>Writer</h2>
+				<div style={styles.seperator} />
+				<a
+					onMouseEnter={isWriterUrl ? () => {} : () => setWriterHovered(true)}
+					onMouseLeave={isWriterUrl ? () => {} : () => setWriterHovered(false)}
+					onClick={writerOnClick}
+				>
+					<h2
+						style={textStyle(writerHovered || isWriterUrl)}
+						className='unselectable'
+					>
+						Writer
+					</h2>
 				</a>
 			</div>
 		</div>
