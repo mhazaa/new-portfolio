@@ -100,7 +100,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 			cursor: topArrowVisible ? 'pointer' : 'default',
 		},
 		arrowTop: {
-			width: '40px',
+			width: '35px',
 			transform: 'rotate(180deg)',
 		},
 		arrowWrapperBottom: {
@@ -110,7 +110,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 			cursor: bottomArrowVisible ? 'pointer' : 'default',
 		},
 		arrowBottom: {
-			width: '40px',
+			width: '35px',
 		},
 	};
 
