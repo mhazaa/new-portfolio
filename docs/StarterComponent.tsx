@@ -1,5 +1,5 @@
 /*import React, { CSSProperties } from 'react';
-import globalStyles from '../frontend/src/theme';
+import { globalStyles } from '../frontend/src/theme';
 
 interface StarterComponentProps {
 	text: string;
