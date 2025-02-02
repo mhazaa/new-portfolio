@@ -68,23 +68,53 @@ const Footer: React.FC<FooterProps> = ({
 		<div style={styles.container}>
 			<ul style={styles.menuItems}>
 				<li>
-					<a style={styles.menuItem} className='clickable translateHover' onClick={bioOnClick}><h6>Bio</h6></a>
+					<a
+						style={styles.menuItem}
+						className='clickable translateHover'
+						onClick={bioOnClick}
+					>
+						<h6>Bio</h6>
+					</a>
 				</li>
 				<li>
-					<a style={styles.menuItem} className='clickable translateHover' onClick={resumeOnClick}><h6>Resumé</h6></a>
+					<a
+						style={styles.menuItem}
+						className='clickable translateHover'
+						onClick={resumeOnClick}
+					>
+						<h6>Resumé</h6>
+					</a>
 				</li>
 				<li>
-					<a style={styles.menuItem} className='clickable translateHover' onClick={contactOnClick}><h6>Contact</h6></a>
+					<a
+						style={styles.menuItem}
+						className='clickable translateHover'
+						onClick={contactOnClick}
+					>
+						<h6>Contact</h6>
+					</a>
 				</li>
 			</ul>
 			<div style={styles.socialMediaWrapper}>
-				<a style={styles.socialMediaIconWrapper} className='clickable scaleHover' onClick={instagramOnClick}>
+				<a
+					style={styles.socialMediaIconWrapper}
+					className='clickable scaleHover'
+					onClick={instagramOnClick}
+				>
 					<img style={styles.socialMediaIcon} src={instagram} alt='Instagram' />
 				</a>
-				<a style={styles.socialMediaIconWrapper} className='clickable scaleHover' onClick={tiktokOnClick}>
+				<a
+					style={styles.socialMediaIconWrapper}
+					className='clickable scaleHover'
+					onClick={tiktokOnClick}
+				>
 					<img style={styles.socialMediaIcon} src={tiktok} alt='TikTok' />
 				</a>
-				<a style={styles.socialMediaIconWrapper} className='clickable scaleHover' onClick={githubOnClick}>
+				<a
+					style={styles.socialMediaIconWrapper}
+					className='clickable scaleHover'
+					onClick={githubOnClick}
+				>
 					<img style={styles.socialMediaIcon} src={github} alt='GitHub' />
 				</a>
 			</div>
