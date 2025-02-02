@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import globalStyles from '../theme';
+import { globalStyles } from '../theme';
 
 const getIsMobile = () => window.innerWidth <= globalStyles.breakpoints.mobile;
 const getIsTablet = () => window.innerWidth <= globalStyles.breakpoints.tablet;
