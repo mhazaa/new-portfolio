@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
-import globalStyles from '../theme';
+import { globalStyles } from '../theme';
 import instagram from '../assets/instagram.svg';
 import tiktok from '../assets/tiktok.svg';
 import github from '../assets/github.svg';
@@ -24,10 +24,15 @@ const Footer: React.FC<FooterProps> = ({
 			zIndex: '999',
 		},
 		menuItems: {
-			
+		},
+		menuItem: {
+			display: 'block',
 		},
 		socialMediaWrapper: {
 			marginTop: globalStyles.spacing.half,
+		},
+		socialMediaIconWrapper: {
+			display: 'inline-block',
 		},
 		socialMediaIcon: {
 			height: '25px',
@@ -63,23 +68,23 @@ const Footer: React.FC<FooterProps> = ({
 		<div style={styles.container}>
 			<ul style={styles.menuItems}>
 				<li>
-					<a className='clickable' onClick={bioOnClick}><h6>Bio</h6></a>
+					<a style={styles.menuItem} className='clickable translateHover' onClick={bioOnClick}><h6>Bio</h6></a>
 				</li>
 				<li>
-					<a className='clickable' onClick={resumeOnClick}><h6>Resumé</h6></a>
+					<a style={styles.menuItem} className='clickable translateHover' onClick={resumeOnClick}><h6>Resumé</h6></a>
 				</li>
 				<li>
-					<a className='clickable' onClick={contactOnClick}><h6>Contact</h6></a>
+					<a style={styles.menuItem} className='clickable translateHover' onClick={contactOnClick}><h6>Contact</h6></a>
 				</li>
 			</ul>
 			<div style={styles.socialMediaWrapper}>
-				<a className='clickable' onClick={instagramOnClick}>
+				<a style={styles.socialMediaIconWrapper} className='clickable scaleHover' onClick={instagramOnClick}>
 					<img style={styles.socialMediaIcon} src={instagram} alt='Instagram' />
 				</a>
-				<a className='clickable' onClick={tiktokOnClick}>
+				<a style={styles.socialMediaIconWrapper} className='clickable scaleHover' onClick={tiktokOnClick}>
 					<img style={styles.socialMediaIcon} src={tiktok} alt='TikTok' />
 				</a>
-				<a className='clickable' onClick={githubOnClick}>
+				<a style={styles.socialMediaIconWrapper} className='clickable scaleHover' onClick={githubOnClick}>
 					<img style={styles.socialMediaIcon} src={github} alt='GitHub' />
 				</a>
 			</div>
