@@ -1,4 +1,5 @@
 import React, { CSSProperties } from 'react';
+import { animations } from '../theme';
 
 const Loading: React.FC = () => {
 	const styles: {
@@ -7,11 +8,14 @@ const Loading: React.FC = () => {
 		container: {
 			textAlign: 'center',
 		},
+		title: {
+			...animations.titleInk(),
+		},
 	};
 
 	return (
 		<div style={styles.container}>
-			<h2>Loading...</h2>
+			<h2 style={styles.title}>Loading...</h2>
 		</div>
 	);
 };
