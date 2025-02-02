@@ -1,5 +1,5 @@
 import React, { CSSProperties, ReactNode } from 'react';
-import globalStyles from '../theme';
+import { globalStyles } from '../theme';
 
 interface PageProps {
 	variant?: 'fullscreen' | 'sprawling';
