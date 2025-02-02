@@ -3,7 +3,7 @@ import { Pages, Categories } from '../../types';
 
 export const setBrowserUrl = (url: string) => history.pushState(null, '', `${url}`);
 
-const getUrl = (): string => {
+export const getUrl = (): string => {
 	const fullUrl = window.location.href;
 	let url = new URL(fullUrl).pathname;
 	if (url.slice(-1) === '/' && url.length > 1)
