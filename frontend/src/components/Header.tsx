@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({
 	setUrl,
 	variant = 'big',
 }) => {
-	const { isTablet } = useResponsive();
+	const { isMobile } = useResponsive();
 	const [artistHovered, setArtistHovered] = useState<boolean>(false);
 	const [writerHovered, setWriterHovered] = useState<boolean>(false);
 	const isArtistUrl = url.includes('/artist');
@@ -33,16 +33,17 @@ const Header: React.FC<HeaderProps> = ({
 		categoriesWrapper: {
 			display: 'flex',
 			justifyContent: 'center',
-			alignItems: 'stretch',
-			flexDirection: isTablet && variant !== 'small' ? 'column' : 'row',
+			alignItems: isMobile && variant !== 'small' ? 'center' : 'stretch',
+			flexDirection: isMobile && variant !== 'small' ? 'column' : 'row',
 			transform: variant === 'big' ? 'scale(1)' : 'scale(0.5)',
 			transformOrigin: 'top center',
 			marginTop: variant === 'big' ? globalStyles.spacing.double : globalStyles.spacing.standard,
 		},
 		seperator: {
 			background: globalStyles.colors.yellow,
-			width: '3px',
-			margin: `0 ${globalStyles.spacing.double}`,
+			width: isMobile && variant !== 'small' ? '50px' : '3px',
+			height: isMobile && variant !== 'small' ? '3px' : 'auto',
+			margin: isMobile && variant !== 'small' ? `${globalStyles.spacing.double} 0` : `0 ${globalStyles.spacing.double}`,
 			animation: `header-seperator-animation ${globalStyles.transitions.slow} forwards`,
 		},
 	};
