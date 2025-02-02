@@ -18,16 +18,6 @@ const Contact: React.FC<ContactProps> = ({
 	const [responseMessage, setResponseMessage] = useState<React.JSX.Element | null>(null);
 	const [blockClick, setBlockClick] = useState<boolean>(false);
 
-	const successfulResponseMessage =
-		<h4>Thanks for reaching out! I&apos;ll get back to you as soon as I can.<br></br>
-		You&apos;ll be redirected to the homepage shortly.</h4>;
-
-	const failedResponseMessage = 
-		<h4>Looks like there was a technical problem delivering your email.<br></br>
-		Try again later or email me directly at magdihazaa@gmail.com<br></br></h4>;
-
-	const pendingResponseMessage = <h4>Sending...</h4>;
-
 	const styles: {
 		[key: string]: CSSProperties;
 	} = {
@@ -41,6 +31,10 @@ const Contact: React.FC<ContactProps> = ({
 		textWrapper: {
 			marginBottom: globalStyles.spacing.standard,
 			textAlign: isMobile ? 'center' : 'left',
+		},
+		emailLink: {
+			textDecoration: 'underline',
+			fontWeight: globalStyles.fontWeights.black,
 		},
 		nameEmailWrapper: {
 			display: 'flex',
@@ -60,6 +54,25 @@ const Contact: React.FC<ContactProps> = ({
 			width: '100%',
 		},
 	};
+
+	const Email = () =>
+		<a
+			style={styles.emailLink}
+			className = 'clickable'
+			href='mailto:magdihazaa@gmail.com'
+		>
+			magdihazaa@gmail.com
+		</a>;
+
+	const successfulResponseMessage =
+		<h4>Thanks for reaching out! I&apos;ll get back to you as soon as I can.<br></br>
+		You&apos;ll be redirected to the homepage shortly.</h4>;
+
+	const failedResponseMessage = 
+		<h4>Looks like there was a technical problem delivering your email.<br></br>
+		Try again later or email me directly at <Email /><br></br></h4>;
+
+	const pendingResponseMessage = <h4>Sending...</h4>;
 
 	useEffect(() => {
 		AnalyticsEngineClient.sendMetric('VIEWED_CONTACT_PAGE');
@@ -106,7 +119,7 @@ const Contact: React.FC<ContactProps> = ({
 	return (
 		<div>
 			<h2 style={styles.title}>Contact</h2>
-			<h5 style={styles.textWrapper}>Fill out the form below or email me directly at magdihazaa@gmail.com</h5>
+			<h5 style={styles.textWrapper}>Fill out the form below or email me directly at <Email /></h5>
 			<form onSubmit={onSubmit}>
 				<div style={styles.nameEmailWrapper}>
 					<input
