@@ -3,7 +3,7 @@ import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import { openExternalUrl } from '../routing';
 import Markdown from './Markdown';
 import useResponsive from '../hooks/useResponsive';
-import globalStyles from '../theme';
+import { globalStyles, animations } from '../theme';
 import { Post } from '../../../types';
 import backArrow from '../assets/back_arrow.svg';
 import nextArrow from '../assets/next_arrow.svg';
@@ -42,6 +42,9 @@ const PostPage: React.FC<PostPageProps> = ({
 		},
 		backArrow: {
 			width: '40px',
+		},
+		title: {
+			...animations.titleInk(),
 		},
 		mediumYear: {
 			marginTop: globalStyles.spacing.standard,
@@ -85,19 +88,19 @@ const PostPage: React.FC<PostPageProps> = ({
 			<div style={styles.titleWrapper}>
 				<a
 					style={styles.backArrowWrapper}
-					className='clickable'
+					className='clickable translateReverseHover'
 					onClick={backArrowOnClick}
 				>
 					<img style={styles.backArrow} src={backArrow} alt='Back arrow' />
 				</a>
-				<h2>{title}</h2>
+				<h2 style={styles.title} className='extraLineHeight'>{title}</h2>
 				<h4 style={styles.mediumYear}>{medium}, {year}</h4>
 				{publication && (
 					externalUrl
 						?
 						<a
 							style={styles.publicationWrapper}
-							className='clickable'
+							className='clickable translateHover'
 							onClick={() => publicationOnClick(externalUrl)}
 						>
 							<h5 style={styles.publication}>{publication}</h5>
