@@ -2,7 +2,7 @@ import React, { useEffect, CSSProperties } from 'react';
 import { PortableText } from '@portabletext/react';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import useResponsive from '../hooks/useResponsive';
-import globalStyles from '../theme';
+import { globalStyles, animations } from '../theme';
 import { BioPage } from '../../../types';
 
 interface BioPageProps extends BioPage {
@@ -29,11 +29,11 @@ const BioPage: React.FC<BioPageProps> = ({
 			marginBottom: isMobile ? globalStyles.spacing.standard : '0',
 			marginRight: isMobile ? 'auto' : globalStyles.spacing.double,
 			marginLeft: isMobile ? 'auto' : '0',
-			borderRadius: '20px',
 		},
 		title: {
-			marginBottom: globalStyles.spacing.standard,
+			marginBottom: globalStyles.spacing.double,
 			textAlign: isMobile ? 'center' : 'left',
+			...animations.titleInk(),
 		},
 	};
 
@@ -47,7 +47,9 @@ const BioPage: React.FC<BioPageProps> = ({
 			<div>
 				<h2 style={styles.title}>Bio</h2>
 				{image && isMobile && <img style={styles.image} src={image.src} alt={image.alt} /> }
-				<PortableText value={bio} />
+				<div className='bioTextWrapper'>
+					<PortableText value={bio} />
+				</div>
 			</div>
 		</div>
 	);
