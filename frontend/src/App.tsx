@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import { getAllData } from './requests';
-import { setBrowserUrl, getInitialUrl, isPostUrl, getCategory } from './routing';
+import { setBrowserUrl, getUrl, getInitialUrl, isPostUrl, getCategory } from './routing';
 import useResponsive from './hooks/useResponsive';
 import Page from './components/Page';
 import Background from './components/Background';
@@ -33,6 +33,8 @@ const App: React.FC = () => {
 			const allData: AllData = await getAllData();
 			seAlltData(allData);
 		})();
+
+		window.addEventListener('popstate', () => setUrl(getUrl()));
 	}, []);
 
 	useEffect(() => {
