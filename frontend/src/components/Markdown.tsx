@@ -1,10 +1,10 @@
 import React, { CSSProperties, JSX } from 'react';
 import { PortableText, PortableTextReactComponents } from '@portabletext/react';
 import { TypedObject } from '@portabletext/types';
-import { Image } from '../../../../types';
+import { Image } from '../../../types';
 
 interface BlockComponentProps {
-	type: 'normal' | 'centered' | 'poetry';
+	type: 'normal' | 'proseLeft' | 'proseCenter' | 'poetry';
 	children: JSX.Element[];
 }
 
@@ -12,53 +12,13 @@ const BlockComponent: React.FC<BlockComponentProps> = ({
 	type,
 	children,
 }) => {
-	const styles: {
-		[key: string]: CSSProperties;
-	} = {
-		paragraph: {
-			textIndent: type === 'normal' ? '2.5rem' : '0',
-			lineHeight: type === 'poetry' ? '1.2rem' : '1.6rem',
-			textAlign: type === 'centered' ? 'center' : 'left',
-		},
-	};
-
 	//@ts-ignore
 	if (children.length === 1 && children[0] === '') return <br />;
 
 	return (
-		<p style={styles.paragraph}>
+		<p className={type}>
 			{children}
 		</p>
-	);
-};
-
-const BlockComponentNormal: React.FC<BlockComponentProps> = ({
-	children,
-}) => {
-	return (
-		<BlockComponent type='normal'>
-			{children}
-		</BlockComponent>
-	);
-};
-
-const BlockComponentCentered: React.FC<BlockComponentProps> = ({
-	children,
-}) => {
-	return (
-		<BlockComponent type='centered'>
-			{children}
-		</BlockComponent>
-	);
-};
-
-const BlockComponentPoetry: React.FC<BlockComponentProps> = ({
-	children,
-}) => {
-	return (
-		<BlockComponent type='poetry'>
-			{children}
-		</BlockComponent>
 	);
 };
 
@@ -109,12 +69,22 @@ const VideoComponent: React.FC<VideoComponentProps> = ({
 
 const markdownComponents: Partial<PortableTextReactComponents> = {
 	block: {
-		//@ts-ignore
-		normal: BlockComponentNormal,
-		//@ts-ignore
-		centered: BlockComponentCentered,
-		//@ts-ignore
-		poetry: BlockComponentPoetry,
+		normal: ({
+			children,
+			//@ts-ignore
+		}) => <BlockComponent type='normal'>{children}</BlockComponent>,
+		proseLeft: ({
+			children,
+			//@ts-ignore
+		}) => <BlockComponent type='proseLeft'>{children}</BlockComponent>,
+		proseCenter: ({
+			children,
+			//@ts-ignore
+		}) => <BlockComponent type='proseCenter'>{children}</BlockComponent>,
+		poetry: ({
+			children,
+			//@ts-ignore
+		}) => <BlockComponent type='poetry'>{children}</BlockComponent>,
 	},
 	types: {
 		image: ImageComponent,

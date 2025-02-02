@@ -67,8 +67,12 @@ export default {
                             value: 'normal',
                         },
                         {
-                            title: 'Centered',
-                            value: 'centered',
+                            title: 'Prose Left',
+                            value: 'proseLeft',
+                        },
+                        {
+                            title: 'Prose Center',
+                            value: 'proseCenter',
                         },
                         {
                             title: 'Poetry',
