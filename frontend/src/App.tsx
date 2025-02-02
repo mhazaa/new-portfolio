@@ -56,7 +56,7 @@ const App: React.FC = () => {
 		<div>
 			<Background />
 
-			<Page>
+			<Page variant='fullscreen'>
 				<Loading />
 			</Page>
 		</div>
@@ -88,6 +88,7 @@ const App: React.FC = () => {
 				{(url === '/artist' || url === '/writer') &&
 					<Portfolio
 						posts={allData.portfolio[url.substring(1) as Categories]}
+						showScrollbar={false}
 						setUrl={setUrl}
 					/>
 				}
