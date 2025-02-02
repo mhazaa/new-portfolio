@@ -15,6 +15,12 @@ export default {
       of: [
         {
           type: 'block',
+          styles: [
+            {
+                title: 'Normal',
+                value: 'normal',
+            },
+          ],
         },
       ],
       validation: (Rule: any) => Rule.required(),
