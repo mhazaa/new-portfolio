@@ -6,8 +6,8 @@ const Background: React.FC = () => {
 		[key: string]: CSSProperties;
 	} = {
 		container: {
-			position: 'fixed',
 			display: 'flex',
+			position: 'fixed',
 			top: '0',
 			left: '0',
 			height: '100%',

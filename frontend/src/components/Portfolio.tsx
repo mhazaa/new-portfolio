@@ -34,8 +34,8 @@ const Portfolio: React.FC<PortfolioProps> = ({
 			flexDirection: 'column',
 		},
 		contentWrapper: {
-			position: 'relative',
 			display: 'flex',
+			position: 'relative',
 		},
 		scrollbar: {
 			position: 'absolute',

@@ -12,8 +12,8 @@ const Logo: React.FC<LogoProps> = ({
 		[key: string]: CSSProperties;
 	} = {
 		container: {
-			position: 'relative',
 			display: 'flex',
+			position: 'relative',
 			width: '100%',
 			maxWidth: '250px',
 			margin: 'auto',

@@ -14,8 +14,8 @@ const Page: React.FC<PageProps> = ({
 		[key: string]: CSSProperties;
 	} = {
 		container: {
-			position: variant === 'fullscreen' ? 'absolute' : 'relative',
 			display: 'flex',
+			position: variant === 'fullscreen' ? 'absolute' : 'relative',
 			flexDirection: 'column',
 			justifyContent: 'center',
 			alignItems: 'center',
