@@ -15,7 +15,7 @@ const Loading: React.FC = () => {
 
 	return (
 		<div style={styles.container}>
-			<h2 style={styles.title}>Loading...</h2>
+			<h2 style={styles.title} className='unselectable'>Loading...</h2>
 		</div>
 	);
 };
