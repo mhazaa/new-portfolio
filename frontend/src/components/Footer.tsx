@@ -82,7 +82,7 @@ const Footer: React.FC<FooterProps> = ({
 						className='clickable translateHover'
 						onClick={resumeOnClick}
 					>
-						<h6>Resumé</h6>
+						<h6>Resume</h6>
 					</a>
 				</li>
 				<li>
