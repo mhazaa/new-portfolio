@@ -41,14 +41,22 @@ const Header: React.FC<HeaderProps> = ({
 		},
 		seperator: {
 			background: globalStyles.colors.yellow,
-			width: isMobile && variant !== 'small' ? '50px' : '3px',
 			height: isMobile && variant !== 'small' ? '3px' : 'auto',
+			width: isMobile && variant !== 'small' ? '50px' : '3px',
 			margin: isMobile && variant !== 'small' ? `${globalStyles.spacing.double} 0` : `0 ${globalStyles.spacing.double}`,
 			animation: `header-seperator-animation ${globalStyles.transitions.slow} forwards`,
 		},
 	};
-	
-	const textStyle = (selected: boolean) => selected ? animations.titleInk() : animations.titleInkInactive();
+
+	const artistTextStyle = () => {
+		if (isArtistUrl && !writerHovered) return animations.titleInk();
+		return artistHovered ? animations.titleInk() : animations.titleInkInactive();
+	};
+
+	const writerTextStyle = () => {
+		if (isWriterUrl && !artistHovered) return animations.titleInk();
+		return writerHovered ? animations.titleInk() : animations.titleInkInactive();
+	};
 
 	const artistOnClick = () => setUrl('/artist');
 
@@ -60,12 +68,12 @@ const Header: React.FC<HeaderProps> = ({
 
 			<div style={styles.categoriesWrapper}>
 				<a
-					onMouseEnter={isArtistUrl ? () => {} : () => setArtistHovered(true)}
-					onMouseLeave={isArtistUrl ? () => {} : () => setArtistHovered(false)}
+					onMouseEnter={() => setArtistHovered(true)}
+					onMouseLeave={() => setArtistHovered(false)}
 					onClick={artistOnClick}
 				>
 					<h2
-						style={textStyle(artistHovered || isArtistUrl)}
+						style={artistTextStyle()}
 						className='unselectable'
 					>
 						Artist
@@ -73,12 +81,12 @@ const Header: React.FC<HeaderProps> = ({
 				</a>
 				<div style={styles.seperator} />
 				<a
-					onMouseEnter={isWriterUrl ? () => {} : () => setWriterHovered(true)}
-					onMouseLeave={isWriterUrl ? () => {} : () => setWriterHovered(false)}
+					onMouseEnter={() => setWriterHovered(true)}
+					onMouseLeave={() => setWriterHovered(false)}
 					onClick={writerOnClick}
 				>
 					<h2
-						style={textStyle(writerHovered || isWriterUrl)}
+						style={writerTextStyle()}
 						className='unselectable'
 					>
 						Writer
