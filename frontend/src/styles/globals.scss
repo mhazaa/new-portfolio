@@ -1,14 +1,14 @@
-@import url('https://use.typekit.net/kdg5doa.css');
+@import url('https://use.typekit.net/urr5iji.css');
 
 @font-face {
-    font-family: "BoobsFont";
+    font-family: 'BoobsFont';
     src: url('../assets/fonts/BoobsFont.ttf');
 	font-display: block;
 }
 
 /* FONT FAMILIES */
 $fontPrimary: 'brandon-grotesque', sans-serif;
-$fontSecondary: 'citrus-gothic-rough', sans-serif;
+$fontSecondary: 'BoobsFont';
 $fontParagraph: 'Times New Roman', Times, serif;
 /* FONT WEIGHT */
 $thin: 100;
@@ -151,7 +151,7 @@ h1, h2, h3, h4, h5, h6, button, input, textarea {
 }
 
 h2 {
-	font-family: 'BoobsFont';
+	font-family: $fontSecondary;
 	text-transform: uppercase;
 	font-size: 5.9rem;
 	font-weight: $regular;
