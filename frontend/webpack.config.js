@@ -43,7 +43,7 @@ module.exports = {
 					options: {
 						outputPath: 'assets/imgs',
 					},
-				}
+				},
 			},
 		],
 	},
