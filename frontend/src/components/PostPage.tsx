@@ -32,19 +32,23 @@ const PostPage: React.FC<PostPageProps> = ({
 			marginTop: '250px',
 		},
 		titleWrapper: {
+			display: 'flex',
+			flexDirection: 'column',
+			alignItems: isMobile ? 'center' : 'start',
 			width: isTablet ? '100%' : isDesktop ? '85%' : '70%',
 			textAlign: isMobile ? 'center' : 'left',
 		},
 		backArrowWrapper: {
-			position: 'relative',
 			display: 'inline-flex',
+			position: 'relative',
 			paddingBottom: globalStyles.spacing.double,
 		},
 		backArrow: {
 			width: '40px',
 		},
 		title: {
-			...animations.titleInk(),
+			display: 'inline-flex',
+			...animations.titleInk('170%'),
 		},
 		mediumYear: {
 			marginTop: globalStyles.spacing.standard,
