@@ -8,13 +8,18 @@ const animations = {
 		color: 'transparent',
 		transition: `-webkit-text-stroke-color ${globalStyles.transitions.standard}`,
 	}),
-	titleInk: () => ({
-		WebkitTextStroke: '2.2px',
-		WebkitTextStrokeColor: globalStyles.colors.yellow,
-		color: 'transparent',
-		transition: `-webkit-text-stroke-color ${globalStyles.transitions.standard}`,
-		background: `center/120% url('${titleInk}?v=${new Date().valueOf()}') text`,
-	}),
+	titleInk: (
+		percentage = '120%',
+	) => {
+
+		return {
+			WebkitTextStroke: '2.2px',
+			WebkitTextStrokeColor: globalStyles.colors.yellow,
+			color: 'transparent',
+			transition: `-webkit-text-stroke-color ${globalStyles.transitions.standard}`,
+			background: `center center/${percentage} url('${titleInk}?v=${new Date().valueOf()}') text no-repeat`,
+		};
+	},
 };
 
 export default animations;

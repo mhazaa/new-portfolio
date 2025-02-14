@@ -24,10 +24,14 @@ const Contact: React.FC<ContactProps> = ({
 		responseMessageWrapper: {
 			textAlign: 'center',
 		},
-		title: {
-			marginBottom: globalStyles.spacing.double,
+		container: {
 			textAlign: isMobile ? 'center' : 'left',
-			...animations.titleInk(),
+		},
+		title: {
+			display: 'inline-block',
+			marginBottom: globalStyles.spacing.standard,
+			textAlign: isMobile ? 'center' : 'left',
+			...animations.titleInk('110%'),
 		},
 		textWrapper: {
 			marginBottom: globalStyles.spacing.standard,
@@ -118,7 +122,7 @@ const Contact: React.FC<ContactProps> = ({
 	);
 
 	return (
-		<div>
+		<div style={styles.container}>
 			<h2 style={styles.title}>Contact</h2>
 			<h5 style={styles.textWrapper}>Fill out the form below or email me directly at <Email /></h5>
 			<form onSubmit={onSubmit}>

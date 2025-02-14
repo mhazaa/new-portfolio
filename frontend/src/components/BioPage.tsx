@@ -22,18 +22,23 @@ const BioPage: React.FC<BioPageProps> = ({
 			justifyContent: 'center',
 			alignItems: 'center',
 			flexDirection: isMobile ? 'column' : 'row',
+			textAlign: isMobile ? 'center' : 'left',
 		},
 		image: {
 			display: 'block',
+			height: isMobile ? '150px' : 'auto',
 			width: isMobile ? '150px' : '200px',
+			objectFit: 'cover',
+			objectPosition: 'top center',
 			marginBottom: isMobile ? globalStyles.spacing.standard : '0',
 			marginRight: isMobile ? 'auto' : globalStyles.spacing.double,
 			marginLeft: isMobile ? 'auto' : '0',
 		},
 		title: {
-			marginBottom: globalStyles.spacing.double,
+			display: 'inline-block',
+			marginBottom: globalStyles.spacing.standard,
 			textAlign: isMobile ? 'center' : 'left',
-			...animations.titleInk(),
+			...animations.titleInk('170%'),
 		},
 	};
 
