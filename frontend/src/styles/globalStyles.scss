@@ -52,6 +52,7 @@ html, body {
 	width: 100%;
 	overflow-x: hidden;
 	font-size: 16px;
+	cursor: none;
 
 	@media (max-width: $breakpointDesktop) {
 		font-size: 14px;
