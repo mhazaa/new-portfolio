@@ -7,7 +7,7 @@ interface HeaderProps {
 	url: string;
 	setUrl: (url: string) => void;
 	variant?: 'big' | 'small';
-}
+};
 
 const Header: React.FC<HeaderProps> = ({
 	url,
@@ -44,7 +44,7 @@ const Header: React.FC<HeaderProps> = ({
 			height: isMobile && variant !== 'small' ? '3px' : 'auto',
 			width: isMobile && variant !== 'small' ? '50px' : '3px',
 			margin: isMobile && variant !== 'small' ? `${globalStyles.spacing.double} 0` : `0 ${globalStyles.spacing.double}`,
-			animation: `header-seperator-animation ${globalStyles.transitions.slow} forwards`,
+			animation: `headerSeperatorAnimation ${globalStyles.transitions.slow} forwards`,
 		},
 	};
 
@@ -79,7 +79,9 @@ const Header: React.FC<HeaderProps> = ({
 						Artist
 					</h2>
 				</a>
+				
 				<div style={styles.seperator} />
+
 				<a
 					onMouseEnter={() => setWriterHovered(true)}
 					onMouseLeave={() => setWriterHovered(false)}
