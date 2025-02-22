@@ -27,6 +27,7 @@ $yellow: #ffc758;
 $teal: #8dcb97;
 $brown: #6e523b;
 /* TRANSITIONS */
+$transitionStandard: 1.2s cubic-bezier(.07, .76, .35, 1.06);
 $transitionFast: 0.2s ease;
 /* BREAKPOINTS */
 $breakpointMobile: 568px;
@@ -52,7 +53,7 @@ html, body {
 	width: 100%;
 	overflow-x: hidden;
 	font-size: 16px;
-	cursor: none;
+	cursor: none !important;
 
 	@media (max-width: $breakpointDesktop) {
 		font-size: 14px;
@@ -68,13 +69,11 @@ ul {
 }
 
 a {
-	cursor: pointer;
 	text-decoration: none;
 	color: inherit;
 }
 
 .clickable {
-	cursor: pointer !important;
 	transform: scale(1) translateX(0);
 	transition: opacity $transitionFast, transform $transitionFast;
 	
@@ -88,15 +87,44 @@ a {
 		}
 	}
 
-	&.translateHover {
-		&:hover {
-			transform: translateX(5px) !important;
+	@mixin translateHover ($translateAmount) {
+		position: relative;
+
+		&:before {
+			content: '';
+			background: $teal;
+			position: absolute;
+			height: 100%;
+			width: 3px;
+			top: 0;
+			left: -$translateAmount;
+			transform-origin: top;
+			transform: scale(0);
+			transition: transform $transitionStandard;
 		}
+
+		&:hover {
+			transform: translateX($translateAmount) !important;
+			opacity: 1 !important;
+
+			&:before {
+				transform: scale(1);
+			}
+		}
+	}
+
+	&.translateHover {
+		@include translateHover(5px);
+	}
+
+	&.translateExtraHover {
+		@include translateHover(8px);
 	}
 
 	&.translateReverseHover {
 		&:hover {
 			transform: translateX(-5px) !important;
+			opacity: 1 !important;
 		}
 	}
 }
@@ -222,7 +250,6 @@ input, textarea {
 
 button, input[type=submit] {
 	background: $yellow;
-	cursor: pointer;
 	border: none;
 	padding: $spacingStandard $spacingExtraDouble;
 

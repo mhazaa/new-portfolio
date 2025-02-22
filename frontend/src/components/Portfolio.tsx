@@ -11,7 +11,7 @@ interface PortfolioProps {
 	posts: Post[];
 	showScrollbar?: boolean;
 	setUrl: (url: string) => void;
-}
+};
 
 const Portfolio: React.FC<PortfolioProps> = ({
 	posts,
@@ -72,7 +72,6 @@ const Portfolio: React.FC<PortfolioProps> = ({
 			scrollBehavior: 'smooth',
 		},
 		postLabel: {
-			cursor: 'default',
 			marginTop: globalStyles.spacing.standard,
 		},
 		firstPostLabel: {
@@ -97,7 +96,6 @@ const Portfolio: React.FC<PortfolioProps> = ({
 			marginTop: `${globalStyles.spacing.double}`,
 			marginBottom: `${globalStyles.spacing.standard}`,
 			opacity: topArrowVisible ? '1' : '0',
-			cursor: topArrowVisible ? 'pointer' : 'default',
 		},
 		arrowTop: {
 			width: '35px',
@@ -107,7 +105,6 @@ const Portfolio: React.FC<PortfolioProps> = ({
 			display: 'inline-block',
 			marginTop: globalStyles.spacing.standard,
 			opacity: bottomArrowVisible ? '1' : '0',
-			cursor: bottomArrowVisible ? 'pointer' : 'default',
 		},
 		arrowBottom: {
 			width: '35px',
@@ -134,7 +131,9 @@ const Portfolio: React.FC<PortfolioProps> = ({
 		sp = Math.floor(sp);
 		setScrollPercentage(sp);
 
+		// eslint-disable-next-line
 		(elScrollTop <= 2) ? setTopArrowVisible(false) : setTopArrowVisible(true);
+		// eslint-disable-next-line
 		(elScrollTop >= maxScroll - 2) ? setBottomArrowVisible(false) : setBottomArrowVisible(true);
 	};
 
@@ -190,12 +189,12 @@ const Portfolio: React.FC<PortfolioProps> = ({
 					...styles.postLabel,
 					...(i === 0 && {...styles.firstPostLabel})
 				}}
-				className={onlyOneUrl ? 'clickable translateHover' : ''}
+				className={onlyOneUrl ? 'clickable translateExtraHover' : ''}
 				onClick={() => onlyOneUrl && onClick(post.internalUrl, post.externalUrl)}
 			>
 				<div
 					style={styles.item}
-					className={post.internalUrl && !onlyOneUrl ? 'clickable translateHover' : ''}
+					className={post.internalUrl && !onlyOneUrl ? 'clickable translateExtraHover' : ''}
 					onClick={() => itemOnClick(post.internalUrl)}
 				>
 					<h3 style={styles.itemTitle}>{post.title}</h3>
@@ -204,7 +203,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 				{post.publication &&
 					<div
 						style={styles.itemPublication}
-						className={post.externalUrl && !onlyOneUrl ? 'clickable translateHover' : ''}
+						className={post.externalUrl && !onlyOneUrl ? 'clickable translateExtraHover' : ''}
 						onClick={() => publicationOnClick(post.externalUrl)}
 					>
 						<h5>{post.publication}</h5>

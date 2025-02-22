@@ -10,7 +10,7 @@ import nextArrow from '../assets/next_arrow.svg';
 
 interface PostPageProps extends Post {
 	setUrl: (url: string) => void;
-}
+};
 
 const PostPage: React.FC<PostPageProps> = ({
 	id,
@@ -104,7 +104,7 @@ const PostPage: React.FC<PostPageProps> = ({
 						?
 						<a
 							style={styles.publicationWrapper}
-							className='clickable translateHover'
+							className='clickable translateExtraHover'
 							onClick={() => publicationOnClick(externalUrl)}
 						>
 							<h5 style={styles.publication}>{publication}</h5>
