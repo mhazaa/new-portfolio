@@ -5,8 +5,9 @@ import useResponsive from '../hooks/useResponsive';
 import { globalStyles, animations } from '../theme';
 import { BioPage } from '../../../types';
 
+// eslint-disable-next-line
 interface BioPageProps extends BioPage {
-}
+};
 
 const BioPage: React.FC<BioPageProps> = ({
 	image,
