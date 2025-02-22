@@ -2,11 +2,11 @@
 import { globalStyles } from '../frontend/src/theme';
 
 interface StarterComponentProps {
-	text: string;
-}
+	title: string;
+};
 
 const StarterComponent: React.FC<StarterComponentProps> = ({
-	text,
+	title,
 }) => {
 	const styles: {
 		[key: string]: CSSProperties;
@@ -18,7 +18,7 @@ const StarterComponent: React.FC<StarterComponentProps> = ({
 
 	return (
 		<div style={styles.container}>
-			<h1>{text}</h1>
+			<h1>{title}</h1>
 		</div>
 	);
 };
