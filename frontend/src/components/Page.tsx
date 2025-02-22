@@ -4,7 +4,7 @@ import { globalStyles } from '../theme';
 interface PageProps {
 	variant?: 'fullscreen' | 'sprawling';
 	children: ReactNode;
-}
+};
 
 const Page: React.FC<PageProps> = ({
 	variant = 'fullscreen',
