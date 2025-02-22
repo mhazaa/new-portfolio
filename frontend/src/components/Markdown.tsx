@@ -6,13 +6,13 @@ import { Image } from '../../../types';
 interface BlockComponentProps {
 	type: 'normal' | 'proseLeft' | 'proseCenter' | 'poetry';
 	children: JSX.Element[];
-}
+};
 
 const BlockComponent: React.FC<BlockComponentProps> = ({
 	type,
 	children,
 }) => {
-	//@ts-ignore
+	// @ts-expect-error
 	if (children.length === 1 && children[0] === '') return <br />;
 
 	return (
@@ -24,7 +24,7 @@ const BlockComponent: React.FC<BlockComponentProps> = ({
 
 interface ImageComponentProps {
 	value: Image;
-}
+};
 
 const ImageComponent: React.FC<ImageComponentProps> = ({
 	value,
@@ -46,7 +46,7 @@ interface VideoComponentProps {
 	value: {
 		src: string;
 	};
-}
+};
 
 const VideoComponent: React.FC<VideoComponentProps> = ({
 	value,
@@ -71,19 +71,19 @@ const markdownComponents: Partial<PortableTextReactComponents> = {
 	block: {
 		normal: ({
 			children,
-			//@ts-ignore
+			// @ts-expect-error
 		}) => <BlockComponent type='normal'>{children}</BlockComponent>,
 		proseLeft: ({
 			children,
-			//@ts-ignore
+			// @ts-expect-error
 		}) => <BlockComponent type='proseLeft'>{children}</BlockComponent>,
 		proseCenter: ({
 			children,
-			//@ts-ignore
+			// @ts-expect-error
 		}) => <BlockComponent type='proseCenter'>{children}</BlockComponent>,
 		poetry: ({
 			children,
-			//@ts-ignore
+			// @ts-expect-error
 		}) => <BlockComponent type='poetry'>{children}</BlockComponent>,
 	},
 	types: {
@@ -94,7 +94,7 @@ const markdownComponents: Partial<PortableTextReactComponents> = {
 	
 interface MarkdownProps {
 	markdown: TypedObject | TypedObject[];
-}
+};
 
 const Markdown: React.FC<MarkdownProps> = ({
 	markdown,
