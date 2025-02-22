@@ -9,7 +9,7 @@ let _timeout: ReturnType<typeof setTimeout> | undefined;
 
 interface ContactProps {
 	setUrl: (url: string) => void;
-}
+};
 
 const Contact: React.FC<ContactProps> = ({
 	setUrl,

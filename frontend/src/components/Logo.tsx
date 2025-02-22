@@ -3,7 +3,7 @@ import logo from '../assets/logo.svg';
 
 interface LogoProps {
 	setUrl: (url: string) => void;
-}
+};
 
 const Logo: React.FC<LogoProps> = ({
 	setUrl,

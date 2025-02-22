@@ -8,7 +8,7 @@ import github from '../assets/github.svg';
 interface FooterProps {
 	resume: string;
 	setUrl: (url: string) => void;
-}
+};
 
 const Footer: React.FC<FooterProps> = ({
 	resume,

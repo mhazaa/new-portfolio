@@ -14,7 +14,7 @@ export default {
 		prepare () {
 			return {
 				title: 'Video',
-			}
+			};
 		},
 	},
 };

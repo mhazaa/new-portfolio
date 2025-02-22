@@ -5,11 +5,11 @@ import post from './post';
 import portfolio from './portfolio';
 
 const schemas = [
-    bioPage,
-    resume,
-    video,
-    post,
-    portfolio,
+	bioPage,
+	resume,
+	video,
+	post,
+	portfolio,
 ];
 
 export default schemas;
