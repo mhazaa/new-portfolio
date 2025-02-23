@@ -16,6 +16,7 @@ const useResponsive = () => {
 			setIsTablet(getIsTablet());
 			setIsDesktop(getIsDesktop());
 		};
+		
 		window.addEventListener('resize', onResize);
 		return () => window.removeEventListener('resize', onResize);
 	}, []);
