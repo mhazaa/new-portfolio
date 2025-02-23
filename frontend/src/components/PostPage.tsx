@@ -104,7 +104,7 @@ const PostPage: React.FC<PostPageProps> = ({
 						?
 						<a
 							style={styles.publicationWrapper}
-							className='clickable translateExtraHover'
+							className='clickable translateHover'
 							onClick={() => publicationOnClick(externalUrl)}
 						>
 							<h5 style={styles.publication}>{publication}</h5>

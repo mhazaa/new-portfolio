@@ -189,12 +189,12 @@ const Portfolio: React.FC<PortfolioProps> = ({
 					...styles.postLabel,
 					...(i === 0 && {...styles.firstPostLabel})
 				}}
-				className={onlyOneUrl ? 'clickable translateExtraHover' : ''}
+				className={onlyOneUrl ? 'clickable translateLineExtraHover' : ''}
 				onClick={() => onlyOneUrl && onClick(post.internalUrl, post.externalUrl)}
 			>
 				<div
 					style={styles.item}
-					className={post.internalUrl && !onlyOneUrl ? 'clickable translateExtraHover' : ''}
+					className={post.internalUrl && !onlyOneUrl ? 'clickable translateLineExtraHover' : ''}
 					onClick={() => itemOnClick(post.internalUrl)}
 				>
 					<h3 style={styles.itemTitle}>{post.title}</h3>
@@ -203,7 +203,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 				{post.publication &&
 					<div
 						style={styles.itemPublication}
-						className={post.externalUrl && !onlyOneUrl ? 'clickable translateExtraHover' : ''}
+						className={post.externalUrl && !onlyOneUrl ? 'clickable translateLineExtraHover' : ''}
 						onClick={() => publicationOnClick(post.externalUrl)}
 					>
 						<h5>{post.publication}</h5>

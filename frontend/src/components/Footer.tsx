@@ -70,7 +70,7 @@ const Footer: React.FC<FooterProps> = ({
 				<li>
 					<a
 						style={styles.menuItem}
-						className='clickable translateHover'
+						className='clickable translateLineHover'
 						onClick={bioOnClick}
 					>
 						<h6>Bio</h6>
@@ -79,7 +79,7 @@ const Footer: React.FC<FooterProps> = ({
 				<li>
 					<a
 						style={styles.menuItem}
-						className='clickable translateHover'
+						className='clickable translateLineHover'
 						onClick={resumeOnClick}
 					>
 						<h6>Resume</h6>
@@ -88,7 +88,7 @@ const Footer: React.FC<FooterProps> = ({
 				<li>
 					<a
 						style={styles.menuItem}
-						className='clickable translateHover'
+						className='clickable translateLineHover'
 						onClick={contactOnClick}
 					>
 						<h6>Contact</h6>

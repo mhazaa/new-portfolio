@@ -87,7 +87,19 @@ a {
 		}
 	}
 
-	@mixin translateHover ($translateAmount) {
+	&.translateHover {
+		&:hover {
+			transform: translateX(5px) !important;
+		}
+	}
+
+	&.translateReverseHover {
+		&:hover {
+			transform: translateX(-5px) !important;
+		}
+	}
+
+	@mixin translateLineHover ($translateAmount) {
 		position: relative;
 
 		&:before {
@@ -99,7 +111,7 @@ a {
 			top: 0;
 			left: -$translateAmount;
 			transform-origin: top;
-			transform: scale(0);
+			transform: scaleY(0);
 			transition: transform $transitionStandard;
 		}
 
@@ -108,24 +120,17 @@ a {
 			opacity: 1 !important;
 
 			&:before {
-				transform: scale(1);
+				transform: scaleY(1);
 			}
 		}
 	}
 
-	&.translateHover {
-		@include translateHover(5px);
+	&.translateLineHover {
+		@include translateLineHover(5px);
 	}
 
-	&.translateExtraHover {
-		@include translateHover(8px);
-	}
-
-	&.translateReverseHover {
-		&:hover {
-			transform: translateX(-5px) !important;
-			opacity: 1 !important;
-		}
+	&.translateLineExtraHover {
+		@include translateLineHover(8px);
 	}
 }
 
