@@ -112,7 +112,7 @@ const Contact: React.FC<ContactProps> = ({
 			AnalyticsEngineClient.sendMetric('SENT_CONTACT_FORM');
 			setResponseMessage(successfulResponseMessage);
 			_timeout = setTimeout(() => setUrl('/'), 10000);
-		}
+		};
 	};
 
 	if (responseMessage) return (
