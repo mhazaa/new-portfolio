@@ -19,7 +19,7 @@ export default (app: Application, collections: Collections): void => {
 			res.status(200).send(allData);
 		} catch (error) {
 			console.error(error);
-			return res.status(400).send(error);
+			res.status(400).send(error);
 		}
 	});
 
@@ -42,7 +42,7 @@ export default (app: Application, collections: Collections): void => {
 			res.status(200).send(responeData);
 		} catch (error) {
 			console.log(error);
-			return res.status(400).send(error);
+			res.status(400).send(error);
 		}
 	});
 };
