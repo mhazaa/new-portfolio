@@ -13,7 +13,7 @@ const BioPage: React.FC<BioPageProps> = ({
 	image,
 	bio,
 }) => {
-	const { isMobile } = useResponsive();
+	const { isMobile, isTablet } = useResponsive();
 
 	const styles: {
 		[key: string]: CSSProperties;
@@ -27,10 +27,8 @@ const BioPage: React.FC<BioPageProps> = ({
 		},
 		image: {
 			display: 'block',
-			height: isMobile ? '150px' : 'auto',
-			width: isMobile ? '150px' : '200px',
-			objectFit: 'cover',
-			objectPosition: 'top center',
+			height: 'auto',
+			width: isMobile ? '180px' : isTablet ? '230px' : '260px',
 			marginBottom: isMobile ? globalStyles.spacing.standard : '0',
 			marginRight: isMobile ? 'auto' : globalStyles.spacing.double,
 			marginLeft: isMobile ? 'auto' : '0',
