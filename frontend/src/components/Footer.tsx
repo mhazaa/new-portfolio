@@ -7,13 +7,18 @@ import github from '../assets/github.svg';
 
 interface FooterProps {
 	resume: string;
+	url: string;
 	setUrl: (url: string) => void;
 };
 
 const Footer: React.FC<FooterProps> = ({
 	resume,
+	url,
 	setUrl,
 }) => {
+	const isBioUrl = url === '/bio';
+	const isContactrUrl = url === '/contact';
+	
 	const styles: {
 		[key: string]: CSSProperties;
 	} = {
@@ -70,7 +75,7 @@ const Footer: React.FC<FooterProps> = ({
 				<li>
 					<a
 						style={styles.menuItem}
-						className='clickable translateLineHover'
+						className={`clickable translateLineHover ${isBioUrl ? 'translateLineHoverActive' : ''}`}
 						onClick={bioOnClick}
 					>
 						<h6>Bio</h6>
@@ -88,7 +93,7 @@ const Footer: React.FC<FooterProps> = ({
 				<li>
 					<a
 						style={styles.menuItem}
-						className='clickable translateLineHover'
+						className={`clickable translateLineHover ${isContactrUrl ? 'translateLineHoverActive' : ''}`}
 						onClick={contactOnClick}
 					>
 						<h6>Contact</h6>

@@ -115,7 +115,7 @@ a {
 			transition: transform $transitionStandard;
 		}
 
-		&:hover {
+		&:hover, &.translateLineHoverActive {
 			transform: translateX($translateAmount) !important;
 			opacity: 1 !important;
 
