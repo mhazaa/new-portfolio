@@ -3,6 +3,7 @@ import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import { openExternalUrl } from '../routing';
 import useResponsive from '../hooks/useResponsive';
 import map from '../helperFunctions/map';
+import { Pointer } from './Cursor';
 import { globalStyles } from '../theme';
 import { Post } from '../../../types';
 import arrow from '../assets/arrow.svg';
@@ -67,6 +68,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 			display: 'flex',
 			flexDirection: 'column',
 			height: '250px',
+			maxWidth: isMobile || isTablet ? '275px' : isDesktop ? '300px' : '325px',
 			overflowY: 'scroll',
 			paddingLeft: showScrollbar ? globalStyles.spacing.double : 0,
 			scrollBehavior: 'smooth',
@@ -77,21 +79,19 @@ const Portfolio: React.FC<PortfolioProps> = ({
 		firstPostLabel: {
 			marginTop: '0',
 		},
-		item: {
+		titleMediumWrapper: {
 			display: 'block',
-			maxWidth: isMobile ? '200px' : isTablet ? '250px' : 'none',
 		},
-		itemTitle: {
-			maxWidth: isDesktop ? 'unset' : '300px',
+		labelTitle: {
 		},
-		itemMediumYear: {
+		labelMediumYear: {
 			marginTop: globalStyles.spacing.half,
 		},
-		itemPublication: {
+		labelPublication: {
 			display: 'block',
 			marginTop: globalStyles.spacing.half,
 		},
-		arrowWrapperTop: {
+		arrowTopWrapper: {
 			display: 'inline-block',
 			marginTop: `${globalStyles.spacing.double}`,
 			marginBottom: `${globalStyles.spacing.standard}`,
@@ -101,7 +101,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 			width: '35px',
 			transform: 'rotate(180deg)',
 		},
-		arrowWrapperBottom: {
+		arrowBottomWrapper: {
 			display: 'inline-block',
 			marginTop: globalStyles.spacing.standard,
 			opacity: bottomArrowVisible ? '1' : '0',
@@ -110,10 +110,6 @@ const Portfolio: React.FC<PortfolioProps> = ({
 			width: '35px',
 		},
 	};
-
-	useEffect(() => {
-		AnalyticsEngineClient.sendMetric('VIEWED_PORTFOLIO');
-	}, []);
 
 	const refreshScroll = () => {
 		const el = itemsWrapperEl.current;
@@ -138,8 +134,11 @@ const Portfolio: React.FC<PortfolioProps> = ({
 	};
 
 	useEffect(() => {
+		AnalyticsEngineClient.sendMetric('VIEWED_PORTFOLIO');
+
 		refreshScroll();
 		itemsWrapperEl.current?.addEventListener('scroll', refreshScroll);
+		return () => itemsWrapperEl.current?.removeEventListener('scroll', refreshScroll);
 	}, []);
 
 	useEffect(() => {
@@ -192,23 +191,25 @@ const Portfolio: React.FC<PortfolioProps> = ({
 				className={onlyOneUrl ? 'clickable translateLineExtraHover' : ''}
 				onClick={() => onlyOneUrl && onClick(post.internalUrl, post.externalUrl)}
 			>
-				<div
-					style={styles.item}
-					className={post.internalUrl && !onlyOneUrl ? 'clickable translateLineExtraHover' : ''}
-					onClick={() => itemOnClick(post.internalUrl)}
-				>
-					<h3 style={styles.itemTitle}>{post.title}</h3>
-					<h4 style={styles.itemMediumYear}>{post.medium}, {post.year}</h4>
-				</div>
-				{post.publication &&
+				<Pointer>
 					<div
-						style={styles.itemPublication}
-						className={post.externalUrl && !onlyOneUrl ? 'clickable translateLineExtraHover' : ''}
-						onClick={() => publicationOnClick(post.externalUrl)}
+						style={styles.titleMediumWrapper}
+						className={post.internalUrl && !onlyOneUrl ? 'clickable translateLineExtraHover' : ''}
+						onClick={() => itemOnClick(post.internalUrl)}
 					>
-						<h5>{post.publication}</h5>
+						<h3 style={styles.labelTitle}>{post.title}</h3>
+						<h4 style={styles.labelMediumYear}>{post.medium}, {post.year}</h4>
 					</div>
-				}
+					{post.publication &&
+						<div
+							style={styles.labelPublication}
+							className={post.externalUrl && !onlyOneUrl ? 'clickable translateLineExtraHover' : ''}
+							onClick={() => publicationOnClick(post.externalUrl)}
+						>
+							<h5>{post.publication}</h5>
+						</div>
+					}
+				</Pointer>
 			</div>
 		);
 	};
@@ -216,15 +217,17 @@ const Portfolio: React.FC<PortfolioProps> = ({
 	return (
 		<div style={styles.container}>
 			<a
-				style={styles.arrowWrapperTop}
-				className='clickable scaleHover'
+				style={styles.arrowTopWrapper}
+				className='clickable'
 				onClick={topArrowOnClick}
 			>
-				<img
-					style={styles.arrowTop}
-					src={arrow}
-					alt='Up arrow'
-				/>
+				<Pointer>
+					<img
+						style={styles.arrowTop}
+						src={arrow}
+						alt='Up arrow'
+					/>
+				</Pointer>
 			</a>
 			<div style={styles.contentWrapper}>
 				{showScrollbar &&
@@ -243,15 +246,17 @@ const Portfolio: React.FC<PortfolioProps> = ({
 				</div>
 			</div>
 			<a
-				style={styles.arrowWrapperBottom}
-				className='clickable scaleHover'
+				style={styles.arrowBottomWrapper}
+				className='clickable'
 				onClick={bottomArrowOnClick}
 			>
-				<img
-					style={styles.arrowBottom}
-					src={arrow}
-					alt='Down arrow'
-				/>
+				<Pointer>
+					<img
+						style={styles.arrowBottom}
+						src={arrow}
+						alt='Down arrow'
+					/>
+				</Pointer>
 			</a>
 		</div>
 	);
