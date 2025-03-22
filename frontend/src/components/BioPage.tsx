@@ -49,7 +49,7 @@ const BioPage: React.FC<BioPageProps> = ({
 		<div style={styles.container}>
 			{image && !isMobile && <img style={styles.image} src={image.src} alt={image.alt} /> }
 			<div>
-				<h2 style={styles.title}>Bio</h2>
+				<h2 style={styles.title} className='unselectable'>Bio</h2>
 				{image && isMobile && <img style={styles.image} src={image.src} alt={image.alt} /> }
 				<div className='bioTextWrapper'>
 					<PortableText value={bio} />
