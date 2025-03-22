@@ -1,6 +1,7 @@
 import React, { useState, CSSProperties } from 'react';
 import useResponsive from '../hooks/useResponsive';
 import Logo from './Logo';
+import { Pointer } from './Cursor';
 import { globalStyles, animations } from '../theme';
 
 interface HeaderProps {
@@ -44,7 +45,7 @@ const Header: React.FC<HeaderProps> = ({
 			height: isMobile && variant !== 'small' ? '3px' : 'auto',
 			width: isMobile && variant !== 'small' ? '50px' : '3px',
 			margin: isMobile && variant !== 'small' ? `${globalStyles.spacing.double} 0` : `0 ${globalStyles.spacing.double}`,
-			animation: `headerSeperatorAnimation ${globalStyles.transitions.slow} forwards`,
+			animation: `headerSeperatorAnimation ${globalStyles.transitions.standard} forwards`,
 		},
 	};
 
@@ -72,12 +73,14 @@ const Header: React.FC<HeaderProps> = ({
 					onMouseLeave={() => setArtistHovered(false)}
 					onClick={artistOnClick}
 				>
-					<h2
-						style={artistTextStyle()}
-						className='unselectable'
-					>
-						Artist
-					</h2>
+					<Pointer>
+						<h2
+							style={artistTextStyle()}
+							className='unselectable'
+						>
+							Artist
+						</h2>
+					</Pointer>
 				</a>
 				
 				<div style={styles.seperator} />
@@ -87,12 +90,14 @@ const Header: React.FC<HeaderProps> = ({
 					onMouseLeave={() => setWriterHovered(false)}
 					onClick={writerOnClick}
 				>
-					<h2
-						style={writerTextStyle()}
-						className='unselectable'
-					>
-						Writer
-					</h2>
+					<Pointer>
+						<h2
+							style={writerTextStyle()}
+							className='unselectable'
+						>
+							Writer
+						</h2>
+					</Pointer>
 				</a>
 			</div>
 		</div>

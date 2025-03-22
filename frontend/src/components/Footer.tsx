@@ -1,5 +1,6 @@
 import React, { CSSProperties } from 'react';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
+import { Pointer } from './Cursor';
 import { globalStyles } from '../theme';
 import instagram from '../assets/instagram.svg';
 import tiktok from '../assets/tiktok.svg';
@@ -31,17 +32,17 @@ const Footer: React.FC<FooterProps> = ({
 		menuItems: {
 		},
 		menuItem: {
-			display: 'block',
+			display: 'inline-block',
 		},
 		socialMediaWrapper: {
 			marginTop: globalStyles.spacing.half,
 		},
 		socialMediaIconWrapper: {
 			display: 'inline-block',
+			marginRight: globalStyles.spacing.half,
 		},
 		socialMediaIcon: {
 			height: '25px',
-			marginRight: globalStyles.spacing.half,
 		},
 	};
 
@@ -78,7 +79,9 @@ const Footer: React.FC<FooterProps> = ({
 						className={`clickable translateLineHover ${isBioUrl ? 'translateLineHoverActive' : ''}`}
 						onClick={bioOnClick}
 					>
-						<h6>Bio</h6>
+						<Pointer>
+							<h6 className='unselectable'>Bio</h6>
+						</Pointer>
 					</a>
 				</li>
 				<li>
@@ -87,7 +90,9 @@ const Footer: React.FC<FooterProps> = ({
 						className='clickable translateLineHover'
 						onClick={resumeOnClick}
 					>
-						<h6>Resume</h6>
+						<Pointer>
+							<h6 className='unselectable'>Resume</h6>
+						</Pointer>
 					</a>
 				</li>
 				<li>
@@ -96,7 +101,9 @@ const Footer: React.FC<FooterProps> = ({
 						className={`clickable translateLineHover ${isContactrUrl ? 'translateLineHoverActive' : ''}`}
 						onClick={contactOnClick}
 					>
-						<h6>Contact</h6>
+						<Pointer>
+							<h6 className='unselectable'>Contact</h6>
+						</Pointer>
 					</a>
 				</li>
 			</ul>
@@ -106,21 +113,27 @@ const Footer: React.FC<FooterProps> = ({
 					className='clickable scaleHover'
 					onClick={instagramOnClick}
 				>
-					<img style={styles.socialMediaIcon} src={instagram} alt='Instagram' />
+					<Pointer>
+						<img style={styles.socialMediaIcon} src={instagram} alt='Instagram' />
+					</Pointer>
 				</a>
 				<a
 					style={styles.socialMediaIconWrapper}
 					className='clickable scaleHover'
 					onClick={tiktokOnClick}
 				>
-					<img style={styles.socialMediaIcon} src={tiktok} alt='TikTok' />
+					<Pointer>
+						<img style={styles.socialMediaIcon} src={tiktok} alt='TikTok' />
+					</Pointer>
 				</a>
 				<a
 					style={styles.socialMediaIconWrapper}
 					className='clickable scaleHover'
 					onClick={githubOnClick}
 				>
-					<img style={styles.socialMediaIcon} src={github} alt='GitHub' />
+					<Pointer>
+						<img style={styles.socialMediaIcon} src={github} alt='GitHub' />
+					</Pointer>
 				</a>
 			</div>
 		</div>

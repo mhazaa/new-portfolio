@@ -1,4 +1,5 @@
 import React, { CSSProperties } from 'react';
+import { Pointer } from './Cursor';
 import logo from '../assets/logo.svg';
 
 interface LogoProps {
@@ -39,11 +40,13 @@ const Logo: React.FC<LogoProps> = ({
 			<h1 style={styles.logoHiddenText}>
 				Magdi Hazaa
 			</h1>
-			<img
-				style={styles.logoImg}
-				src={logo}
-				alt='Magdi Hazaa'
-			/>
+			<Pointer>
+				<img
+					style={styles.logoImg}
+					src={logo}
+					alt='Magdi Hazaa'
+				/>
+			</Pointer>
 		</a>
 	);
 };

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, CSSProperties } from 'react';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import useResponsive from '../hooks/useResponsive';
+import { Pointer } from './Cursor';
 import { postContactForm } from '../requests';
 import { globalStyles, animations } from '../theme';
 import { PostContactFormData } from '../../../types';
@@ -38,8 +39,8 @@ const Contact: React.FC<ContactProps> = ({
 			textAlign: isMobile ? 'center' : 'left',
 		},
 		emailLink: {
+			display: 'inline-block',
 			textDecoration: 'underline',
-			fontWeight: globalStyles.fontWeights.black,
 		},
 		nameEmailWrapper: {
 			display: 'flex',
@@ -66,7 +67,9 @@ const Contact: React.FC<ContactProps> = ({
 			className = 'clickable'
 			href='mailto:magdihazaa@gmail.com'
 		>
-			magdihazaa@gmail.com
+			<Pointer>
+				<h6>magdihazaa@gmail.com</h6>
+			</Pointer>
 		</a>;
 
 	const successfulResponseMessage =
@@ -123,8 +126,8 @@ const Contact: React.FC<ContactProps> = ({
 
 	return (
 		<div style={styles.container}>
-			<h2 style={styles.title}>Contact</h2>
-			<h5 style={styles.textWrapper}>Fill out the form below or email me directly at <Email /></h5>
+			<h2 style={styles.title} className='unselectable'>Contact</h2>
+			<h6 style={styles.textWrapper}>Fill out the form below or email me directly at <Email /></h6>
 			<form onSubmit={onSubmit}>
 				<div style={styles.nameEmailWrapper}>
 					<input
@@ -150,12 +153,14 @@ const Contact: React.FC<ContactProps> = ({
 					required
 				/>
 				<a>
-					<input
-						style={styles.submitButton}
-						className='clickable'
-						type='submit'
-						value='send'
-					/>
+					<Pointer>
+						<input
+							style={styles.submitButton}
+							className='clickable'
+							type='submit'
+							value='send'
+						/>
+					</Pointer>
 				</a>
 			</form>
 		</div>

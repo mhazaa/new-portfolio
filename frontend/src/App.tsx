@@ -3,6 +3,7 @@ import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
 import { getAllData } from './requests';
 import { setBrowserUrl, getUrl, getInitialUrl, isPostUrl, getCategory } from './routing';
 import useResponsive from './hooks/useResponsive';
+import { CursorContextProvider } from './contexts/CursorContext';
 import Page from './components/Page';
 import Background from './components/Background';
 import Footer from './components/Footer';
@@ -13,6 +14,7 @@ import Contact from './components/Contact';
 import Error from './components/Error';
 import Loading from './components/Loading';
 import PostPage from './components/PostPage';
+import Cursor from './components/Cursor';
 import { Post, AllData, Categories } from '../../types';
 import './styles/stylesheet.scss';
 
@@ -24,6 +26,7 @@ const App: React.FC = () => {
 	const [allData, seAlltData] = useState<AllData>();
 	const [url, setUrl] = useState<string>(initialUrl);
 	const [post, setPost] = useState<Post | null>(null);
+	const [cursorVisibility, setCursorVisibility] = useState<boolean>(false);
 
 	useEffect(() => {
 		AnalyticsEngineClient.connect();
@@ -35,6 +38,8 @@ const App: React.FC = () => {
 		})();
 
 		window.addEventListener('popstate', () => setUrl(getUrl()));
+		window.addEventListener('mouseover', () => setCursorVisibility(true));
+		window.addEventListener('mouseout', () => setCursorVisibility(false));
 	}, []);
 
 	useEffect(() => {
@@ -56,6 +61,8 @@ const App: React.FC = () => {
 
 	if (!allData) return (
 		<div>
+			{cursorVisibility && <Cursor />}
+			
 			<Background />
 
 			<Page variant='fullscreen'>
@@ -73,51 +80,55 @@ const App: React.FC = () => {
 	);
 
 	return (
-		<div>
-			<Background />
+		<CursorContextProvider>
+			<div>
+				{cursorVisibility && <Cursor />}
+				
+				<Background />
 
-			{!post &&
-				<Footer resume={allData.resume} setUrl={setUrl} />
-			}
+				{!post &&
+					<Footer resume={allData.resume} url={url} setUrl={setUrl} />
+				}
 
-			<Page variant={post ? 'sprawling' : 'fullscreen'}>
-				<Header
-					url={url}
-					setUrl={setUrl}
-					variant={headerVariant()}
-				/>
-
-				{(url === '/artist' || url === '/writer') &&
-					<Portfolio
-						posts={allData.portfolio[url.substring(1) as Categories]}
-						showScrollbar={false}
+				<Page variant={post ? 'sprawling' : 'fullscreen'}>
+					<Header
+						url={url}
 						setUrl={setUrl}
+						variant={headerVariant()}
 					/>
-				}
 
-				{post &&
-					<PostPage 
-						{...post}
-						setUrl={setUrl}
-					/> 
-				}
+					{(url === '/artist' || url === '/writer') &&
+						<Portfolio
+							posts={allData.portfolio[url.substring(1) as Categories]}
+							showScrollbar={false}
+							setUrl={setUrl}
+						/>
+					}
 
-				{url === '/bio' &&
-					<BioPage
-						bio={allData.bioPage.bio}
-						image={allData.bioPage.image}
-					/>
-				}
+					{post &&
+						<PostPage 
+							{...post}
+							setUrl={setUrl}
+						/> 
+					}
 
-				{url === '/contact' &&
-					<Contact setUrl={setUrl} />
-				}
+					{url === '/bio' &&
+						<BioPage
+							bio={allData.bioPage.bio}
+							image={allData.bioPage.image}
+						/>
+					}
 
-				{url === '/error' &&
-					<Error />
-				}
-			</Page>
-		</div>
+					{url === '/contact' &&
+						<Contact setUrl={setUrl} />
+					}
+
+					{url === '/error' &&
+						<Error />
+					}
+				</Page>
+			</div>
+		</CursorContextProvider>
 	);
 };
 

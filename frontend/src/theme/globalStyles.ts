@@ -27,7 +27,7 @@ const globalStyles = {
 	transitions: {
 		slow: '2s cubic-bezier(.07, .68, .42, .98)',
 		standard: '1.2s cubic-bezier(.07, .76, .35, 1.06)',
-		fast: '0.2s ease',
+		fast: '0.3s ease',
 	},
 	breakpoints: {
 		mobile: 568,
