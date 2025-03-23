@@ -84,6 +84,7 @@ const Footer: React.FC<FooterProps> = ({
 						</Pointer>
 					</a>
 				</li>
+				
 				<li>
 					<a
 						style={styles.menuItem}
@@ -95,6 +96,7 @@ const Footer: React.FC<FooterProps> = ({
 						</Pointer>
 					</a>
 				</li>
+
 				<li>
 					<a
 						style={styles.menuItem}
