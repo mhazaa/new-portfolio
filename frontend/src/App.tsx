@@ -26,7 +26,6 @@ const App: React.FC = () => {
 	const [allData, seAlltData] = useState<AllData>();
 	const [url, setUrl] = useState<string>(initialUrl);
 	const [post, setPost] = useState<Post | null>(null);
-	const [cursorVisibility, setCursorVisibility] = useState<boolean>(false);
 
 	useEffect(() => {
 		AnalyticsEngineClient.connect();
@@ -38,8 +37,6 @@ const App: React.FC = () => {
 		})();
 
 		window.addEventListener('popstate', () => setUrl(getUrl()));
-		window.addEventListener('mouseover', () => setCursorVisibility(true));
-		window.addEventListener('mouseout', () => setCursorVisibility(false));
 	}, []);
 
 	useEffect(() => {
@@ -61,7 +58,7 @@ const App: React.FC = () => {
 
 	if (!allData) return (
 		<div>
-			{cursorVisibility && <Cursor />}
+			<Cursor />
 			
 			<Background />
 
@@ -82,7 +79,7 @@ const App: React.FC = () => {
 	return (
 		<CursorContextProvider>
 			<div>
-				{cursorVisibility && <Cursor />}
+				<Cursor />
 				
 				<Background />
 

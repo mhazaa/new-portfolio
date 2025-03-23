@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, CSSProperties, ReactNode } from 'react';
+import React, { useState, useEffect, useRef, CSSProperties, ReactNode } from 'react';
 import { useCursorContext } from '../contexts/CursorContext';
 import lerp from '../helperFunctions/lerp';
 import isMobileOrTablet from '../helperFunctions/isMobileOrTablet';
@@ -35,13 +35,14 @@ export const Pointer: React.FC<PointerProps> = ({
 
 const Cursor: React.FC = () => {
 	const { cursorMode } = useCursorContext();
+	const [cursorVisibility, setCursorVisibility] = useState<boolean>(false);
 	const cursorWrapper = useRef<HTMLDivElement>(null);
 
 	const styles: {
 		[key: string]: CSSProperties;
 	} = {
 		container: {
-			display: 'block',
+			display: cursorVisibility ? 'block' : 'none',
 			position: 'absolute',
 			zIndex: '1000',
 			height: '0',
@@ -104,13 +105,19 @@ const Cursor: React.FC = () => {
 
 		const onMouseMove = (e: MouseEvent) => moveCursor(e);
 		const onScroll = () => moveCursor();
+		const onMouseOver = () => setCursorVisibility(true);
+		const onMouseOut = () => setCursorVisibility(false);
 
 		window.addEventListener('mousemove', onMouseMove);
 		window.addEventListener('scroll', onScroll);
+		window.addEventListener('mouseover', onMouseOver);
+		window.addEventListener('mouseout', onMouseOut);
 
 		return () => {
 			window.removeEventListener('mousemove', onMouseMove);
 			window.removeEventListener('scroll', onScroll);
+			window.removeEventListener('mouseover', onMouseOver);
+			window.removeEventListener('mouseout', onMouseOut);
 		};
 	}, []);
 
