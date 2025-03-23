@@ -218,18 +218,23 @@ h5 {
 	font-weight: $medium;
 	line-height: 1rem;
 	color: $teal;
+
+	@media (max-width: $breakpointTablet) {
+		font-size: 1.1rem;
+		line-height: 1.1rem;
+	}
 }
 
 h6 {
 	text-transform: uppercase;
 	font-size: 1rem;
 	font-weight: $black;
-	line-height: 1.1rem;
+	line-height: 1rem;
 	color: $teal;
 
 	@media (max-width: $breakpointTablet) {
 		font-size: 1.1rem;
-		line-height: 1.2rem;
+		line-height: 1.1rem;
 	}
 }
 
