@@ -1,9 +1,10 @@
 import React, { useEffect, CSSProperties } from 'react';
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
-import { openExternalUrl } from '../routing';
-import Markdown from './Markdown';
-import useResponsive from '../hooks/useResponsive';
 import { globalStyles, animations } from '../theme';
+import { openExternalUrl } from '../routing';
+import useResponsive from '../hooks/useResponsive';
+import Markdown from './Markdown';
+import { Pointer } from './Cursor';
 import { Post } from '../../../types';
 import backArrow from '../assets/back_arrow.svg';
 import nextArrow from '../assets/next_arrow.svg';
@@ -41,7 +42,7 @@ const PostPage: React.FC<PostPageProps> = ({
 		backArrowWrapper: {
 			display: 'inline-flex',
 			position: 'relative',
-			paddingBottom: globalStyles.spacing.double,
+			marginBottom: globalStyles.spacing.double,
 		},
 		backArrow: {
 			width: '40px',
@@ -66,6 +67,8 @@ const PostPage: React.FC<PostPageProps> = ({
 			display: 'block',
 			width: '80px',
 			marginTop: globalStyles.spacing.standard,
+			marginLeft: isMobile ? 'auto' : '0',
+			marginRight: isMobile ? 'auto' : '0',
 		},
 		nextArrow: {
 		},
@@ -92,10 +95,12 @@ const PostPage: React.FC<PostPageProps> = ({
 			<div style={styles.titleWrapper}>
 				<a
 					style={styles.backArrowWrapper}
-					className='clickable translateReverseHover'
+					className={`clickable ${isMobile ? '' : 'translateReverseHover'}`}
 					onClick={backArrowOnClick}
 				>
-					<img style={styles.backArrow} src={backArrow} alt='Back arrow' />
+					<Pointer>
+						<img style={styles.backArrow} src={backArrow} alt='Back arrow' />
+					</Pointer>
 				</a>
 				<h2 style={styles.title} className='extraLineHeight'>{title}</h2>
 				<h4 style={styles.mediumYear}>{medium}, {year}</h4>
@@ -104,17 +109,19 @@ const PostPage: React.FC<PostPageProps> = ({
 						?
 						<a
 							style={styles.publicationWrapper}
-							className='clickable translateHover'
+							className={`clickable ${isMobile ? '' : 'translateHover'}`}
 							onClick={() => publicationOnClick(externalUrl)}
 						>
-							<h5 style={styles.publication}>{publication}</h5>
-							<div style={styles.nextArrowWrapper}>
-								<img
-									style={styles.nextArrow}
-									src={nextArrow}
-									alt='Open external URL arrow'
-								/>
-							</div>
+							<Pointer>
+								<h5 style={styles.publication}>{publication}</h5>
+								<div style={styles.nextArrowWrapper}>
+									<img
+										style={styles.nextArrow}
+										src={nextArrow}
+										alt='Open external URL arrow'
+									/>
+								</div>
+							</Pointer>
 						</a>
 						:
 						<h5 style={styles.publication}>{publication}</h5>
