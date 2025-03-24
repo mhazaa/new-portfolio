@@ -2,13 +2,17 @@
 
 https://magdihazaa.art/
 
+### npm run lint
+
+Lints codebase (root folder and backend, fronend, and sanity workspaces)
+
 ### npm run build
 
-Compiles both frontend and backend files
+Lints project, then compiles both frontend and backend files
 
 ### npm run start
 
-Stops and cleans project, then rebuilds project and restarts a PM2 server at **localhost:3000**, and lastly deploys Sanity studio to **https://mhazaa.sanity.studio**
+Stops and cleans project, then rebuilds project (including linting) and restarts a PM2 server at **localhost:3000**, and lastly deploys Sanity studio to **https://mhazaa.sanity.studio**
 
 ### npm run start-yaml-test
 
@@ -24,8 +28,12 @@ Spins a dev server at **localhost:3000** for the project, and a sanity dev serve
 
 ### npm run deploy-sanity
 
-deploys Sanity studio to **https://mhazaa.sanity.studio**
+Lints Sanity, then deploys Sanity studio to **https://mhazaa.sanity.studio**
 
 ### npm run clean
 
 Cleans all build files and folders
+
+### npm run nuke
+
+Cleans all build files and folder AND removes all node_modules folder and package-lock.json files

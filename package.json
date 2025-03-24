@@ -8,13 +8,14 @@
     "sanity"
   ],
   "scripts": {
-    "build": "concurrently \"npm run build -w ./frontend\" \"npm run build -w ./backend\"",
+	"lint": "concurrently 'eslint' 'npm run lint -w ./frontend' 'npm run lint -w ./sanity'",
+    "build": "npm run lint && concurrently --kill-others-on-fail 'npm run build -w ./frontend' 'npm run build -w ./backend'",
     "start": "npm run stop && npm run clean && npm run build && npm run start -w ./backend && npm run deploy-sanity",
     "start-yaml-test": "npm run stop && npm run clean && npm run build && npm run start -w ./backend",
     "stop": "npm run stop -w ./backend",
-    "dev": "concurrently \"npm run dev -w ./frontend\" \"npm run dev -w ./backend\" \"npm run dev -w ./sanity\"",
-    "deploy-sanity": "npm run deploy -w ./sanity",
-    "clean": "rm -f ./types.js & rm -rf ./frontend/build & rm -f ./backend/*.js & rm -f ./backend/**/*.js & rm -rf ./sanity/dist",
+    "dev": "concurrently 'npm run dev -w ./frontend' 'npm run dev -w ./backend' 'npm run dev -w ./sanity'",
+    "deploy-sanity": "npm run lint -w ./sanity && npm run deploy -w ./sanity",
+	"clean": "rm -f ./types.js & rm -rf ./frontend/build & rm -f ./backend/*.js & rm -f ./backend/**/*.js & rm -rf ./sanity/dist",
 	"nuke": "npm run clean && find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + && find . -name 'package-lock.json' -type f -delete"
   },
   "keywords": [],

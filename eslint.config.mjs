@@ -2,18 +2,16 @@ import { defineConfig, globalIgnores } from 'eslint/config';
 import globals from 'globals';
 import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
-import pluginReact from 'eslint-plugin-react';
 
 export default defineConfig([
-	{
-		files: ['**/*.{ts,tsx,js,jsx}'],
+    {
+        files: ['**/*.{ts,tsx}'],
 		languageOptions: {
 			globals: globals.browser,
 		},
 		extends: [
 			pluginJs.configs.recommended,
 			tseslint.configs.recommended,
-			pluginReact.configs.flat.recommended,
 		],
 		rules: {
 			'indent': ['error', 'tab'],
@@ -22,14 +20,9 @@ export default defineConfig([
 			'semi': ['error', 'always'],
 			'@typescript-eslint/ban-ts-comment': 'off',
 		},
-		settings: {
-			react: {
-				version: 'detect',
-			},
-		},
-	},
+    },
 	globalIgnores([
-		'build/',
-		'**/*.js',
+		'frontend/',
+		'sanity/',
 	]),
 ]);
