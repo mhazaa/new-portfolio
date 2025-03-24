@@ -31,7 +31,7 @@ export const CursorContextProvider: React.FC<CursorContextProviderProps> = ({
 };
 
 export const useCursorContext = (): CursorContextProps => {
-    const context = useContext(CursorContext);
-    if (!context) throw new Error('useCursorContext must be used within a CursorContextProvider');
-    return context;
+	const context = useContext(CursorContext);
+	if (!context) throw new Error('useCursorContext must be used within a CursorContextProvider');
+	return context;
 };
