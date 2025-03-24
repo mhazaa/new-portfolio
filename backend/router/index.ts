@@ -5,6 +5,8 @@ import getAllData from '../sanityControls/getAllData';
 import mailer from '../mailer';
 import { AllData, PostContactFormData } from '../../types';
 
+const estlintTest = "eslinttest"
+
 interface Collections {
 	contactFormsCollection: Collection;
 }
