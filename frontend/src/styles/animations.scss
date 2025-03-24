@@ -1,9 +1,18 @@
 
-@keyframes headerSeperatorAnimation {
+@keyframes headerSeperatorAnimationVertical {
 	from {
 		transform: scaleY(0);
 	}
 	to {
 		transform: scaleY(1);
+	}
+}
+
+@keyframes headerSeperatorAnimationHorizontal {
+	from {
+		transform: scaleX(0);
+	}
+	to {
+		transform: scaleX(1);
 	}
 }

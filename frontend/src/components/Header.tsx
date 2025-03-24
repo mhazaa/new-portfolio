@@ -45,7 +45,7 @@ const Header: React.FC<HeaderProps> = ({
 			height: isMobile && variant !== 'small' ? '3px' : 'auto',
 			width: isMobile && variant !== 'small' ? '50px' : '3px',
 			margin: isMobile && variant !== 'small' ? `${globalStyles.spacing.double} 0` : `0 ${globalStyles.spacing.double}`,
-			animation: `headerSeperatorAnimation ${globalStyles.transitions.standard} forwards`,
+			animation: `${isMobile ? 'headerSeperatorAnimationHorizontal' : 'headerSeperatorAnimationVertical'} ${globalStyles.transitions.standard} forwards`,
 		},
 	};
 
