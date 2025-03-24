@@ -29,7 +29,6 @@ const App: React.FC = () => {
 
 	useEffect(() => {
 		AnalyticsEngineClient.connect();
-		if (url === '/') AnalyticsEngineClient.sendMetric('VIEWED_HOMEPAGE');
 		
 		(async () => {
 			const allData: AllData = await getAllData();
@@ -38,6 +37,10 @@ const App: React.FC = () => {
 
 		window.addEventListener('popstate', () => setUrl(getUrl()));
 	}, []);
+
+	useEffect(() => {
+		if (url === '/') AnalyticsEngineClient.sendMetric('VIEWED_HOMEPAGE');
+	}, [url]);
 
 	useEffect(() => {
 		setPost(null);
@@ -53,7 +56,7 @@ const App: React.FC = () => {
 		const _post: Post | undefined =
 			allData?.portfolio[category].find((post: Post) => post.internalUrl === url);
 		
-		(_post) ? setPost(_post) : setUrl('/error');
+		return (_post) ? setPost(_post) : setUrl('/error');
 	}, [url, allData]);
 
 	if (!allData) return (
