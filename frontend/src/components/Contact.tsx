@@ -61,26 +61,31 @@ const Contact: React.FC<ContactProps> = ({
 		},
 	};
 
-	const Email = () =>
+	const Email: React.FC<{responseMessage?: boolean}> = ({
+		responseMessage = false,
+	}) =>
 		<a
 			style={styles.emailLink}
 			className = 'clickable'
 			href='mailto:magdihazaa@gmail.com'
 		>
 			<Pointer>
-				<h6>magdihazaa@gmail.com</h6>
+				{responseMessage
+					? <h4>magdihazaa@gmail.com</h4>
+					: <h6>magdihazaa@gmail.com</h6>
+				}
 			</Pointer>
 		</a>;
 
 	const successfulResponseMessage =
-		<h4>Thanks for reaching out! I&apos;ll get back to you as soon as I can.<br></br>
-		You&apos;ll be redirected to the homepage shortly.</h4>;
+		<>Thanks for reaching out! I&apos;ll get back to you as soon as I can.<br></br>
+		You&apos;ll be redirected to the homepage shortly.</>;
 
 	const failedResponseMessage = 
-		<h4>Looks like there was a technical problem delivering your email.<br></br>
-		Try again later or email me directly at <Email /><br></br></h4>;
+		<>Looks like there was a technical problem delivering your email.<br></br>
+		Try again later or email me directly at <Email responseMessage={true} /><br></br></>;
 
-	const pendingResponseMessage = <h4>Sending...</h4>;
+	const pendingResponseMessage = <>Sending...</>;
 
 	useEffect(() => {
 		AnalyticsEngineClient.sendMetric('VIEWED_CONTACT_PAGE');
