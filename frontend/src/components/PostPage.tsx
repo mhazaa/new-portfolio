@@ -14,6 +14,7 @@ interface PostPageProps extends Post {
 };
 
 const PostPage: React.FC<PostPageProps> = ({
+	// eslint-disable-next-line
 	id,
 	title,
 	medium,
@@ -81,7 +82,7 @@ const PostPage: React.FC<PostPageProps> = ({
 	};
 
 	useEffect(() => {
-		AnalyticsEngineClient.sendMetric(`VIEWED_POST: ${title}__${id}`);
+		AnalyticsEngineClient.sendMetric(`VIEWED_POST: ${title}`);
 	}, []);
 
 	const backArrowOnClick = () => setUrl('/' + category);
