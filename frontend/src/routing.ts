@@ -1,4 +1,5 @@
 import AnalyticsEngineClient from '@mhazaa/analytics-engine/client';
+import replaceDotsWithUnderscores from './helperFunctions/replaceDotsWithUnderscores';
 import { Pages, Categories } from '../../types';
 
 export const setBrowserUrl = (url: string) => history.pushState(null, '', `${url}`);
@@ -42,6 +43,6 @@ export const getCategory = (): Categories | false => {
 
 export const openExternalUrl = (externalUrl?: string) => {
 	if (!externalUrl) return;
-	AnalyticsEngineClient.sendMetric(`CLICKED_ON: ${externalUrl}`);
+	AnalyticsEngineClient.sendMetric(`CLICKED_ON: ${replaceDotsWithUnderscores(externalUrl)}`);
 	window.open(externalUrl, '_blank');
 };
