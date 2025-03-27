@@ -1,3 +1,5 @@
+import { Rule } from '@sanity/types';
+
 export default {
 	title: 'Resume',
 	name: 'resume',
@@ -7,7 +9,7 @@ export default {
 			title: 'Resume',
 			name: 'resume',
 			type: 'file',
-			validation: (Rule: any) => Rule.required(),
+			validation: (Rule: Rule) => Rule.required(),
 		},
 	],
 	preview: {

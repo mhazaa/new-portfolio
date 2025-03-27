@@ -1,3 +1,5 @@
+import { Rule } from '@sanity/types';
+
 export default {
 	title: 'Video',
 	name: 'video',
@@ -7,7 +9,7 @@ export default {
 			title: 'Source',
 			name: 'src',
 			type: 'string',
-			validation: (Rule: any) => Rule.required(),
+			validation: (Rule: Rule) => Rule.required(),
 		},
 	],
 	preview: {

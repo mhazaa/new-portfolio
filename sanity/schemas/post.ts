@@ -1,3 +1,5 @@
+import { Rule } from '@sanity/types';
+
 export default {
 	title: 'Post',
 	name: 'post',
@@ -7,19 +9,19 @@ export default {
 			title: 'Title',
 			name: 'title',
 			type: 'string',
-			validation: (Rule: any) => Rule.required(),
+			validation: (Rule: Rule) => Rule.required(),
 		},
 		{
 			title: 'Medium',
 			name: 'medium',
 			type: 'string',
-			validation: (Rule: any) => Rule.required(),
+			validation: (Rule: Rule) => Rule.required(),
 		},
 		{
 			title: 'Year',
 			name: 'year',
 			type: 'string',
-			validation: (Rule: any) => Rule.required(),
+			validation: (Rule: Rule) => Rule.required(),
 		},
 		{
 			title: 'Category',
@@ -37,7 +39,7 @@ export default {
 					},
 				],
 			},
-			validation: (Rule: any) => Rule.required(),
+			validation: (Rule: Rule) => Rule.required(),
 		},
 		{
 			title: 'Publication',
