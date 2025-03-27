@@ -1,7 +1,9 @@
 import studio from '@sanity/eslint-config-studio';
+import tseslint from 'typescript-eslint';
 
 export default [
 	...studio,
+	...tseslint.configs.recommended,
 	{
 		rules: {
 			'indent': ['error', 'tab'],
