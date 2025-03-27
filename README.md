@@ -37,6 +37,3 @@ Cleans all build files and folders
 ### npm run nuke
 
 Cleans all build files and folder AND removes all node_modules folder and package-lock.json files
-
-- Metric post id if name change
-- sanity deploy on server
