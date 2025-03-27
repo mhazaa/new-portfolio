@@ -3,7 +3,7 @@ const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-	mode: 'production',
+	mode: process.env.NODE_ENV || 'development',
 
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js', '.jsx'],

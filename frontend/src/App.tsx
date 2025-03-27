@@ -28,7 +28,7 @@ const App: React.FC = () => {
 	const [post, setPost] = useState<Post | null>(null);
 
 	useEffect(() => {
-		AnalyticsEngineClient.connect();
+		if (process.env.NODE_ENV === 'production') AnalyticsEngineClient.connect();
 		
 		(async () => {
 			const allData: AllData = await getAllData();
