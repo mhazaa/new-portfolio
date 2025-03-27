@@ -14,8 +14,7 @@ interface PostPageProps extends Post {
 };
 
 const PostPage: React.FC<PostPageProps> = ({
-	// eslint-disable-next-line
-	id,
+	id: _id,
 	title,
 	medium,
 	year,

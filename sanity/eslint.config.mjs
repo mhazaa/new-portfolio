@@ -9,7 +9,14 @@ export default [
 			'quotes': ['error', 'single', {'allowTemplateLiterals': true}],
 			'semi': ['error', 'always'],
 			'@typescript-eslint/ban-ts-comment': 'off',
-			'no-unused-vars': 'error',
+			'@typescript-eslint/no-unused-vars': [
+				'error',
+				{
+					'argsIgnorePattern': '^_',
+					'varsIgnorePattern': '^_',
+					'caughtErrorsIgnorePattern': '^_',
+				},
+			],
 		},
 	},
 ];
