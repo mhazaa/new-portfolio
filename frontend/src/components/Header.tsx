@@ -1,8 +1,54 @@
-import React, { useState, CSSProperties } from 'react';
+import React, { useState, useEffect, CSSProperties } from 'react';
 import useResponsive from '../hooks/useResponsive';
 import Logo from './Logo';
 import { Pointer } from './Cursor';
 import { globalStyles, animations } from '../theme';
+
+interface HeaderItemProps {
+	text: string;
+	onClickUrl: string;
+	urlActive: boolean;
+	otherUrlActive: boolean;
+	setUrl: (url: string) => void;
+};
+
+const HeaderItem: React.FC<HeaderItemProps> = ({
+	text,
+	onClickUrl,
+	urlActive,
+	otherUrlActive,
+	setUrl,
+}) => {
+	const [hovered, setIsHovered] = useState<boolean>(false);
+
+	const onClick = () => setUrl(onClickUrl);
+
+	useEffect(() => {
+		if (!otherUrlActive) setIsHovered(false);
+	}, [otherUrlActive]);
+
+	const textStyle = () => {
+		if (urlActive) return animations.titleInk();
+		return hovered ? animations.titleInk() : animations.titleInkInactive();
+	};
+
+	return (
+		<a
+			onMouseEnter={!urlActive ? () => setIsHovered(true) : () => {}}
+			onMouseLeave={!urlActive ? () => setIsHovered(false): () => {}}
+			onClick={onClick}
+		>
+			<Pointer active={!urlActive}>
+				<h2
+					style={textStyle()}
+					className='unselectable'
+				>
+					{text}
+				</h2>
+			</Pointer>
+		</a>
+	);
+};
 
 interface HeaderProps {
 	url: string;
@@ -16,8 +62,6 @@ const Header: React.FC<HeaderProps> = ({
 	variant = 'big',
 }) => {
 	const { isMobile } = useResponsive();
-	const [artistHovered, setArtistHovered] = useState<boolean>(false);
-	const [writerHovered, setWriterHovered] = useState<boolean>(false);
 	const isArtistUrl = url.includes('/artist');
 	const isWriterUrl = url.includes('/writer');
 
@@ -49,56 +93,28 @@ const Header: React.FC<HeaderProps> = ({
 		},
 	};
 
-	const artistTextStyle = () => {
-		if (isArtistUrl && !writerHovered) return animations.titleInk();
-		return artistHovered ? animations.titleInk() : animations.titleInkInactive();
-	};
-
-	const writerTextStyle = () => {
-		if (isWriterUrl && !artistHovered) return animations.titleInk();
-		return writerHovered ? animations.titleInk() : animations.titleInkInactive();
-	};
-
-	const artistOnClick = () => setUrl('/artist');
-
-	const writerOnClick = () => setUrl('/writer');
-
 	return (
 		<div style={styles.container}>
 			<Logo setUrl={setUrl} />
 
 			<div style={styles.categoriesWrapper}>
-				<a
-					onMouseEnter={() => setArtistHovered(true)}
-					onMouseLeave={() => setArtistHovered(false)}
-					onClick={artistOnClick}
-				>
-					<Pointer>
-						<h2
-							style={artistTextStyle()}
-							className='unselectable'
-						>
-							Artist
-						</h2>
-					</Pointer>
-				</a>
+				<HeaderItem
+					text='Artist'
+					onClickUrl='/artist'
+					urlActive={isArtistUrl}
+					otherUrlActive={isWriterUrl}
+					setUrl={setUrl}
+				/>
 				
 				<div style={styles.seperator} />
 
-				<a
-					onMouseEnter={() => setWriterHovered(true)}
-					onMouseLeave={() => setWriterHovered(false)}
-					onClick={writerOnClick}
-				>
-					<Pointer>
-						<h2
-							style={writerTextStyle()}
-							className='unselectable'
-						>
-							Writer
-						</h2>
-					</Pointer>
-				</a>
+				<HeaderItem
+					text='Writer'
+					onClickUrl='/writer'
+					urlActive={isWriterUrl}
+					otherUrlActive={isArtistUrl}
+					setUrl={setUrl}
+				/>
 			</div>
 		</div>
 	);

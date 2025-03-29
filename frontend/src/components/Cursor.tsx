@@ -15,11 +15,13 @@ const cursorRadius = 10;
 export type CursorModes = 'auto' | 'pointer';
 
 interface PointerProps {
+	active?: boolean;
 	style?: CSSProperties;
 	children: ReactNode;
 };
 
 export const Pointer: React.FC<PointerProps> = ({
+	active = true,
 	style,
 	children,
 }) => {
@@ -28,7 +30,7 @@ export const Pointer: React.FC<PointerProps> = ({
 	return (
 		<div
 			style={style}
-			onMouseEnter={() => setCursorMode('pointer')}
+			onMouseEnter={active ? () => setCursorMode('pointer') : () => {}}
 			onMouseLeave={() => setCursorMode('auto')}
 		>
 			{children}
