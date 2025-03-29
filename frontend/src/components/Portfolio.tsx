@@ -68,7 +68,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 			display: 'flex',
 			flexDirection: 'column',
 			height: '250px',
-			maxWidth: isMobile || isTablet ? '275px' : isDesktop ? '300px' : '325px',
+			maxWidth: isMobile || isTablet ? '250px' : isDesktop ? '300px' : '325px',
 			overflowY: 'scroll',
 			paddingLeft: showScrollbar ? globalStyles.spacing.double : 0,
 			scrollBehavior: 'smooth',
@@ -221,7 +221,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 				className='clickable'
 				onClick={topArrowOnClick}
 			>
-				<Pointer>
+				<Pointer active={topArrowVisible}>
 					<img
 						style={styles.arrowTop}
 						src={arrow}
@@ -250,7 +250,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 				className='clickable'
 				onClick={bottomArrowOnClick}
 			>
-				<Pointer>
+				<Pointer active={bottomArrowVisible}>
 					<img
 						style={styles.arrowBottom}
 						src={arrow}
