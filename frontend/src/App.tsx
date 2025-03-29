@@ -23,7 +23,7 @@ setBrowserUrl(initialUrl);
 
 const App: React.FC = () => {
 	const { isTablet } = useResponsive();
-	const [allData, seAlltData] = useState<AllData>();
+	const [allData, setAllData] = useState<AllData>();
 	const [url, setUrl] = useState<string>(initialUrl);
 	const [post, setPost] = useState<Post | null>(null);
 
@@ -32,7 +32,7 @@ const App: React.FC = () => {
 		
 		(async () => {
 			const allData: AllData = await getAllData();
-			seAlltData(allData);
+			setAllData(allData);
 		})();
 
 		window.addEventListener('popstate', () => setUrl(getUrl()));
