@@ -65,8 +65,8 @@ const Cursor: React.FC = () => {
 			top: cursorRadius / 2 + 'px',
 			left: cursorRadius / 2 + 'px',
 			borderRadius: '999px',
-			transform: cursorMode === 'pointer' ? 'scale(0.8)' : 'scale(1)',
-			transition: `transform ${globalStyles.transitions.standard}`,
+			transform: cursorMode === 'pointer' ? 'scale(0.6)' : 'scale(1)',
+			transition: `transform ${globalStyles.transitions.fast}`,
 		},
 		stroke: {
 			fill: 'none',
