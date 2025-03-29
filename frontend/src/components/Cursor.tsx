@@ -15,16 +15,19 @@ const cursorRadius = 10;
 export type CursorModes = 'auto' | 'pointer';
 
 interface PointerProps {
+	style?: CSSProperties;
 	children: ReactNode;
 };
 
 export const Pointer: React.FC<PointerProps> = ({
+	style,
 	children,
 }) => {
 	const { setCursorMode } = useCursorContext();
 
 	return (
 		<div
+			style={style}
 			onMouseEnter={() => setCursorMode('pointer')}
 			onMouseLeave={() => setCursorMode('auto')}
 		>

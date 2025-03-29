@@ -24,6 +24,8 @@ const Footer: React.FC<FooterProps> = ({
 		[key: string]: CSSProperties;
 	} = {
 		container: {
+			display: 'inline-flex',
+			flexDirection: 'column',
 			position: 'fixed',
 			bottom: globalStyles.spacing.standard,
 			left: globalStyles.spacing.standard,
@@ -35,11 +37,15 @@ const Footer: React.FC<FooterProps> = ({
 			display: 'inline-block',
 		},
 		socialMediaWrapper: {
+			display: 'inline-flex',
 			marginTop: globalStyles.spacing.half,
 		},
 		socialMediaIconWrapper: {
-			display: 'inline-block',
+			display: 'inline-flex',
 			marginRight: globalStyles.spacing.half,
+		},
+		pointer: {
+			display: 'inline-flex',
 		},
 		socialMediaIcon: {
 			height: '25px',
@@ -109,31 +115,34 @@ const Footer: React.FC<FooterProps> = ({
 					</a>
 				</li>
 			</ul>
+
 			<div style={styles.socialMediaWrapper}>
 				<a
 					style={styles.socialMediaIconWrapper}
 					className='clickable scaleHover'
 					onClick={instagramOnClick}
 				>
-					<Pointer>
+					<Pointer style={styles.pointer}>
 						<img style={styles.socialMediaIcon} src={instagram} alt='Instagram' />
 					</Pointer>
 				</a>
+
 				<a
 					style={styles.socialMediaIconWrapper}
 					className='clickable scaleHover'
 					onClick={tiktokOnClick}
 				>
-					<Pointer>
+					<Pointer style={styles.pointer}>
 						<img style={styles.socialMediaIcon} src={tiktok} alt='TikTok' />
 					</Pointer>
 				</a>
+
 				<a
 					style={styles.socialMediaIconWrapper}
 					className='clickable scaleHover'
 					onClick={githubOnClick}
 				>
-					<Pointer>
+					<Pointer style={styles.pointer}>
 						<img style={styles.socialMediaIcon} src={github} alt='GitHub' />
 					</Pointer>
 				</a>
