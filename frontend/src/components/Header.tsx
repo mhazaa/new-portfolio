@@ -25,7 +25,7 @@ const HeaderItem: React.FC<HeaderItemProps> = ({
 
 	useEffect(() => {
 		if (!otherUrlActive) setIsHovered(false);
-	}, [otherUrlActive]);
+	}, [urlActive, otherUrlActive]);
 
 	const textStyle = () => {
 		if (urlActive) return animations.titleInk();
