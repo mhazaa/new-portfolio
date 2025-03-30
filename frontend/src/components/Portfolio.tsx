@@ -64,12 +64,13 @@ const Portfolio: React.FC<PortfolioProps> = ({
 			left: '0',
 			zIndex: '1',
 		},
-		itemsWrapper: {
+		postLabelsWrapper: {
 			display: 'flex',
 			flexDirection: 'column',
 			height: '250px',
 			maxWidth: isMobile || isTablet ? '250px' : isDesktop ? '300px' : '325px',
 			overflowY: 'scroll',
+			overflowX: 'hidden',
 			paddingLeft: showScrollbar ? globalStyles.spacing.double : 0,
 			scrollBehavior: 'smooth',
 		},
@@ -237,7 +238,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 					</div>
 				}
 				
-				<div style={styles.itemsWrapper} ref={itemsWrapperEl}>
+				<div style={styles.postLabelsWrapper} ref={itemsWrapperEl}>
 					{posts.map((post: Post, i: number) => (
 						<div key={i}>
 							{PostLabel(post, i)}
