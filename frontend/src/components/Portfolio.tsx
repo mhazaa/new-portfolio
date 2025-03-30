@@ -68,7 +68,7 @@ const Portfolio: React.FC<PortfolioProps> = ({
 			display: 'flex',
 			flexDirection: 'column',
 			height: '250px',
-			maxWidth: isMobile || isTablet ? '250px' : isDesktop ? '300px' : '325px',
+			maxWidth: isMobile ? '250px' : isTablet ? '275px' : isDesktop ? '300px' : '325px',
 			overflowY: 'scroll',
 			overflowX: 'hidden',
 			paddingLeft: showScrollbar ? globalStyles.spacing.double : 0,
