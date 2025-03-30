@@ -49,7 +49,10 @@ const PostPage: React.FC<PostPageProps> = ({
 		},
 		title: {
 			display: 'inline-flex',
-			...animations.titleInk('170%'),
+			...animations.titleInk({
+				stroke: false,
+				percentage: '170%',
+			}),
 		},
 		mediumYear: {
 			marginTop: globalStyles.spacing.standard,

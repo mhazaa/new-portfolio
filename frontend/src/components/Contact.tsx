@@ -32,7 +32,10 @@ const Contact: React.FC<ContactProps> = ({
 			display: 'inline-block',
 			marginBottom: globalStyles.spacing.standard,
 			textAlign: isMobile ? 'center' : 'left',
-			...animations.titleInk('110%'),
+			...animations.titleInk({
+				stroke: false,
+				percentage: '110%',
+			}),
 		},
 		textWrapper: {
 			marginBottom: globalStyles.spacing.standard,

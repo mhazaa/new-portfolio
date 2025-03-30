@@ -28,7 +28,10 @@ const HeaderItem: React.FC<HeaderItemProps> = ({
 	}, [urlActive, otherUrlActive]);
 
 	const textStyle = () => {
-		if (urlActive) return animations.titleInk();
+		if (urlActive) return animations.titleInk({
+			stroke: false,
+		});
+
 		return hovered ? animations.titleInk() : animations.titleInkInactive();
 	};
 

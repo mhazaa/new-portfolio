@@ -37,7 +37,10 @@ const BioPage: React.FC<BioPageProps> = ({
 			display: 'inline-block',
 			marginBottom: globalStyles.spacing.standard,
 			textAlign: isMobile ? 'center' : 'left',
-			...animations.titleInk('170%'),
+			...animations.titleInk({
+				stroke: false,
+				percentage: '170%',
+			}),
 		},
 	};
 
