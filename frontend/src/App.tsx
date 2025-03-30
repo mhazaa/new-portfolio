@@ -15,7 +15,7 @@ import Error from './components/Error';
 import Loading from './components/Loading';
 import PostPage from './components/PostPage';
 import Cursor from './components/Cursor';
-import { Post, AllData, Categories } from '../../types';
+import { Categories, Post, AllData } from '../../types';
 import './styles/stylesheet.scss';
 
 const initialUrl = getInitialUrl();
