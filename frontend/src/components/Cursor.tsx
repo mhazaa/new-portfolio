@@ -32,6 +32,7 @@ export const Pointer: React.FC<PointerProps> = ({
 			style={style}
 			onMouseEnter={active ? () => setCursorMode('pointer') : () => {}}
 			onMouseLeave={() => setCursorMode('auto')}
+			onClick={() => setCursorMode('auto')}
 		>
 			{children}
 		</div>
