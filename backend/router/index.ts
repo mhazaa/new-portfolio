@@ -20,7 +20,7 @@ export default (app: Application, collections: Collections): void => {
 		} catch (error) {
 			console.error(error);
 			res.status(400).send(error);
-		}
+		};
 	});
 
 	app.get('*', (_req, res) => {
@@ -43,6 +43,6 @@ export default (app: Application, collections: Collections): void => {
 		} catch (error) {
 			console.log(error);
 			res.status(400).send(error);
-		}
+		};
 	});
 };
