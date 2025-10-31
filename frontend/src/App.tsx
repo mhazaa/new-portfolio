@@ -16,7 +16,7 @@ import Loading from './components/Loading';
 import PostPage from './components/PostPage';
 import Cursor from './components/Cursor';
 import { Categories, Post, AllData } from '../../types';
-import './styles/stylesheet.scss';
+import './styles/styleSheet.scss';
 
 const initialUrl = getInitialUrl();
 setBrowserUrl(initialUrl);
