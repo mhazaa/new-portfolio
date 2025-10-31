@@ -8,15 +8,15 @@
     "sanity"
   ],
   "scripts": {
-	"lint": "concurrently 'eslint' 'npm run lint -w ./frontend' 'npm run lint -w ./sanity'",
+    "lint": "concurrently 'eslint' 'npm run lint -w ./frontend' 'npm run lint -w ./sanity'",
     "build": "npm run lint && concurrently --kill-others-on-fail 'npm run build -w ./frontend' 'npm run build -w ./backend'",
-	"start": "npm run stop && npm run clean && NODE_ENV=production npm run build && NODE_ENV=production npm run start -w ./backend",
+    "start": "npm run stop && npm run clean && NODE_ENV=production npm run build && NODE_ENV=production npm run start -w ./backend",
     "start-and-deploy-sanity": "npm run start && npm run deploy-sanity",
     "stop": "npm run stop -w ./backend",
     "dev": "NODE_ENV=development concurrently 'npm run dev -w ./frontend' 'npm run dev -w ./backend' 'npm run dev -w ./sanity'",
     "deploy-sanity": "npm run lint -w ./sanity && npm run deploy -w ./sanity",
-	"clean": "rm -f ./types.js & rm -rf ./frontend/build & rm -f ./backend/*.js & rm -f ./backend/**/*.js & rm -rf ./sanity/dist",
-	"nuke": "npm run clean && find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + && find . -name 'package-lock.json' -type f -delete"
+    "clean": "rm -f ./types.js & rm -rf ./frontend/build & rm -f ./backend/*.js & rm -f ./backend/**/*.js & rm -rf ./sanity/dist",
+    "nuke": "npm run clean && find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + && find . -name 'package-lock.json' -type f -delete"
   },
   "keywords": [],
   "author": "Magdi Hazaa",
@@ -30,7 +30,7 @@
     "concurrently": "^9.1.2",
     "eslint": "^9.19.0",
     "globals": "^15.14.0",
-    "typescript": "^5.7.3",
+    "typescript": "^5.9.3",
     "typescript-eslint": "^8.23.0"
   }
 }
