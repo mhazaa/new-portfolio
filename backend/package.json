@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-	"lint": "eslint",
+    "lint": "eslint",
     "build": "tsc",
     "start": "pm2 start server.js",
     "stop": "pm2 kill",
@@ -13,7 +13,7 @@
   "author": "Magdi Hazaa",
   "license": "ISC",
   "dependencies": {
-    "@mhazaa/mongo-controller": "^1.0.20",
+    "@mhazaa/mongo-controller": "^1.0.21",
     "@sanity/client": "^6.27.2",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
