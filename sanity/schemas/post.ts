@@ -80,6 +80,10 @@ export default {
 							title: 'Poetry',
 							value: 'poetry',
 						},
+						{
+							title: 'Poetry Indented',
+							value: 'poetryIndented',
+						},
 					],
 				},
 				{

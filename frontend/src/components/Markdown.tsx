@@ -4,7 +4,7 @@ import { TypedObject } from '@portabletext/types';
 import { Image } from '../../../types';
 
 interface BlockComponentProps {
-	type: 'normal' | 'proseLeft' | 'proseCenter' | 'poetry';
+	type: 'normal' | 'proseLeft' | 'proseCenter' | 'poetry' | 'poetryIndented';
 	children: JSX.Element[];
 };
 
@@ -85,6 +85,10 @@ const markdownComponents: Partial<PortableTextReactComponents> = {
 			children,
 			// @ts-expect-error
 		}) => <BlockComponent type='poetry'>{children}</BlockComponent>,
+		poetryIndented: ({
+			children,
+			// @ts-expect-error
+		}) => <BlockComponent type='poetryIndented'>{children}</BlockComponent>,
 	},
 	types: {
 		image: ImageComponent,

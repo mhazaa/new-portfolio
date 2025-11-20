@@ -174,6 +174,11 @@ p {
 	&.poetry {
 		margin-bottom: 0 !important;
 	}
+
+	&.poetryIndented {
+		margin-bottom: 0 !important;
+		text-indent: 2.5rem;
+	}
 }
 
 .bioTextWrapper p {
